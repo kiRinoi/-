@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+    * {
+        font-size: 16px;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    
+    body {
+        margin: 1rem auto;
+        max-width: 800px;
+        border: 1px solid;
+    }
+    
+    body * {
+        border: 1px solid;
+        margin: 0.2rem;
+    }
+    
+    .box1 {
+        height: 10rem;
+        text-align: center;
+    }
+    
+    .box2 {
+        text-align: center;
+    }
+    
+    .box2 div {
+        display: inline-block;
+        width: calc(33% - 0.6rem);
+        height: 14rem;
+    }
+    
+    .box3 {
+        text-align: center;
+    }
+    
+    .box4 {
+        float: left;
+        width: calc(40% - 0.4rem);
+    }
+    
+    .box4 div {
+        height: 15rem;
+    }
+    
+    .box5 {
+        width: calc(60% - 0.2rem);
+        margin-left: 40%;
+        height: calc(30rem + 0.7rem)
+    }
+    
+    .clearfix:after {
+        content: "clearfix";
+        display: block;
+        height: 0;
+        clear: both;
+        visibility: hidden;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="box1">box1</div>
+    <div class="box2">
+        <div>box2_a</div>
+        <div>box2_b</div>
+        <div>box2_c</div>
+    </div>
+    <div class="box3 clearfix">
+        <div class="box4 ">
+            <div>box4_a</div>
+            <div>box4_b</div>
+        </div>
+        <div class="box5">box5</div>
+    </div>
+</body>
+
+</html>
