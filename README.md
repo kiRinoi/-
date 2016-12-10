@@ -9,5 +9,6 @@
 + 实现网格与多列文字布局
 + 弹性盒快速布局
 + calc实现自适应布局
++ 网格实现响应式布局
 <br><br>
 CodePen：<a target="_blank" href="http://codepen.io/kiRinoi/#">kiRi</a>
