@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		body *{border:1px solid; font-size: 16px; margin: 0.2rem; text-align: center; max-width: 50rem;}
+		li{list-style: none;}
+
+		.flex {display: flex;}
+
+		.s1 nav{flex:1;}
+		.s1 section{flex:1;}
+
+		.s2 section{flex:1 1 auto;}
+		.s2 section:nth-of-type(3){flex-grow: 2;}
+		.s2 section:nth-of-type(4){flex-grow: 3;}
+
+		.s3 {align-items: center; justify-content: center; height: 10rem;}
+		.s3 section{width: 5rem; height: 5rem;}
+	</style>
+</head>
+<body>
+	<div class="flex s1">
+		<nav>
+			<li>你可以用它向客户展示方案</li>
+			<li>但不要在项目中使用弹性盒</li>
+		</nav>
+		<section>
+			<p>除非老板不叫你兼容IE</p>
+			<p>全世界都在用 IE8.0</p>
+		</section>
+	</div>
+	<div class="flex s2">
+		<section>我是s1</section>
+		<section>我是s2</section>
+		<section>我是他们的2倍</section>
+		<section>我是他们的3倍</section>
+	</div>
+	<div class="flex s3">
+		<section>简单的垂直居中布局！</section>
+	</div>
+</body>
+</html>
