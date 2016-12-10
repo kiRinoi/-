@@ -7,5 +7,6 @@
 + 使用float实现CSS布局
 + 使用媒体查询器实现简易响应式布局
 + 实现网格与多列文字布局
++ 弹性盒快速布局
 <br><br>
 CodePen：<a target="_blank" href="http://codepen.io/kiRinoi/#">kiRi</a>
