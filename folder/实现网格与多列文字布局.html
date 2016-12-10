@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+    * {
+        font-size: 16px;
+        margin: 0;
+        padding: 0;
+        color: #302833;
+    }
+    
+    .style {
+        max-width: 60rem;
+        margin: 1rem auto;
+        border: 2px solid #ab6953;
+    }
+    
+    .style * {
+        margin: 0.2rem;
+        text-align: center;
+    }
+    
+    .style nav {
+        display: inline-block;
+        width: calc(25% - 0.6rem);
+        vertical-align: top;
+        border: 1px solid #ab6953;
+    }
+    
+    .style nav li {
+        display: inline-block;
+        width: 4rem;
+        height: 4rem;
+        text-align: center;
+        line-height: 4rem;
+        background-color: #edd3a1;
+        transition: 0.5s;
+        border: 1px solid #ab6953;
+        cursor: pointer;
+    }
+    
+    .style div {
+        display: inline-block;
+        width: calc(75% - 1rem);
+        vertical-align: top;
+        border: 1px solid #ab6953;
+    }
+    
+    .style div img {
+        width: 13rem;
+        height: 13rem;
+        border: 2px solid #ab6953;
+        padding: 0.2rem;
+        background-color: #302833;
+        transition: 0.5s;
+        cursor: pointer;
+    }
+    
+    .style div p {
+        -moz-column-count: 2;
+        -moz-column-gap: 2.5rem;
+        -webkit-column-count: 2;
+        -webkit-column-gap: 2.5rem;
+        column-count: 2;
+        column-gap: 2.5rem;
+        word-break: break-all;
+        padding: 0.5rem;
+        line-height: 2rem;
+        text-align: left;
+        border: 1px solid #ab6953;
+    }
+    
+    li:hover {
+        opacity: 0.5;
+    }
+    
+    img:hover {
+        opacity: 0.5;
+    }
+    </style>
+</head>
+
+<body style="background-color:#d7a98c">
+    <div class="style">
+        <nav>
+            <li>Jan</li>
+            <li>Feb</li>
+            <li>Mar</li>
+            <li>Apr</li>
+            <li>May</li>
+            <li>Jun</li>
+            <li>Jul</li>
+            <li>Aug</li>
+            <li>Sep</li>
+            <li>Oct</li>
+            <li>Nov</li>
+            <li>Dec</li>
+        </nav>
+        <div>
+            <img src="http://imglf2.nosdn.127.net/img/blJpRVNabllxYmgyOUQ4dXVwWUdmSnErVFNKQmlVbTV3S0lUb0NVZDhJOGkwMlQ1cmlKVVNBPT0.jpg?imageView&thumbnail=1680x0&quality=96&stripmeta=0&type=jpg" alt="">
+            <img src="http://imglf1.nosdn.127.net/img/blJpRVNabllxYmg5WTZTTVFLYlc3SmNKS3UxS0FEdmFwZTdBcEgzM1JsWFhPS1hqbUpaanRRPT0.jpg?imageView&thumbnail=1680x0&quality=96&stripmeta=0&type=jpg" alt="">
+            <img src="http://imglf.nosdn.127.net/img/blJpRVNabllxYmdIaUU3STNneG1RMjl4eUI5NTJzZ0oyRGFmaHNlc3V1dEFUSkVMaTdrSC9RPT0.jpg?imageView&thumbnail=1680x0&quality=96&stripmeta=0&type=jpg" alt="">
+            <img src="http://imglf1.nosdn.127.net/img/blJpRVNabllxYmdCZi9yYVBDOTJIRStWL2VkOGtMVDRCVytnZWk5bVZBVWxMaEx1RDBLQjRnPT0.jpg?imageView&thumbnail=1680x0&quality=96&stripmeta=0&type=jpg" alt="">
+            <img src="http://imglf1.nosdn.127.net/img/blJpRVNabllxYmh6cXNPS1pMT0Y3RGZyeW56Z3BWbHVRNTVxa0t2K3N6K3JISitmUTJ6ZzR3PT0.jpg?imageView&thumbnail=1680x0&quality=96&stripmeta=0&type=jpg" alt="">
+            <img src="http://imglf2.nosdn.127.net/img/blJpRVNabllxYmlMQUNnL25STmpnVFlLM3FiUFBha2djWmo4cDdCMHdRazRoWUtvL005TUNRPT0.jpg?imageView&thumbnail=1680x0&quality=96&stripmeta=0&type=jpg" alt="">
+            <p>
+                &emsp;&emsp;你可以创建很多网格来铺满浏览器。在过去很长的一段时间内使用 float 是一种选择，但是使用 <b>inline-block</b> 会更简单。
+                <br> &emsp;&emsp;你得做些额外工作来让IE6和IE7支持 inline-block 。
+                <br> &emsp;&emsp;有些时候人们谈到 inline-block 会触发叫做 hasLayout 的东西，你只需要知道那是用来支持旧浏览器的。
+                <br> &emsp;&emsp;你可以使用 inline-block 来布局。有一些事情需要你牢记：
+                <br> &emsp;&emsp;&emsp;1. <b>vertical-align</b> 属性会影响到 inline-block 元素，你可能会把它的值设置为 top 。
+                <br> &emsp;&emsp;&emsp;2. 你需要设置每一列的<b>宽度</b>。
+                <br> &emsp;&emsp;&emsp;3. 如果HTML源代码中元素之间有空格，那么列与列之间会产生空隙 。
+                <br> &emsp;&emsp;使用 <b>calc( )</b> 来计算大小，达到自适应的效果。
+                <br> &emsp;&emsp;还有有一系列新的CSS属性，可以帮助你很轻松的实现文字的多列布局。
+                <br> &emsp;&emsp;CSS <b>columns</b> 是很新的标准，所以你需要使用前缀，并且它不被IE9及以下和Opera Mini支持。
+            </p>
+        </div>
+    </div>
+</body>
+
+</html>
