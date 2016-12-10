@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		/***Grid***/
+		*{font-size: 16px; box-sizing: border-box; margin: 0; padding: 0;}
+		body {max-width: 50rem; margin: 1rem auto;}
+		.row:after {content: ""; display: block; clear: both; visibility: hidden;}
+		[class*="col-"] {float:left; padding: 1.2rem;}
+		/*因为margin会将div撑大，所以用padding来代替实现边距的效果*/
+		.col-1 {width: 8.33%;}
+		.col-2 {width: 16.66%;}
+		.col-3 {width: 25%;}
+		.col-4 {width: 33.33%;}
+		.col-5 {width: 41.66%;}
+		.col-6 {width: 50%;}
+		.col-7 {width: 58.33%;}
+		.col-8 {width: 66.66%;}
+		.col-9 {width: 75%;}
+		.col-10 {width: 83.33%;}
+		.col-11 {width: 91.66%;}
+		.col-12 {width: 100%;}
+		/*网格真是酷到没朋友，要什么双飞燕，要什么圣杯...*/
+		li {list-style: none; }
+		nav {background-color: #2196F3;}
+		nav li {color: #fef4f4; border-right: 0.1em solid;}
+		.main {background-color: #FF5252; height: 12rem; color: #fef4f4; border:0.1em solid; transition: 1.2s;}
+		.sub {background-color: #455A64; height: 20rem; color: #fef4f4; border:0.1em solid; transition: 1.2s;}
+		.other {background-color: #7C4DFF; height: 12rem; color: #fef4f4; border:0.1em solid; transition: 1.2s;}
+		li:hover{background-color: #448AFF; border: 0.1rem solid; cursor: pointer;}
+		.main:hover{opacity: 0.8; background: #448AFF; color: #212121; cursor: pointer;}
+		.sub:hover{opacity: 0.8; background: #7C4DFF; color: #212121; cursor: pointer;}
+		.other:hover{opacity: 0.8; background: #FFEB3B; color: #212121; cursor: pointer;}
+	</style>
+</head>
+<body>
+	<nav class="row">
+		<li class="col-3">导航</li>
+		<li class="col-3">导航</li>
+		<li class="col-3">导航</li>
+		<li class="col-3">导航</li>
+
+	</nav>
+	<div class="row">
+		<div class="col-7 main">使用网格时很重要的一点：在float元素的父元素上用clearfix来清除浮动...</div>
+		<div class="col-5 other">网格真是酷到没朋友，有了网格，还要什么双飞翼，要什么圣杯...
+		</div>
+		<div class="col-4 sub">
+		另外就是：<br><code>[class*="class"] {css code}</code><br> 这个语法，这个不仅对网格布局来说很重要，还能很大程度减少CSS的代码量。
+		</div>
+		<div class="col-4 sub">
+		得了吧！有了网格式布局，谁还用float呢？ <br>要知道这能应对所有的需求，好吧，几乎所有...呃...几乎..80%吧... <br>
+		当然position还是有用的...当然，关键时刻还得diplay:block...谁用谁知道...
+		</div>
+		<div class="col-4 sub">
+		这就是酷炫的响应式布局，多么高大上！我还给他添加一点效果，让他更加coooooool... <br>
+		当然有必要的话，你可以用媒体查询器让他更完善，可我觉得没必要，不是吗??
+		</div>
+	</div>
+</body>
+</html>
