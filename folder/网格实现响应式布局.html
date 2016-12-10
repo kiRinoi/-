@@ -5,7 +5,8 @@
 	<title>Document</title>
 	<style>
 		/***Grid***/
-		*{font-size: 16px; box-sizing: border-box; margin: 0; padding: 0;}
+		*{font-size: 16px; box-sizing: border-box; margin: 0; padding: 0; overflow: hidden;}
+		/*box-sizing: border-box; 是很重要的属性*/
 		body {max-width: 50rem; margin: 1rem auto;}
 		.row:after {content: ""; display: block; clear: both; visibility: hidden;}
 		[class*="col-"] {float:left; padding: 1.2rem;}
