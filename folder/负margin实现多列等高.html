@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		/***Grid***/
+		*{font-size: 16px; box-sizing: border-box; margin: 0; padding: 0; overflow: hidden;}
+		body {max-width: 50rem; margin: 1rem auto;}
+		.row:after {content: ""; display: block; clear: both; visibility: hidden;}
+		[class*="col-"] {float:left; padding: 1.2rem;}
+		/*因为margin会将div撑大，所以用padding来代替实现边距的效果*/
+		.col-1 {width: 8.33%;}
+		.col-2 {width: 16.66%;}
+		.col-3 {width: 25%;}
+		.col-4 {width: 33.33%;}
+		.col-5 {width: 41.66%;}
+		.col-6 {width: 50%;}
+		.col-7 {width: 58.33%;}
+		.col-8 {width: 66.66%;}
+		.col-9 {width: 75%;}
+		.col-10 {width: 83.33%;}
+		.col-11 {width: 91.66%;}
+		.col-12 {width: 100%;}
+
+		li {list-style: none; }
+		nav {background-color: #2196F3;}
+		nav li {color: #fef4f4; border-right: 0.2em solid;}
+
+		.main {background-color: #FF5252; color: #fef4f4; border:0.2em solid; transition: 1.2s; padding-bottom: 100rem; margin-bottom: -100rem; word-break: break-all;}
+		.sub {background-color: #455A64; color: #fef4f4; border:0.2em solid; transition: 1.2s; padding-bottom: 100rem; margin-bottom: -100rem; word-break: break-all;}
+		.other {background-color: #7C4DFF; color: #fef4f4; border:0.2em solid; transition: 1.2s; padding-bottom: 100rem; margin-bottom: -100rem; word-break: break-all;}
+
+		li:hover{background-color: #448AFF; border: 0.1rem solid; cursor: pointer;}
+		.main:hover{background: #448AFF; color: #212121; cursor: pointer; border-color: white;}
+		.sub:hover{background: #7C4DFF; color: #212121; cursor: pointer; border-color: white;}
+		.other:hover{background: #FFEB3B; color: #212121; cursor: pointer; border-color: white;}
+	</style>
+</head>
+<body>
+	<nav class="row">
+		<li class="col-3">导航</li>
+		<li class="col-3">导航</li>
+		<li class="col-3">导航</li>
+		<li class="col-3">导航</li>
+
+	</nav>
+	<div class="row">
+		<div class="col-10 main">
+		同列等高布局修复了几个问题：<br>
+		1.缩放时超出容器的内容隐藏， 现在容器高度可以被内容撑开了。<br>
+		2.实现了同列等高， 现在容器边界不会因为被撑开而层次不齐来了。<br>
+		3.解决了缩放时英数不能换行的问题， 放开手缩放吧！<br>
+		4.加粗了边线，把动画边线改成了白色。<br>
+		5.etc...
+		<br><br></div>
+
+		<div class="col-2 other">
+		我可以自适应同列的高度！
+		<br><br></div>
+
+		<div class="col-5 sub">
+		1.使用了负margin正padding的方法补足同列高度。<br>
+		2.使用 overflow: hidden; 隐藏了多余的padding。<br>
+		3.使用了 word-break 让英数换行。<br>
+		4.在文章结尾使用 br 模拟padding空行的效果。<br>
+		5.删除了半透明效果，不然会让隐藏的padding显示出来。<br>
+		6.变更了布局，因为第二列的等高布局，导致内容填充不足时下列的容器会浮动上去。<br>
+		7.etc...
+		<br><br></div>
+
+		<div class="col-3 sub">
+		还存在很多技术难题！<br>
+		顺便说一下我可以自适应高度！
+		<br><br></div>
+
+		<div class="col-4 sub">
+		这就是酷炫的响应式布局，多么高大上！我还给他添加一点效果，让他更加cooooooooooooooooooooooooool（现在英数不会溢出了！）... <br>
+		当然有必要的话，你可以用媒体查询器让他更完善，可我觉得没必要，不是吗??
+		<br><br></div>
+		<!-- 每个容器尾部都加入2个br实现下padding的效果 -->
+	</div>
+</body>
+</html>
