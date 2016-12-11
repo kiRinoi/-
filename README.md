@@ -10,5 +10,6 @@
 + 弹性盒快速布局
 + calc实现自适应布局
 + 网格实现响应式布局
++ 使用负margin实现多列等高
 <br><br>
 CodePen：<a target="_blank" href="http://codepen.io/kiRinoi/#">kiRi</a>
