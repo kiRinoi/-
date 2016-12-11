@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		body *{border: 1px solid; margin: 0;padding: 0; overflow: hidden;}
+		p{line-height: 30px; padding: 15px; position: absolute; top: 10px; right: 10px; margin-left: 350px;}
+
+		.box-0 {height: 300px; width: 300px; position: relative;top: 0;left: 0;}
+		.box-1 div{height: 100px;width: 100px;}
+		/*************************************************************/
+        /*************************************************************/
+		.md-1 {max-width: 20%; max-height: 20%; position: absolute;top: 0;bottom: 0;left: 0;right: 0;margin: auto;}
+
+		.md-2 div{position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);}
+
+		.md-3 {text-align: center;}
+		.md-3-1:after {content: ""; display: inline-block; width: 0; height: 100%; vertical-align: middle;}
+		.md-3 div{display: inline-block; vertical-align: middle;}
+
+	</style>
+</head>
+<body>
+	<div class="md-1">
+		基于position的绝对居中-响应式
+	</div>
+	<!-- /*************************************************************/ -->
+	<div class="md-2 box-1 box-0">
+		<div>基于position的绝对居中-固定宽度</div>
+	</div>
+	<!-- /*************************************************************/ -->
+	<div class="md-3 md-3-1 box-0">
+		<div>不确定大小绝对居中-牛逼闪闪</div>
+	</div>
+	<!-- /*************************************************************/ -->
+	<p>
+	关于不确定大小绝对居中：<br>
+	1. 单个 inline-block 无法使用 vertical-align 来垂直居中，需要另一个 inline-block 作为参照。 <br>
+	2. inline-block 是基线（中心线）对齐，当参照 block 的高度为父元素的 100% 时，中心线为 50% 的位置；则目标 block 对齐到 50% ，即垂直居中。<br>
+	3. 将参照 block 宽度设置为 0 ，参照 block 不在容器内占位，即目标 block水平居中。<br>
+	4. 绝对居中实现！<br>
+	</p>
+</body>
+</html>
