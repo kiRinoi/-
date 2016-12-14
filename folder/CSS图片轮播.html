@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <style>
+    * {
+        font-size: 16px;
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+    
+    body {
+        background: black;
+        background-image: url(http://imglf.nosdn.127.net/img/blJpRVNabllxYmlTcTVoRmtNcGpzdEhENXpUODYyZVNRemRBTThudnUwV3Vnamc2SUFHOEp3PT0.jpg?imageView&thumbnail=1680x0&quality=96&stripmeta=0&type=jpg);
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+    }
+    
+    .row:after {
+        display: block;
+        visibility: hidden;
+        clear: both;
+        content: '';
+    }
+    
+    [class*='col-'] {
+        float: left;
+    }
+    
+    .col-1 {
+        width: 8.33%;
+    }
+    
+    .col-2 {
+        width: 16.66%;
+    }
+    
+    .col-3 {
+        width: 25%;
+    }
+    
+    .col-4 {
+        width: 33.33%;
+    }
+    
+    .col-5 {
+        width: 41.66%;
+    }
+    
+    .col-6 {
+        width: 50%;
+    }
+    
+    .col-7 {
+        width: 58.33%;
+    }
+    
+    .col-8 {
+        width: 66.66%;
+    }
+    
+    .col-9 {
+        width: 75%;
+    }
+    
+    .col-10 {
+        width: 83.33%;
+    }
+    
+    .col-11 {
+        width: 91.66%;
+    }
+    
+    .col-12 {
+        width: 100%;
+    }
+    
+    .navbar {
+        font-size: 0;
+        position: fixed;
+        z-index: 100;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 3rem;
+        text-align: right;
+        color: #15f5f5;
+        background-color: #212121;
+        box-shadow: 0 0 1rem .3rem #353535 inset;
+    }
+    
+    .nav-block:after {
+        display: inline-block;
+        visibility: hidden;
+        width: 0;
+        height: 100%;
+        content: '';
+        vertical-align: middle;
+    }
+    
+    .navbar li {
+        line-height: 2.6rem;
+        display: inline-block;
+        width: 2.6rem;
+        height: 2.6rem;
+        margin: 0 .4rem;
+        transition: .4s;
+        text-align: center;
+        vertical-align: middle;
+    }
+    
+    .navbar img {
+        width: 1.5rem;
+        height: 1.5rem;
+        text-align: center;
+        vertical-align: middle;
+    }
+    
+    .navbar span {
+        visibility: hidden;
+    }
+    
+    .navbar li:hover {
+        width: 3.5rem;
+        cursor: pointer;
+        border-radius: .3rem;
+        background: #f44336;
+    }
+    
+    .main {
+        margin-top: 3rem;
+    }
+    
+    .frame {
+        position: relative;
+        overflow: hidden;
+        width: 100%;
+        height: 30rem;
+        border-style: solid;
+        border-color: #212121;
+        border-top: 0;
+        border-right: .5rem;
+        border-bottom: 0;
+        border-left: .5rem;
+    }
+    
+    .photo {
+        font-size: 0;
+        width: 320%;
+        animation: move 15s linear 0s infinite;
+    }
+    
+    .box-img {
+        display: inline-block;
+        width: 33.33%;
+        height: 40rem;
+        animation: bigger 30s linear 0s infinite;
+        background-position: 50% 50%;
+        background-size: cover;
+    }
+    
+    @keyframes move {
+        0%,
+        29% {
+            transform: translateX(0%);
+        }
+        33%,
+        62% {
+            transform: translateX(-33.33%);
+        }
+        66%,
+        95% {
+            transform: translateX(-66.66%);
+        }
+        100% {
+            transform: translateX(0%);
+        }
+    }
+    
+    @keyframes move2 {
+        0%,
+        29% {
+            transform: translateX(-33.33%);
+        }
+        33%,
+        62% {
+            transform: translateX(-66.66%);
+        }
+        66%,
+        95% {
+            transform: translateX(0%);
+        }
+        100% {
+            transform: translateX(-33.33%);
+        }
+    }
+    
+    @keyframes move3 {
+        0%,
+        29% {
+            transform: translateX(-66.66%);
+        }
+        33%,
+        62% {
+            transform: translateX(0%);
+        }
+        66%,
+        95% {
+            transform: translateX(-33.33%);
+        }
+        100% {
+            transform: translateX(-66.66%);
+        }
+    }
+    
+    #l1:checked ~ .frame .photo {
+        animation-name: move;
+    }
+    
+    #l2:checked ~ .frame .photo {
+        animation-name: move2;
+    }
+    
+    #l3:checked ~ .frame .photo {
+        animation-name: move3;
+    }
+    
+    #l1,
+    #l2,
+    #l3 {
+        display: none;
+    }
+    
+    @keyframes bigger {
+        0% {
+            transform: scale(1);
+        }
+        50% {
+            transform: scale(1.1);
+        }
+        100% {
+            transform: scale(1);
+        }
+    }
+    
+    .lab {
+        font-size: 0;
+        line-height: 30px;
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: 35px;
+        text-align: right;
+        background: #212121;
+    }
+    
+    .lab label {
+        font-weight: bold;
+        line-height: 35px;
+        z-index: 100;
+        display: inline-block;
+        width: 35px;
+        height: 35px;
+        margin: 0 3px;
+        transition: .5s;
+        text-align: center;
+        color: white;
+        border: 1px solid #212121;
+        border-radius: 5px;
+        background: #212121;
+    }
+    
+    .lab label:hover {
+        cursor: pointer;
+        background: #f44336;
+    }
+    
+    .block {
+        margin-top: 10rem;
+    }
+    
+    .block div {
+        position: relative;
+        padding-bottom: 25%;
+        border: .1rem solid #212121;
+        box-shadow: 0 0 .5rem .3rem #353535 inset;
+    }
+    
+    .block div:nth-child(1) {
+        background-image: url(http://imglf1.nosdn.127.net/img/blJpRVNabllxYmlTcTVoRmtNcGpzdG4ydGtyL1RHL1o5NW5VaU9CVm5EbkhhTFhLMmo3c3pnPT0.png?imageView&thumbnail=1680x0&quality=96&stripmeta=0&type=jpg);
+        background-position: 50% 50%;
+        background-size: cover;
+    }
+    
+    .block div:nth-child(2) {
+        background-image: url(http://imglf0.nosdn.127.net/img/blJpRVNabllxYmpBWVZzNElkUnA3WUhubTcrNVJjWG1UTmVKYUVEclVTbVl4VHRKcGFuYjd3PT0.jpg?imageView&thumbnail=1680x0&quality=96&stripmeta=0&type=jpg);
+        background-position: 50% 50%;
+        background-size: cover;
+    }
+    
+    .block div:nth-child(3) {
+        background-image: url(http://imglf0.nosdn.127.net/img/blJpRVNabllxYmlTcTVoRmtNcGpzdklOUmJxVGdra3RVbEc1UmM3WjQ1WURnTVYwaVcyUWNBPT0.jpg?imageView&thumbnail=1680x0&quality=96&stripmeta=0&type=jpg);
+        background-position: 50% 50%;
+        background-size: cover;
+    }
+    
+    .block div:nth-child(4) {
+        background-image: url(http://imglf.nosdn.127.net/img/blJpRVNabllxYmlTcTVoRmtNcGpzaFQwbnQwblg5TW01NWdzZy91eDc4ZGcvSG1GRWxwZDlnPT0.jpg?imageView&thumbnail=1680x0&quality=96&stripmeta=0&type=jpg);
+        background-position: 50% 50%;
+        background-size: cover;
+    }
+    
+    .block div:nth-child(5) {
+        background-image: url(http://imglf2.nosdn.127.net/img/blJpRVNabllxYmlTcTVoRmtNcGpzdDh5WTRFMU8vVzNTUWgrV2hEaVZQa1dFTGk3bVNGdSt3PT0.jpg?imageView&thumbnail=1680x0&quality=96&stripmeta=0&type=jpg);
+        background-position: 50% 50%;
+        background-size: cover;
+    }
+    
+    .block div:nth-child(6) {
+        background-image: url(http://imglf0.nosdn.127.net/img/blJpRVNabllxYmlTcTVoRmtNcGpzb1QwVGJZTk5KWHZZTjBCTHNIaVMwWG5NNHNxZHREaVFnPT0.jpg?imageView&thumbnail=1680x0&quality=96&stripmeta=0&type=jpg);
+        background-position: 50% 50%;
+        background-size: cover;
+    }
+    
+    .block div:nth-child(7) {
+        background-image: url(http://imglf0.nosdn.127.net/img/blJpRVNabllxYmlTcTVoRmtNcGpzcU95K1h5bWlPWlZ6VTZlNTRmK0NSOVdIMHFVUXVBOTV3PT0.jpg?imageView&thumbnail=1680x0&quality=96&stripmeta=0&type=jpg);
+        background-position: 50% 50%;
+        background-size: cover;
+    }
+    
+    .block div:nth-child(8) {
+        background-image: url(http://imglf.nosdn.127.net/img/blJpRVNabllxYmlTcTVoRmtNcGpza3B5RTM5SlkrWm5ub3BBeW1RMndwdWNTUUFTMmpOTlNBPT0.jpg?imageView&thumbnail=1680x0&quality=96&stripmeta=0&type=jpg);
+        background-position: 50% 50%;
+        background-size: cover;
+    }
+    
+    .col-3 section {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        transition: .5s;
+        opacity: .5;
+        background-color: black;
+    }
+    
+    .block section:hover {
+        cursor: pointer;
+        opacity: 0;
+    }
+    
+    .hidden {
+        visibility: hidden;
+    }
+    
+    .footer {
+/*        position: absolute;
+        bottom: 0rem;
+        left: 0;*/
+        margin-top: 10rem;
+        width: 100%;
+        height: 10rem;
+        border-color: #212121;
+        border-top: .3rem border-style: solid;
+        border-right: .1rem;
+        border-left: .1rem;
+        background: #2d2e28;
+    }
+    
+    .footer ul {
+        margin-left: 16.66%;
+    }
+    
+    .footer li {
+        font-size: .95rem;
+        display: inline-block;
+        margin-top: 2rem;
+        margin-right: 2rem;
+        list-style: none;
+        color: gray;
+    }
+    
+    .footer p {
+        font-size: .9rem;
+        margin-top: 1rem;
+        color: gray;
+    }
+    
+    .footer li:hover {
+        cursor: pointer;
+        color: white;
+    }
+    
+    .spaceholder {
+        position: relative;
+    }
+    </style>
+</head>
+
+<body>
+    <main class="row spaceholder">
+        <nav class="navbar nav-block">
+            <li><img src='http://p1.bqimg.com/564791/41692dd0c1b8a8da.png'></li>
+            <li><img src='http://i1.piimg.com/564791/57892466253f7bb8.png'></li>
+            <li><img src='http://p1.bqimg.com/564791/20ff7b2b1abd47c7.png'></li>
+            <li><img src='http://p1.bqimg.com/564791/b74d68c3eef19ca9.png'></li>
+            <span>0</span>
+        </nav>
+        <section class="main">
+            <div class="row col-2"><span class="hidden">0</span></div>
+            <div class="row col-8">
+                <input type="radio" checked name="ph" id="l1">
+                <input type="radio" name="ph" id="l2">
+                <input type="radio" name="ph" id="l3">
+                <div class="frame">
+                    <div class="photo">
+                        <div class="box-img" style="background-image: url(http://imglf2.nosdn.127.net/img/blJpRVNabllxYmpBWVZzNElkUnA3VUx2MEdiVXhhbFFqS1FucmhFUkNsYjlES0h0SGlXSEhRPT0.jpg?imageView&thumbnail=1680x0&quality=96&stripmeta=0&type=jpg);"></div>
+                        <div class="box-img" style="background-image: url(http://imglf1.nosdn.127.net/img/blJpRVNabllxYmpBWVZzNElkUnA3YlRueG9BSVlzYS9ZR0x6cXFkaHVqa2ViWldTUldoOHdnPT0.png?imageView&thumbnail=1680x0&quality=96&stripmeta=0&type=jpg);"></div>
+                        <div class="box-img" style="background-image: url(http://imglf0.nosdn.127.net/img/blJpRVNabllxYmpBWVZzNElkUnA3YkRjSmdoL1JoUnc1dUFFMjk3QkNJN2pNOUFzeVBiQnB3PT0.png?imageView&thumbnail=1680x0&quality=96&stripmeta=0&type=jpg);"></div>
+                    </div>
+                    <div class="lab">
+                        <label for="l1">1</label>
+                        <label for="l2">2</label>
+                        <label for="l3">3</label>
+                    </div>
+                </div>
+                <div class="block row">
+                    <div class="col-3">
+                        <section></section>
+                    </div>
+                    <div class="col-3">
+                        <section></section>
+                    </div>
+                    <div class="col-3">
+                        <section></section>
+                    </div>
+                    <div class="col-3">
+                        <section></section>
+                    </div>
+                    <div class="col-3">
+                        <section></section>
+                    </div>
+                    <div class="col-3">
+                        <section></section>
+                    </div>
+                    <div class="col-3">
+                        <section></section>
+                    </div>
+                    <div class="col-3">
+                        <section></section>
+                    </div>
+                </div>
+            </div>
+            <div class="row col-2"><span class="hidden">0</span></div>
+        </section>
+
+    </main>
+    <footer class="footer">
+        <ul>
+            <li>首页</li>
+            <li>作品</li>
+            <li>日志</li>
+            <li>关于</li>
+            <p>Copyright © Infinito Web Design Studio 2016. All Rights Reserved</p>
+        </ul>
+    </footer>    
+</body>
+
+</html>
