@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style type="text/css">
+    * {
+        font-size: 16px;
+        box-sizing: border-box;
+    }
+    
+    .block {
+        width: 30rem;
+        margin: auto;
+        position: relative;
+        border: 1rem solid #212121;
+    }
+    
+    .block .dd {
+        float: left;
+        width: 33.33%;
+        height: 10rem;
+        border: 0.2rem solid #212121;
+        position: relative;
+    }
+    
+    .big {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #212121;
+        z-index: 50;
+    }
+    
+    .cf:after {
+        content: "";
+        display: block;
+        clear: both;
+        visibility: hidden;
+    }
+    
+    .block span {
+        position: absolute;
+        top: 0;
+        right: .2rem;
+        color: red;
+        font-weight: 900;
+        display: none;
+        z-index: 100;
+        font-size: 2rem;
+    }
+    
+    .block div:nth-child(1) {
+        background-image: url(http://imglf1.nosdn.127.net/img/blJpRVNabllxYmlTcTVoRmtNcGpzdG4ydGtyL1RHL1o5NW5VaU9CVm5EbkhhTFhLMmo3c3pnPT0.png?imageView&thumbnail=1680x0&quality=96&stripmeta=0&type=jpg);
+        background-position: 50% 50%;
+        background-size: cover;
+    }
+    
+    .block div:nth-child(2) {
+        background-image: url(http://imglf0.nosdn.127.net/img/blJpRVNabllxYmpBWVZzNElkUnA3WUhubTcrNVJjWG1UTmVKYUVEclVTbVl4VHRKcGFuYjd3PT0.jpg?imageView&thumbnail=1680x0&quality=96&stripmeta=0&type=jpg);
+        background-position: 50% 50%;
+        background-size: cover;
+    }
+    
+    .block div:nth-child(3) {
+        background-image: url(http://imglf0.nosdn.127.net/img/blJpRVNabllxYmlTcTVoRmtNcGpzdklOUmJxVGdra3RVbEc1UmM3WjQ1WURnTVYwaVcyUWNBPT0.jpg?imageView&thumbnail=1680x0&quality=96&stripmeta=0&type=jpg);
+        background-position: 50% 50%;
+        background-size: cover;
+    }
+    
+    .block div:nth-child(4) {
+        background-image: url(http://imglf.nosdn.127.net/img/blJpRVNabllxYmlTcTVoRmtNcGpzaFQwbnQwblg5TW01NWdzZy91eDc4ZGcvSG1GRWxwZDlnPT0.jpg?imageView&thumbnail=1680x0&quality=96&stripmeta=0&type=jpg);
+        background-position: 50% 50%;
+        background-size: cover;
+    }
+    
+    .block div:nth-child(5) {
+        background-image: url(http://imglf2.nosdn.127.net/img/blJpRVNabllxYmlTcTVoRmtNcGpzdDh5WTRFMU8vVzNTUWgrV2hEaVZQa1dFTGk3bVNGdSt3PT0.jpg?imageView&thumbnail=1680x0&quality=96&stripmeta=0&type=jpg);
+        background-position: 50% 50%;
+        background-size: cover;
+    }
+    
+    .block div:nth-child(6) {
+        background-image: url(http://imglf0.nosdn.127.net/img/blJpRVNabllxYmlTcTVoRmtNcGpzb1QwVGJZTk5KWHZZTjBCTHNIaVMwWG5NNHNxZHREaVFnPT0.jpg?imageView&thumbnail=1680x0&quality=96&stripmeta=0&type=jpg);
+        background-position: 50% 50%;
+        background-size: cover;
+    }
+    
+    .block div:nth-child(7) {
+        background-image: url(http://imglf0.nosdn.127.net/img/blJpRVNabllxYmlTcTVoRmtNcGpzcU95K1h5bWlPWlZ6VTZlNTRmK0NSOVdIMHFVUXVBOTV3PT0.jpg?imageView&thumbnail=1680x0&quality=96&stripmeta=0&type=jpg);
+        background-position: 50% 50%;
+        background-size: cover;
+    }
+    
+    .block div:nth-child(8) {
+        background-image: url(http://imglf.nosdn.127.net/img/blJpRVNabllxYmlTcTVoRmtNcGpza3B5RTM5SlkrWm5ub3BBeW1RMndwdWNTUUFTMmpOTlNBPT0.jpg?imageView&thumbnail=1680x0&quality=96&stripmeta=0&type=jpg);
+        background-position: 50% 50%;
+        background-size: cover;
+    }
+    
+    .dd section {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        transition: .3s;
+        opacity: 0.5;
+        background: black;
+    }
+    
+    .dd section:hover {
+        opacity: 0;
+        cursor: pointer;
+    }
+    
+    .block span:hover {
+        cursor: pointer;
+    }
+    </style>
+    <script type="text/javascript">
+	window.onload = function() {
+    var box = document.getElementById('box')
+    var dbox = box.getElementsByTagName('div')
+    var cc = document.getElementById('cc')
+    var i = 0
+    for (i; i < dbox.length; i++) {
+        dbox[i].onclick = function() {
+            this.className = 'big'
+            cc.style.display = 'block'
+        }
+    }
+    cc.onclick = function() {
+        for (var n = 0; n < dbox.length; n++) {
+            dbox[n].className = 'dd'
+            cc.style.display = 'none'
+        }
+    }
+}
+</script>
+</head>
+
+<body>
+    <section id="box" class="block cf">
+        <div class="dd">
+            <section></section>
+        </div>
+        <div class="dd">
+            <section></section>
+        </div>
+        <div class="dd">
+            <section></section>
+        </div>
+        <div class="dd">
+            <section></section>
+        </div>
+        <div class="dd">
+            <section></section>
+        </div>
+        <div class="dd">
+            <section></section>
+        </div>
+        <div class="dd">
+            <section></section>
+        </div>
+        <div class="dd">
+            <section></section>
+        </div>
+        <div class="dd">
+            <section></section>
+        </div>
+        <span id="cc">[x]</span>
+    </section>
+</body>
+</html>
