@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+    body {
+        background: white;
+    }
+    
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+    
+    .header {
+        position: fixed;
+        top: 0;
+        height: 40px;
+        width: 100%;
+        background: #0967C9;
+        border-bottom: 2px solid #095FB4;
+    }
+    
+    .header * {
+        vertical-align: middle;
+        color: white;
+    }
+    
+    .navbar {
+        width: 1000px;
+        margin: 0 auto;
+        height: 40px;
+        position: relative;
+        background: #0967C9;
+        background: transparent;
+    }
+    
+    .logo {
+        font-size: 25px;
+        display: inline-block;
+        height: 100%;
+        cursor: pointer;
+        line-height: 40px;
+    }
+    
+    .form {
+        width: 30%;
+        margin-left: 10px;
+        display: inline-block;
+        cursor: pointer;
+        font-size: 0;
+    }
+    
+    .searchbar {
+        width: calc(100% - 30px);
+        min-width: 200px;
+        height: 30px;
+        color: #333;
+    }
+    
+    .btn {
+        height: 30px;
+        width: 30px;
+        cursor: pointer;
+        font-weight: bold;
+        background: #0E79ED;
+        border: 1px solid #095FB4;
+        border-radius: 4px;
+    }
+    
+    .header .box {
+        display: inline-block;
+        margin-left: 10px;
+    }
+    
+    .box span {
+        cursor: pointer;
+        font-size: 14px;
+        display: inline-block;
+        height: 40px;
+        line-height: 40px;
+        padding: 0 12px;
+        color: #DDD;
+    }
+    
+    .btn2 {
+        height: 30px;
+        width: 65px;
+        display: inline-block;
+        margin-left: 190px;
+        cursor: pointer;
+        background: #0E79ED;
+        border: 1px solid #095FB4;
+        border-radius: 4px;
+    }
+    
+    .img {
+        background-image: url(https://liukanshan.zhihu.com/images/downloads/avatars/classic/06-33098635.png);
+        height: 25px;
+        width: 25px;
+        background-size: cover;
+        display: inline-block;
+        margin-right: 10px;
+    }
+    
+    .name {
+        font-size: 14px;
+        display: inline-block;
+    }
+    
+    .holder {
+        position: absolute;
+        right: 0;
+        width: 120px;
+        text-align: center;
+        line-height: 38px;
+        cursor: pointer;
+    }
+    
+    .list {
+        position: absolute;
+        top: 0;
+        z-index: -1;
+        display: none;
+    }
+    
+    .list li {
+        list-style: none;
+        height: 40px;
+        width: 120px;
+        background: #095FB4;
+        font-size: 15px;
+        cursor: pointer;
+    }
+    
+    .checked {
+        background: #095FB4;
+    }
+    
+    .btb {
+        border-bottom-right-radius: 4px;
+        border-bottom-left-radius: 4px;
+    }
+    
+    .box span:hover {
+        color: white;
+    }
+    </style>
+    <script>
+    window.onload = function() {
+        var main = document.getElementById('page')
+        var ul = main.getElementsByTagName('ul')[0]
+        var li = main.getElementsByTagName('li')
+        main.onmouseover = function() {
+            ul.style.display = 'block'
+        }
+        main.onmouseout = function() {
+            ul.style.display = 'none'
+        }
+        for (var i = 0; i < li.length; i++) {
+            li[i].onmouseover = function() {
+                this.style.background = '#0466CB'
+            }
+            li[i].onmouseout = function() {
+                this.style.background = '#095FB4'
+            }
+        }
+    }
+    </script>
+</head>
+
+<body>
+    <div class="header">
+        <nav class="navbar">
+            <span class=logo>逼 乎</span>
+            <form class="form" action="search">
+                <input class="searchbar" placeholder="&emsp;搜索你感兴趣的内容..." type="text">
+                <button class="btn">S</button>
+            </form>
+            <div class="box">
+                <span class="checked">首页</span>
+                <span>话题</span>
+                <span>发现</span>
+                <span>消息</span>
+            </div>
+            <button class="btn2">提问</button>
+            <div id="page" class="box holder">
+                <div class="img"></div>
+                <div class="name">刘看山</div>
+                <ul class="list">
+                    <li></li>
+                    <li>我的主页</li>
+                    <li>私信</li>
+                    <li>设置</li>
+                    <li class="btb">退出</li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+</body>
+
+</html>
