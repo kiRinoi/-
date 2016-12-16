@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		*{box-sizing: border-box;margin: 0;padding: 0;}
+		body {background:#7094AE ;}
+		.icon {width: 120px;height: 150px;position: absolute;top: 100px;left: 200px;background: url(http://p1.bqimg.com/564791/9916a718bdd1b52f.png);background-repeat: no-repeat;background-position: 50% 50%;background-color: #CAA772;border-radius: 30px;border: 3px solid #9F705B;}
+		.list {position: absolute;top: 0px;right: 130px;width: 100px;display: none;text-align: center;background: #CAA772;}
+		.list li{list-style: none;color:white;border: 1px solid #9F705B;}
+		.icon span{display: block;position: absolute;bottom: -40px;left: -40px; font-size: 25px;width: 200px;text-align: center; color:#4A3949 ;}
+	</style>
+	<script>
+		window.onload=function(){
+			var box = document.getElementById('box')
+			box.onmousedown=function(event){
+				var boxtop = event.clientY - box.offsetTop
+				var boxleft = event.clientX - box.offsetLeft 
+				document.onmousemove=function(event){
+					var dtop = event.clientY - boxtop
+					var dleft = event.clientX - boxleft
+					var maxtop = document.documentElement.clientWidth - box.offsetWidth 
+					var maxleft = document.documentElement.clientheight - box.offsetHeight
+					if (dtop<0) {dtop=0}
+						else if (dtop>maxtop) {dtop=maxtop}
+					if (dleft<0) {dleft=0}
+						else if (dleft>maxleft) {dleft=maxleft}
+					box.style.top = dtop+'px'
+					box.style.left = dleft+'px'
+				}
+				box.onmouseup=function(){
+					document.onmousemove=null
+					document.onmouseup=null
+				}
+			}
+
+
+			var ul = box.getElementsByTagName('ul')[0]
+			var li = box.getElementsByTagName('li')
+			box.onclick=function(event){
+				if (event.stopPropagation) {event.stopPropagation()}
+				ul.style.display = "block"
+				for (var i=0; i<li.length; i++){
+					li[i].onmouseover=function(){
+						this.style.background = "#9F705B"
+					}
+					li[i].onmouseout=function(){
+						this.style.background = "#CAA772"
+					}
+				}
+			}
+			document.onclick=function(){
+				ul.style.display = "none"
+			}
+		}
+	</script>
+</head>
+<body>
+	<div id="box" class="icon">
+		<ul class="list">
+			<li>1</li>
+			<li>2</li>
+			<li>4</li>
+			<li>5</li>
+			<li>6</li>
+			<li>7</li>
+			<li>8</li>
+			<li>9</li>
+			<li>10</li>
+		</ul>
+		<span>drag me !</span>
+	</div>
+</body>
+</html>
