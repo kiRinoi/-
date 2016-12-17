@@ -6,6 +6,7 @@
 + JS控制图片尺寸
 + JS下拉菜单
 + JS拖拽
++ JS掷骰子
 <br><br>
 + 使用position实现CSS布局
 + 使用float实现CSS布局
