@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		.style *{margin: 0 auto;text-align: center;}
+		.container {height: 150px;width: 150px;margin-bottom: 15px;line-height: 150px;font-size: 60px;border: 3px solid #000;}
+		.menu span {background: #EDB;margin: 10px;display: inline-block;height: 40px;width: 80px;line-height: 40px;}
+		.prompt {font-size: 20px;margin: 15px;}
+	</style>
+	<script>
+		var dice = ['1','2','3','4','5','6']
+		var dicing = 0
+		var counter = 0
+
+		window.onload = function(){
+			var menu = document.getElementById('btn')
+			var startbtn = menu.getElementsByTagName('span')[0]
+			var stopbtn = menu.getElementsByTagName('span')[1]
+			startbtn.onclick = startgame
+			stopbtn.onclick = stopgame
+
+			document.onkeyup = function(event){
+				if (event.keyCode == 13 && counter == 0) {
+					startgame()
+					counter = 1
+				} else {
+					stopgame()
+					counter = 0
+				}
+			}
+		}
+
+		function startgame(){
+			var menu = document.getElementById('btn')
+			var startbtn = menu.getElementsByTagName('span')[0]
+			clearInterval(dicing)
+			dicing = setInterval(number,50)
+			startbtn.style.background = "#DDD"
+		}
+		function number(){
+			var text = document.getElementById('text')
+			var result = document.getElementById('box')
+			var random = Math.random() * (dice.length - 1)
+			var value = Math.round(random)
+			result.innerHTML = dice[value]
+			text.innerHTML = "The result is&emsp;" + dice[value]
+			text.style.display = "none"
+		}
+		function stopgame(){
+			var text = document.getElementById('text')
+			var menu = document.getElementById('btn')
+			var startbtn = menu.getElementsByTagName('span')[0]
+			clearInterval(dicing)
+			startbtn.style.background = "#EDB"
+			text.style.display = "block"
+		}
+
+	</script>
+</head>
+<body>
+	<div class="style">
+		<div id="box" class="container">Roll</div>
+		<div id="btn" class="menu"><span>Start</span><span>Stop</span></div>
+		<div id="text" class="prompt">Can also push Enter</div>
+	</div>
+</body>
+</html>
