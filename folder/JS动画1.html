@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<style>
+* {margin: 0;padding: 0;box-sizing: border-box;}
+body {background: url(http://imglf.nosdn.127.net/img/blJpRVNabllxYmhyTEc0ZzJGWWMrUUdUVEFZdy81WWs3UytaNG9od0pzTW45Y3pnRVJuSVpnPT0.jpg?imageView&thumbnail=1680x0&quality=96&stripmeta=0&type=jpg);}
+.container {background: url(http://imglf2.nosdn.127.net/img/blJpRVNabllxYmhyTEc0ZzJGWWMrZjRzZDJISEFWaXpZOUtvSUROTkRzQ1lyc1dDR09iUTh3PT0.jpg?imageView&rotate=90&thumbnail=1680x0&quality=96&stripmeta=0&type=jpg);background-size:cover;}
+.container nav {width: 80%;height: 300px;margin: -260px auto 0 auto;}
+
+</style>
+<body>
+	<div id="content" class="container">
+		<nav></nav>
+	</div>
+</body>
+<script>
+var main = document.getElementById('content')
+var nav = main.getElementsByTagName('nav')[0]
+var timer = 0
+window.onload=function(){
+	nav.onmouseover = function(){
+		move(0)
+	}
+	nav.onmouseout = function(){
+		move(-260)
+	}
+}
+function move(m){
+	clearInterval(timer)
+	var speed = 0
+	timer = setInterval(function(){
+	if (nav.offsetTop < m ){
+			speed = 20
+		} else {speed = -20}
+		if (nav.offsetTop == m){
+			clearInterval(timer)
+		} else {nav.style.marginTop = nav.offsetTop + speed +'px'}
+	}, 30)
+}
+</script>
+</html>
