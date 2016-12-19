@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	.op { height: 200px;width: 200px; background: #ABC; opacity: 0.5;}
+	</style>
+
+</head>
+<body>
+	<div>
+		<div id="box" class="op"></div>
+	</div>
+</body>
+	<script>
+		var box = document.getElementById('box')
+		var timer = 0
+		var op = 50
+		window.onload= function(){
+		box.onmouseover = function(){
+			opacity(100)
+		}
+		box.onmouseout = function(){
+			opacity(50)
+		}
+		}
+		 function opacity(val) {
+		 	clearInterval(timer)
+		 	timer = setInterval(function(){
+		 		var speed = 0
+		 		if (op < val) { speed = 5 }else{speed = -5}
+		 		if (op == val) {clearInterval(timer)} else {
+		 			op += speed
+		 			box.style.opacity = op/100
+		 		}
+		 	},30)
+		}
+	</script>
+</html>
