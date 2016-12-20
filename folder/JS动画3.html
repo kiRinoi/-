@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+  *{margin: 0;padding: 0;}
+  #nav ul li{list-style: none;background: #FBE;height: 60px;width: 150px;margin-top: 15px;border: 1px solid #000;}
+  </style>
+</head>
+<body>
+  <div>
+    <nav id="nav">
+      <ul>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+      </ul>
+    </nav>
+  </div>
+</body>
+<script>
+var box = document.getElementById('nav')
+var list = box.getElementsByTagName('li')
+window.onload = function(){
+  for (var i=0; i<list.length;i++) {
+    list[i].timer = 0 //定义很多timer
+    list[i].onmouseover = function(){
+      move(this,300)
+    }
+    list[i].onmouseout = function(){
+      move(this,150)
+    }
+  }
+}
+function getstyle(obj,ele){
+  return getComputedStyle(obj)[ele] //可以获得对象所有css样式，包括继承来的
+}
+function move(obj,width){
+  clearInterval(obj.timer)
+  obj.timer = setInterval(function(){
+    var speed = (width - obj.offsetWidth)/5
+    speed = speed > 0?Math.ceil(speed):Math.floor(speed)
+    obj.offsetWidth == width?clearInterval(obj.timer):obj.style.width = parseInt(getstyle(obj,'width')) + speed +'px'
+  },30)
+}//只是消除border影响的话，clientWidth和boder-sizing也是好方法
+</script>
+</html>
