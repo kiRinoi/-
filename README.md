@@ -1,6 +1,6 @@
 前端相关练习
 ===
-主要是HTML+CSS的练习，用于巩固基础的知识点。
+主要是HTML+CSS+Javascript的练习，用于巩固基础的知识点。
 <br><br>
 ### 课题列表：
 + JS控制图片尺寸
@@ -10,6 +10,8 @@
 + JS动画1
 + JS动画2
 + JS动画3
++ JS动画4
++ JS动画5
 <br><br>
 + 使用position实现CSS布局
 + 使用float实现CSS布局
