@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+  .bo1,.bo2 {height: 200px;width: 200px;border: 1px solid #000;background: #EDF;}
+  </style>
+</head>
+<body>
+  <div id="box">
+    <div class="bo1">1</div>
+    <div class="bo2">2</div>
+  </div>
+</body>
+<script>
+var main = document.getElementById('box')
+var box = main.getElementsByTagName('div')
+window.onload=function(){
+  for (var i=0; i<box.length; i++){
+    box[i].timer = null
+    box[i].onmouseover = function(){
+      move(this,{width:400,height:400})}
+    
+    box[i].onmouseout=function(){
+      move(this,{width:200,height:200})}
+     }
+  }
+function getstyle(obj,ele){
+  var mystyle = getComputedStyle(obj)[ele]
+  return parseInt(mystyle)
+}
+function move(obj,json){
+	clearInterval(obj.timer)
+	var wh = null
+	obj.timer = setInterval(function(){
+		var flag = true;
+		for (var i in json) {
+			wh = getstyle(obj,i)
+			var speed = (json[i] - wh)/10
+			speed = speed>0?Math.ceil(speed):Math.floor(speed)
+			if (wh != json[i]) {flag = false }
+			obj.style[i] = wh + speed + 'px'
+		}
+		if (flag) {clearInterval(obj.timer)}
+	},30)
+}
+</script>
+</html>
