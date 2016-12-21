@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+  .bo1,.bo2 {height: 200px;width: 200px;border: 1px solid #000;background: #EDF;}
+  </style>
+</head>
+<body>
+  <div id="box">
+    <div class="bo1">1</div>
+    <div class="bo2">2</div>
+  </div>
+</body>
+<script>
+var main = document.getElementById('box')
+var box = main.getElementsByTagName('div')
+window.onload=function(){
+  for (var i=0; i<box.length; i++){
+    box[i].timer = null
+    box[i].onmouseover = function(){
+      move(this,'width',400,function(){move(this,'height',400)})
+    }
+    box[i].onmouseout=function(){
+      move(this,'width',200,function(){move(this,'height',200)})
+    }
+  }
+}
+function getstyle(obj,ele){
+  var mystyle = getComputedStyle(obj)[ele]
+  return mystyle
+}
+function move(obj,ele,val,fn){
+  clearInterval(obj.timer)
+  obj.timer = setInterval(function(){
+    var ms = parseInt(getstyle(obj,ele))
+    var speed = (val-ms)/5
+    speed = speed > 0?Math.ceil(speed):Math.floor(speed)
+        if (ms == val) {
+          clearInterval(obj.timer)
+          if (fn) {fn.call(obj)}
+        }
+          else {obj.style[ele] = ms + speed + 'px'}
+  },30)
+}
+</script>
+</html>
