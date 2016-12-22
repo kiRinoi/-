@@ -12,6 +12,7 @@
 + JS动画3
 + JS动画4
 + JS动画5
++ JS动画6
 <br><br>
 + 使用position实现CSS布局
 + 使用float实现CSS布局
