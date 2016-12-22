@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	*{text-align: center;margin-top: 10px;}
+	</style>
+</head>
+<body>
+	<div>
+		<div id="time">hello world</div>
+	</div>
+	<div>距离&emsp;2017年8月29日&emsp;剩余&emsp;<span id="counter">0</span>&emsp;天</div>
+	<div>
+		<div id="al">世界已经毁灭！</div>
+	</div>
+</body>
+<script>
+	window.onload = function(){
+		showtime()
+		counter()
+		allc()
+
+	}
+	function allc(){
+		var limit = new Date ('2017,8,29')
+		var now = new Date()
+		var ln = limit.getTime() - now.getTime()
+		var time = parseInt(ln/1000)
+		var day = (time/3600)/24
+		var hour = (time/3600)%24
+		var min = (time/60)%60
+		var sec = time%60
+		if (time >= 0) {
+			var al = document.getElementById('al')
+			al.innerHTML = '确切的说是，'+parseInt(day)+'天'+parseInt(hour)+'小时'+parseInt(min)+'分'+parseInt(sec)+'秒'
+			setTimeout(allc,500)
+		} else {clearTimeout(allc)}
+		
+	}
+	function counter(){
+		var limit = new Date ('2017,8,29')
+		var now = new Date()
+		var ln = limit.getTime() - now.getTime()
+		var result = Math.ceil(ln/(1000 *60 * 60 * 24))
+		var sp = document.getElementById('counter')
+		if (result > 0) {
+			sp.innerHTML = result
+			setTimeout(counter,43200000)
+		} else {clearTimeout(allc)}
+	}
+
+	function check(obj){
+		if (obj < 10) {obj ='0' + obj}
+			return obj
+	}
+
+	function showtime(){
+		var now = new Date()
+		var content = document.getElementById('time')
+		var year = now.getFullYear()
+		var mon = now.getMonth()+1
+		var date = now.getDate()
+		var min = now.getMinutes()
+		var hour = now.getHours()
+		var sec = now.getSeconds()
+		sec = check(sec)
+		mon = check(mon)
+		date = check(date)
+		min = check(min)
+		hour = check(hour)
+
+		var week = new Array(7)
+		week[0] = '星期天'
+		week[1] = '星期一'
+		week[2] = '星期二'
+		week[3] = '星期三'
+		week[4] = '星期四'
+		week[5] = '星期五'
+		week[6] = '星期六'
+
+		var yy = year+'年'+mon+'月'+date+'日'
+		var mm = hour+'点'+min+'分'+sec+'秒'
+		content.innerHTML = '今天是&emsp;'+yy + '&emsp;' +week[now.getDay()]+ '&emsp;时间&emsp;' + mm  
+		setTimeout(showtime,500)
+	}
+</script>
+</html>
