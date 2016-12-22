@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	*{margin: 0;padding: 0;box-sizing: border-box;overflow: hidden}
+	#box {border: 1px solid #000;text-align: center;padding: 5px;width: 200px;margin: 50px auto;}
+	#box li{list-style: none;display: inline-block;margin: 5px;width: 60px;background: #EBF;border: 1px solid #000;padding: 5px;}
+	#box a{text-decoration: none;color: #000;display: block;}
+	#box i,img{height: 40px;width: 40px;position: relative;top: 0;opacity: 1;}
+	#box span{display: block;font-size: 14px;}
+	</style>
+</head>
+<body>
+	<div>
+		<ul id="box">
+			<p>List</p>
+			<li><a href=""><i><img src="http://i1.piimg.com/564791/ee53c070144fe2c8.png" alt=""></i></a><span>1</span></li>
+			<li><a href=""><i><img src="http://i1.piimg.com/564791/ee53c070144fe2c8.png" alt=""></i></a><span>2</span></li>
+			<li><a href=""><i><img src="http://i1.piimg.com/564791/ee53c070144fe2c8.png" alt=""></i></a><span>3</span></li>
+			<li><a href=""><i><img src="http://i1.piimg.com/564791/ee53c070144fe2c8.png" alt=""></i></a><span>4</span></li>
+		</ul>
+	</div>
+</body>
+<script>
+var list = document.getElementsByTagName('li')
+window.onload = function(){
+	for (var i=0; i<list.length; i++){
+		list[i].timer = null
+		list[i].onmouseenter = function(){
+			var _this = this.getElementsByTagName('i')[0]
+			move(_this,
+				{top:-50,opacity:0},
+				function(){
+					_this.style.top = 50 + 'px'
+					move(_this,
+						{top:0,opacity:100}
+						)
+				}
+				)
+		}
+	}
+}
+function getstyle(obj,attr){
+	var style = getComputedStyle(obj)[attr]
+	style = attr == 'opacity'?Math.round(parseFloat(style)*100):parseInt(style)
+	return style
+}
+function move(obj,json,fn){
+	clearInterval(obj.timer)
+	obj.timer = setInterval(function(){
+	var flag = true
+		for (var i in json){
+			var nval = getstyle(obj,i)
+			var speed = (json[i] - nval)/5
+			speed = speed > 0?Math.ceil(speed):Math.floor(speed)
+			if (nval != json[i]){flag = false}
+			var reuslt = nval + speed
+			obj.style[i] = i == 'opacity'?reuslt/100:reuslt + 'px'
+		}
+		if (flag) {
+			clearInterval(obj.timer)
+			if(fn){fn()}
+		}
+	},20)
+}
+</script>
+</html>
