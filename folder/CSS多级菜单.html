@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+    * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+    }
+    
+    .ul {
+        border: 2px solid #F55;
+        border-right: transparent;
+        border-left: transparent;
+        width: 200px;
+        position: relative;
+        margin: 50px;
+    }
+    
+    .logo {
+        background: #F55;
+        padding: 10px;
+        text-indent: 20px;
+        color: white;
+        font-weight: bold;
+    }
+    
+    .ul a {
+        text-decoration: none;
+        color: black;
+        font-size: 15px;
+    }
+    
+    .ul li {
+        list-style: none;
+        text-indent: 5px;
+        border-right: 2px solid #F55;
+        border-left: 2px solid #F55;
+        height: 40px;
+        line-height: 40px;
+    }
+    
+    .ul li:hover {
+        border: transparent;
+        box-shadow: 5px 0 8px #DDD;
+        border-left: 2px solid #F55;
+    }
+    
+    .ul a:hover {
+        color: #F55;
+    }
+    
+    .img {
+        width: 300px;
+        height: 300px;
+        display: block;
+        border: 1px solid #000;
+    }
+    
+    .box {
+        height: 500px;
+        width: 500px;
+        background: #FFF;
+        position: absolute;
+        left: 205px;
+        top: 0;
+        display: none;
+        box-shadow: 0 0 10px #AAA;
+        background: white;
+    }
+    
+    .ul li:hover .box {
+        display: block;
+    }
+    
+    .ul .sp {
+        display: none;
+        height: 40px;
+        width: 50px;
+        background: #FFF;
+        float: right;
+        position: relative;
+        right: -10px;
+        z-index: 1
+    }
+    
+    .ul li:hover .sp {
+        display: inline-block;
+    }
+    
+    .dl {
+        border-bottom: 1px solid #DDD;
+        width: 90%;
+        height: 40px;
+        margin: 0 auto;
+        line-height: 40px;
+        padding: 1px;
+        font-size: 14px;
+    }
+    
+    .dl dt {
+        display: inline-block;
+        height: 25px;
+        line-height: 25px;
+        width: 70px;
+        text-align: center;
+        color: red;
+    }
+    
+    .dl dd {
+        display: inline-block;
+        height: 25px;
+        line-height: 25px;
+        width: 50px;
+        text-align: center;
+        border-left: 1px solid #DDD;
+        border-right;
+        1px solid #DDD;
+    }
+    </style>
+</head>
+
+<body>
+    <div>
+        <ul class="ul">
+            <div class="logo">全部分类</div>
+            <li><a href="">分类1</a><span class="sp"></span>
+                <div class="box">
+                    <dl class="dl">
+                        <dt>title1</dt>
+                        <dd>1</dd>
+                        <dd>2</dd>
+                        <dd>3</dd>
+                        <dd>4</dd>
+                    </dl>
+                    <dl class="dl">
+                        <dt>title2</dt>
+                        <dd>1</dd>
+                        <dd>2</dd>
+                        <dd>3</dd>
+                        <dd>4</dd>
+                    </dl>
+                </div>
+            </li>
+            <li><a href="">分类2</a><span class="sp"></span>
+                <div class="box">neir2</div>
+            </li>
+            <li><a href="">分类3</a><span class="sp"></span>
+                <div class="box">neir3</div>
+            </li>
+            <li><a href="">分类4</a><span class="sp"></span>
+                <div class="box">neir4</div>
+            </li>
+            <li><a href="">分类5</a><span class="sp"></span>
+                <div class="box">neir5</div>
+            </li>
+            <li><a href="">分类6</a><span class="sp"></span>
+                <div class="box">neir6</div>
+            </li>
+            <li><a href="">分类7</a><span class="sp"></span>
+                <div class="box">neir7</div>
+            </li>
+            <li><a href="">分类8</a><span class="sp"></span>
+                <div class="box">neir8</div>
+            </li>
+        </ul>
+    </div>
+</body>
+
+</html>
