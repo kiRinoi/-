@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+    * {margin: 0;padding: 0;box-sizing: border-box;font-family: 'Microsoft YaHei';}
+
+    .navbar {height: 80px;margin-top: 10px;}
+    .logo {position: fixed;top: 15px;left: 15px;}
+    .logo img {height: 40px;width: 40px;;transition: 0.1s;}
+    .menu {position: fixed;top: 15px;right: 15px;}
+    .menu img {height: 40px;width: 40px;transition: 0.1s;}
+    .menu a {text-decoration: none;color: #000;margin: 0 5px;font-size: 15px;display: inline-block;vertical-align: middle;font-family: 'Broadway';transition: 0.1s;}
+    .menu a:hover {color: #F55;}
+    .logo img:hover {transform:rotate(-45deg);}
+    .menu img:hover {transform:rotate(45deg);}
+
+    #title {text-align: center;}
+    #title h1 {font-family: 'Palace Script MT';font-size: 200px;margin-bottom: -30px;}
+    #title .btn {margin-top: 30px;}
+    #title .btn button {width: 200px;height: 40px;border-radius: 100px;cursor: pointer;background: #FFF;border: 2px solid #000;transition: 0.3s;margin: 20px;}
+    #title .btn span {display: inline-block;vertical-align: middle;font-weight: bold;position: relative;left:15px;}
+    #title .btn img {height: 25px;width: 25px;vertical-align: middle;display: inline-block;position: relative;left: -15px; opacity: 0;}
+    #title .btn button:hover {color: #FFF;background: #F55;}
+    #title .btn button:hover img {opacity: 1;}
+
+    .banner {width: 70%;height: 550px;margin: 30px auto;position: relative;overflow: hidden;}
+    .banner .hot img {width: 150px;height: 150px;position: absolute;top: 225px;transition: 0.2s;cursor: pointer;}
+    .banner #frame {width:100%;height: 100%;font-size: 0;}
+    .banner #frame img {height: 100%;width: 100%;margin-left: 0px;position: absolute;top: 0;left: 0;transition: 1s;opacity: 1;}
+    .banner .right {right: -25px;}
+    .banner .left {left: -25px;}
+    .banner .right:hover {right: -35px;}
+    .banner .left:hover {left: -35px;}
+
+    .content {text-align: center;margin-top: 50px;}
+    .content div{display: inline-block;margin: 50px;vertical-align: top;}
+    .content img {height: 80px;width: 80px;}
+    .content p {font-size: 14px;line-height: 30px;margin-top: 30px;}
+    .content a {text-decoration: none;color: #F55;}
+
+    #subnav {text-align: center;margin-top: 50px;}
+    #subnav * {color: #888;text-decoration: none;font-size: 12px;margin: 0 20px;transition: 0.1s;font-weight: bold;}
+    #subnav a:hover {color: #F55;}
+
+    #list {width: 1000px;height: 670px;margin: 20px auto;text-align: center;position: relative;overflow: hidden;}
+
+    #list div:nth-child(1) {
+        background-image: url(http://imglf1.nosdn.127.net/img/blJpRVNabllxYmlTcTVoRmtNcGpzdG4ydGtyL1RHL1o5NW5VaU9CVm5EbkhhTFhLMmo3c3pnPT0.png?imageView&thumbnail=1680x0&quality=96&stripmeta=0&type=jpg);
+        background-position: 50% 50%;}
+    #list div:nth-child(2) {
+        background-image: url(http://imglf0.nosdn.127.net/img/blJpRVNabllxYmpBWVZzNElkUnA3WUhubTcrNVJjWG1UTmVKYUVEclVTbVl4VHRKcGFuYjd3PT0.jpg?imageView&thumbnail=1680x0&quality=96&stripmeta=0&type=jpg);
+        background-position: 50% 50%;}
+    #list div:nth-child(3) {
+        background-image: url(http://imglf0.nosdn.127.net/img/blJpRVNabllxYmlTcTVoRmtNcGpzdklOUmJxVGdra3RVbEc1UmM3WjQ1WURnTVYwaVcyUWNBPT0.jpg?imageView&thumbnail=1680x0&quality=96&stripmeta=0&type=jpg);
+        background-position: 50% 50%;}
+    #list div:nth-child(4) {
+        background-image: url(http://imglf.nosdn.127.net/img/blJpRVNabllxYmlTcTVoRmtNcGpzaFQwbnQwblg5TW01NWdzZy91eDc4ZGcvSG1GRWxwZDlnPT0.jpg?imageView&thumbnail=1680x0&quality=96&stripmeta=0&type=jpg);
+        background-position: 50% 50%;}
+    #list div:nth-child(5) {
+        background-image: url(http://imglf2.nosdn.127.net/img/blJpRVNabllxYmlTcTVoRmtNcGpzdDh5WTRFMU8vVzNTUWgrV2hEaVZQa1dFTGk3bVNGdSt3PT0.jpg?imageView&thumbnail=1680x0&quality=96&stripmeta=0&type=jpg);
+        background-position: 50% 50%;}
+    #list div:nth-child(6) {
+        background-image: url(http://imglf0.nosdn.127.net/img/blJpRVNabllxYmlTcTVoRmtNcGpzb1QwVGJZTk5KWHZZTjBCTHNIaVMwWG5NNHNxZHREaVFnPT0.jpg?imageView&thumbnail=1680x0&quality=96&stripmeta=0&type=jpg);
+        background-position: 50% 50%;}
+    #list div:nth-child(7) {
+        background-image: url(http://imglf0.nosdn.127.net/img/blJpRVNabllxYmlTcTVoRmtNcGpzcU95K1h5bWlPWlZ6VTZlNTRmK0NSOVdIMHFVUXVBOTV3PT0.jpg?imageView&thumbnail=1680x0&quality=96&stripmeta=0&type=jpg);
+        background-position: 50% 50%;} 
+    #list div:nth-child(8) {
+        background-image: url(http://imglf.nosdn.127.net/img/blJpRVNabllxYmlTcTVoRmtNcGpza3B5RTM5SlkrWm5ub3BBeW1RMndwdWNTUUFTMmpOTlNBPT0.jpg?imageView&thumbnail=1680x0&quality=96&stripmeta=0&type=jpg);
+        background-position: 50% 50%;}
+    #list div:nth-child(9) {
+        background-image: url(http://imglf1.nosdn.127.net/img/blJpRVNabllxYmlqRk5IbkU1Ulc4NjdwcGwzckhhR3BsSHR2eXhUV2dDc296YjFKa2t0cjdnPT0.jpg?imageView&thumbnail=1680x0&quality=96&stripmeta=0&type=jpg);
+        background-position: 50% 50%;}
+
+    #list .normal {display: inline-block;width: 300px;height: 200px;margin: 10px;cursor: pointer;position: relative;transition: 0.6s;opacity: 1;transform:rotateY(360deg);}
+    #list p {color: #FFF;width: 100%;height: 100%;position: absolute;top: 0;left: 0;background: #000;font-size: 150px;font-family: 'Palace Script MT';line-height: 150px;opacity: 0;transition: 0.3s;font-weight: bold;}
+    #list a {display: block;position: absolute;left: 3px;bottom: 3px;width: 40px;height: 30px;background: url(http://i1.piimg.com/564791/181e0e405a3a6e6e.png);background-size: cover;opacity: 0;transition: 0.4s;}
+    #list div:hover p {opacity: 0.8;line-height: 200px;}
+    #list div:hover a {opacity: 1;height: 40px;}
+    .bigger {height: 100%;width: 100%;position: absolute;top: 0;left: 0;margin: 0;z-index: 1;background-size: cover;}
+    #list span {height: 100%;width: 100%;position: absolute;top: 0;left: 0;margin: 0;z-index: 1;background: transparent;display: none;border: 30px solid #000;}
+    #list img {height: 80px;width: 80px;border-radius: 50px;position: absolute;right: 5px;top: 5px;cursor: pointer;background: #000;opacity: 0.8;border: 10px solid #000;}
+    .none {width: 0;height: 0;transition: 0.6s;visibility: hidden;margin: 0;padding: 0;font-size: 0;display: inline-block;opacity: 0;transform:rotateY(90deg);}
+    #on {color: #F55;}
+
+    .service {width: 80%;margin: 0 auto;text-align: center;margin-top: 100px;}
+    .service div {display: inline-block;margin: 20px;vertical-align: top;}
+    .service a {display: block;padding: 15px;border: 2px solid #F55;border-radius: 150px;height: 150px;width: 150px;margin: 0 auto;}
+    .service img {width: 90px;height: 90px;margin-top: 15px;}
+    .service h1 {font-size: 24px;margin-bottom: 40px;margin-top: 150px;}
+    .service h5 {margin-bottom: 30px;color: #F55;margin-top: 15px;}
+    .service li {list-style: none;font-size: 14px;line-height: 25px;}
+    
+    .footer {text-align: center;margin-top: 100px;margin-bottom: 100px;}
+    .footer h2{margin-bottom: 20px;}
+    #endbtn {width: 350px;height: 40px;border-radius: 100px;cursor: pointer;background: #FFF;border: 2px solid #000;transition: 0.3s;margin: 40px;}
+    #endbtn span {display: inline-block;vertical-align: middle;font-weight: bold;position: relative;left:15px;}
+    #endbtn img {height: 25px;width: 25px;vertical-align: middle;display: inline-block;position: relative;left: -15px; opacity: 0;}
+    #endbtn:hover {color: #FFF;background: #F55;}
+    #endbtn:hover img {opacity: 1;}
+    </style>
+</head>
+<body>
+    <nav class='navbar'>
+        <a class='logo' href="#top"><img src="http://p1.bqimg.com/564791/38e7f1cd4c054b95.png" alt=""></a>
+        <div class='menu'>
+            <a href="#top">Home</a>
+            <a href="#endbtn">Contact</a>
+            <a href="javascript:void(0)" name='alert'><img src="http://p1.bqimg.com/564791/d362b23f2ac2db63.png" alt=""></a>
+        </div>
+    </nav>
+    <!-- navbar -->
+    <section id='title'>
+        <h1>kiRi</h1>
+        <h2>This is a Web Design Studio.
+        <br>I'm a self taught web designer and self taught illustrator : )
+        </h2>
+        <div class='btn'>
+            <button name='alert'><span>Watch Portfolio&emsp;<span></span></span><img src="http://p1.bqimg.com/564791/8fba72180123bb0a.png" alt=""></button>
+            <button name='alert'><span>Contact kiRi&emsp;<span></span></span><img src="http://p1.bqimg.com/564791/7d600647aefdc5a5.png" alt=""></button>
+        </div>
+    </section>
+    <!-- title -->
+    <div class='banner'>
+        <div id='frame'>
+            <img style='opacity: 1;' src="http://imglf2.nosdn.127.net/img/blJpRVNabllxYmp5dlRFWTUwUVVQaEhENWRsSDMrRWs5cGxza0ZubmYxTDU5QmNPaWpKRGlnPT0.jpg?imageView&thumbnail=1680x0&quality=96&stripmeta=0&type=jpg" alt="">
+            <img style='opacity: 0;' src="http://imglf1.nosdn.127.net/img/blJpRVNabllxYmlqRk5IbkU1Ulc4NjdwcGwzckhhR3BsSHR2eXhUV2dDc296YjFKa2t0cjdnPT0.jpg?imageView&thumbnail=1680x0&quality=96&stripmeta=0&type=jpg" alt="">
+            <img style='opacity: 0;' src="http://imglf.nosdn.127.net/img/blJpRVNabllxYmlqRk5IbkU1Ulc4MGVaeDdDZThFU3hhbzloOFE2dW1YNURNSW9pSWhqRFNRPT0.jpg?imageView&thumbnail=1680x0&quality=96&stripmeta=0&type=jpg" alt="">
+        </div>
+        <div class='hot'>
+            <img class='left' src="http://i1.piimg.com/564791/096dd395d1293fdc.png" alt="">
+            <img class='right' src="http://i1.piimg.com/564791/f72b5161df09b120.png" alt="">
+        </div>
+    </div>
+    <!-- banner -->
+    <section class='content'>
+        <div>
+            <img src="http://i1.piimg.com/564791/0a11bfe4484e4fa6.png" alt="">
+            <h2>Social Networks</h2>
+            <p>
+            kiRi wastes time on social media;<br>
+            <a href="https://twitter.com" target='_blank'>Twitter</a> ,  
+            <a href="http://www.lofter.com" target='_blank'>Lofter</a> and 
+            <a href="http://www.pixiv.net/" target='_blank'>Pixiv</a>
+            </p>
+        </div>
+        <div>
+            <img src="http://i1.piimg.com/564791/ded0d881714140eb.png" alt="">
+            <h2>Currently working on</h2>
+            <p>
+            Web design of Mr. kiRi<br>
+            And code code code..
+            </p>
+        </div>
+        <div>
+            <img src="http://i1.piimg.com/564791/0818dd1e0869771d.png" alt="">
+            <h2>Contact kiRi</h2>
+            <p>Mail: info@kiRi.com<br>
+            Go to the 
+            <a href="#endbtn">contact page</a> for all info
+            </p>
+        </div>
+    </section>
+    <!-- content -->
+    <div id='subnav'>
+        <span>SORT PORTFOLIO:</span>
+        <a href="javascript:void(0)" id='on'>All</a>
+        <a href="javascript:void(0)">illustrator</a>
+        <a href="javascript:void(0)">Design</a>
+        <a href="javascript:void(0)">Other</a>
+    </div>
+    <!-- subnav  -->
+    <div id='list'>
+        <div class='normal' name="Design"><p>kiRi</p><a></a></div>
+        <div class='normal' name="illustrator"><p>kiRi</p><a></a></div>
+        <div class='normal' name="illustrator"><p>kiRi</p><a></a></div>
+        <div class='normal' name="Design"><p>kiRi</p><a></a></div>
+        <div class='normal' name="illustrator"><p>kiRi</p><a></a></div>
+        <div class='normal' name="Design"><p>kiRi</p><a></a></div>
+        <div class='normal' name="illustrator"><p>kiRi</p><a></a></div>
+        <div class='normal' name="illustrator"><p>kiRi</p><a></a></div>
+        <div class='normal' name="Other"><p>kiRi</p><a></a></div>
+        <span><img src="http://p1.bqimg.com/564791/84758edd78d0edce.png" alt=""></span>
+    </div>
+    <!-- list -->
+    <section class='service'>
+        <h1>Services</h1>
+        <div>
+            <a href="javascript:void(0)"><img src="http://p1.bqimg.com/564791/9d71349990061387.png" alt=""></a>
+            <h5>Branding</h5>
+            <ul>
+                <li>Brand Creation</li>
+                <li>Logo Development</li>
+                <li>Brand Guidelines</li>
+                <li>Redesign</li>
+            </ul>
+        </div>
+        <div>
+            <a href="javascript:void(0)"><img src="http://p1.bqimg.com/564791/cedea47d3bb564fc.png" alt=""></a>
+            <h5>Tactile Media</h5>
+            <ul>
+                <li>Packaging</li>
+                <li>Apparel</li>
+                <li>Posters</li>
+                <li>Brochures</li>
+            </ul>
+        </div>
+        <div>
+            <a href="javascript:void(0)"><img src="http://p1.bqimg.com/564791/3d10e47a559aec5c.png" alt=""></a>
+            <h5>Digital</h5>
+            <ul>
+                <li>Webdesign</li>
+                <li>Webdevelopment</li>
+                <li>Responsive Design</li>
+                <li>Basic E-commerce</li>
+            </ul>
+        </div>
+        <div>
+            <a href="javascript:void(0)"><img src="http://p1.bqimg.com/564791/cdfd88befdb6cd48.png" alt=""></a>
+            <h5>Visual Communication</h5>
+            <ul>
+                <li>Graphic Design</li>
+                <li>Illustration</li>
+                <li>Type Design</li>
+                <li>Icon Design</li>
+            </ul>
+        </div>
+    </section>
+    <!-- service -->
+    <footer class='footer'>
+        <h2>
+        A founded conversation leads to better design.
+        </h2>
+        <h2>
+        Don’t hesitate to contact kiRi for a free quotation or a candle light dinner.
+        </h2>
+        <button id='endbtn' name='alert'><span>Feel The Connection? Contact Me!&emsp;<span></span></span><img src="http://p1.bpimg.com/564791/dd709bcf50eb16bf.png" alt=""></button>
+    </footer>
+</body>
+<script>
+var list = document.getElementById('list')
+var display = document.getElementById('display')
+var limg = list.getElementsByTagName('div')
+var lspan = list.getElementsByTagName('span')[0]
+var clo = list.getElementsByTagName('img')[0]
+var subnav = document.getElementById('subnav')
+var subbtn = subnav.getElementsByTagName('a')
+
+var illi = document.getElementsByName('illustrator')
+var des = document.getElementsByName('Design')
+var oth = document.getElementsByName('Other')
+function on(obj){
+    for (var i=0; i<subbtn.length; i++){
+        subbtn[i].style.color = '#888'
+    }
+        obj.style.color = '#F55'   
+}
+
+function choose(obj,style){
+    for (var i=0; i<obj.length; i++){
+        obj[i].className = style
+    }
+}
+function selection(){
+    subbtn[0].onclick = function(){
+        choose(limg,'none')
+        choose(limg,'normal')
+        on(subbtn[0])
+    }
+    subbtn[1].onclick = function(){
+        choose(limg,'none')
+        choose(illi,'normal')
+        on(subbtn[1])
+    }
+    subbtn[2].onclick = function(){
+        choose(limg,'none')
+        choose(des,'normal')
+        on(subbtn[2])
+    }
+    subbtn[3].onclick = function(){
+        choose(limg,'none')
+        choose(oth,'normal')
+        on(subbtn[3])
+    }
+}
+
+function shiftimg(){
+    for (var i=0; i<limg.length; i++){
+        limg[i].onclick = function(){
+            this.className = 'bigger'
+            lspan.style.display = 'block'
+        }
+    }
+    clo.onclick = function(){
+        for (var n=0; n<limg.length; n++){
+            limg[n].className = 'normal'
+            lspan.style.display = 'none'
+            on(subbtn[0])
+        }
+    }
+}
+
+var banner = document.getElementById('frame')
+var bimg = banner.getElementsByTagName('img')
+var index = 0 
+var play = null
+
+function show(obj){
+    for (var i=0; i<bimg.length; i++){
+        bimg[i].style.opacity = 0
+        bimg[obj].style.opacity = 1
+    }
+}
+function imgmove(){
+    play = setInterval(function(){
+        index++
+        if (index >= bimg.length){index=0}
+        show(index)
+    },3500)
+}
+
+var title = document.getElementById('title')
+var btn = title.getElementsByTagName('button')
+var img = title.getElementsByTagName('img')
+var span = title.getElementsByTagName('span')
+
+var endbtn = document.getElementById('endbtn')
+
+window.onload = function(){
+    endbtn.onmouseenter = function(){
+        var _endimg = this.getElementsByTagName('img')[0]
+        var _endspan = this.getElementsByTagName('span')[0]
+        startmove(_endimg,'left',0)
+        startmove(_endspan,'left',0)
+    }
+    endbtn.onmouseout = function(){
+        var _endimg = this.getElementsByTagName('img')[0]
+        var _endspan = this.getElementsByTagName('span')[0]
+        startmove(_endimg,'left',-15)
+        startmove(_endspan,'left',15)
+    }
+    selection()
+    shiftimg()
+    imgmove()
+    for (var i=0; i<btn.length; i++){
+        btn[i].timer = null
+        btn[i].onmouseenter = function(){
+            var _img = this.getElementsByTagName('img')[0]
+            var _span = this.getElementsByTagName('span')[0]
+            startmove(_img,'left',0)
+            startmove(_span,'left',0)
+            
+        }
+        btn[i].onmouseout = function(){
+            var _img = this.getElementsByTagName('img')[0]
+            var _span = this.getElementsByTagName('span')[0]
+            startmove(_img,'left',-15)
+            startmove(_span,'left',15)
+        }
+    }
+    var btnalert = document.getElementsByName('alert')
+    for (var i=0; i<btnalert.length; i++){
+        btnalert[i].onclick = function(){
+            alert('这个功能还未开放哦！')
+        }
+    }
+}
+function getstyle(obj,attr){
+    var style = getComputedStyle(obj)[attr]
+    style = parseInt(style)
+    return style
+}
+function startmove(obj,attr,val){
+    clearInterval(obj.timer)
+    obj.timer = setInterval(function(){
+        var nowval = getstyle(obj,attr)
+        var speed = (val - nowval)/10
+        speed = speed >0?Math.ceil(speed):Math.floor(speed)
+        if (nowval != val) {obj.style[attr] = nowval + speed + 'px'}
+    },15)
+}
+
+
+</script>
+</html>
