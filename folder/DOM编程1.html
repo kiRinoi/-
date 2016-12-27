@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	div {text-align: center;}
+	ul {list-style: none;margin-left: -40px;}
+	li {display: inline-block;margin: auto 10px;}
+	a {text-decoration: none;color: #000;}
+	img {display: inline-block;border: 1px solid #000;padding: 3px;}
+	</style>
+</head>
+<body>
+	<div>
+		<h1>TSUTAYA BOOK IMAGE</h1>
+		<ul>
+			<li><a href="image/1_02.jpg" onclick="showPic(this); return false" title="TSUTAYA BOOK 1">IMAGE 1</a></li>
+			<li><a href="image/2_03.jpg" onclick="showPic(this); return false" title="TSUTAYA BOOK 2">IMAGE 2</a></li>
+			<li><a href="image/2_10.jpg" onclick="showPic(this); return false" title="TSUTAYA BOOK 3">IMAGE 3</a></li>
+			<li><a href="image/5_02.jpg" onclick="showPic(this); return false" title="TSUTAYA BOOK 4">IMAGE 4</a></li>
+		</ul>
+		<img id="placeholder" src="image/2_02.jpg" alt="">
+		<p id="text">Choose an image.</p>
+	</div>
+</body>
+</html>
+<script>
+function showPic(piclink) {
+	var img = document.getElementById('placeholder')
+	var source = piclink.getAttribute('href')
+	img.setAttribute('src',source)
+	var showtext = document.getElementById('text')
+	var text = piclink.getAttribute('title')
+	showtext.firstChild.nodeValue = text
+}
+
+
+</script>
