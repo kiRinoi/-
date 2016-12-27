@@ -1,23 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link href="https://fonts.googleapis.com/css?family=Italianno|Limelight" rel="stylesheet"> 
     <meta charset="UTF-8">
     <title>Document</title>
     <style>
     * {margin: 0;padding: 0;box-sizing: border-box;font-family: 'Microsoft YaHei';}
 
     .navbar {height: 80px;margin-top: 10px;}
-    .logo {position: fixed;top: 15px;left: 15px;}
+    .logo {position: fixed;top: 15px;left: 15px;z-index: 10;}
     .logo img {height: 40px;width: 40px;;transition: 0.1s;}
-    .menu {position: fixed;top: 15px;right: 15px;}
+    .menu {position: fixed;top: 15px;right: 15px;z-index: 10;}
     .menu img {height: 40px;width: 40px;transition: 0.1s;}
-    .menu a {text-decoration: none;color: #000;margin: 0 5px;font-size: 15px;display: inline-block;vertical-align: middle;font-family: 'Broadway';transition: 0.1s;}
+    .menu a {text-decoration: none;color: #000;margin: 0 5px;font-size: 15px;display: inline-block;vertical-align: middle;font-family: 'Limelight', cursive;transition: 0.1s;}
     .menu a:hover {color: #F55;}
     .logo img:hover {transform:rotate(-45deg);}
     .menu img:hover {transform:rotate(45deg);}
 
     #title {text-align: center;}
-    #title h1 {font-family: 'Palace Script MT';font-size: 200px;margin-bottom: -30px;}
+    #title h1 {font-family: 'Italianno', cursive;font-size: 200px;margin-bottom: -30px;}
     #title .btn {margin-top: 30px;}
     #title .btn button {width: 200px;height: 40px;border-radius: 100px;cursor: pointer;background: #FFF;border: 2px solid #000;transition: 0.3s;margin: 20px;}
     #title .btn span {display: inline-block;vertical-align: middle;font-weight: bold;position: relative;left:15px;}
@@ -75,7 +76,7 @@
         background-position: 50% 50%;}
 
     #list .normal {display: inline-block;width: 300px;height: 200px;margin: 10px;cursor: pointer;position: relative;transition: 0.6s;opacity: 1;transform:rotateY(360deg);}
-    #list p {color: #FFF;width: 100%;height: 100%;position: absolute;top: 0;left: 0;background: #000;font-size: 150px;font-family: 'Palace Script MT';line-height: 150px;opacity: 0;transition: 0.3s;font-weight: bold;}
+    #list p {color: #FFF;width: 100%;height: 100%;position: absolute;top: 0;left: 0;background: #000;font-size: 150px;font-family: 'Italianno', cursive;line-height: 150px;opacity: 0;transition: 0.3s;font-weight: bold;}
     #list a {display: block;position: absolute;left: 3px;bottom: 3px;width: 40px;height: 30px;background: url(http://i1.piimg.com/564791/181e0e405a3a6e6e.png);background-size: cover;opacity: 0;transition: 0.4s;}
     #list div:hover p {opacity: 0.8;line-height: 200px;}
     #list div:hover a {opacity: 1;height: 40px;}
