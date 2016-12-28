@@ -5,35 +5,77 @@
 	<title>Document</title>
 	<style>
 	div {text-align: center;}
+	p {margin: 0;}
 	ul {list-style: none;margin-left: -40px;}
-	li {display: inline-block;margin: auto 10px;}
+	li {display: inline-block;margin: auto 19px;}
 	a {text-decoration: none;color: #000;}
-	img {display: inline-block;border: 1px solid #000;padding: 3px;}
+	img {display: inline-block;border: 1px solid #000;padding: 3px;cursor: pointer;}
+	ul img {width: 100px;height: 100px;}
 	</style>
 </head>
 <body>
 	<div>
 		<h1>TSUTAYA BOOK IMAGE</h1>
-		<ul>
-			<li><a href="image/1_02.jpg" onclick="showPic(this); return false" title="TSUTAYA BOOK 1">IMAGE 1</a></li>
-			<li><a href="image/2_03.jpg" onclick="showPic(this); return false" title="TSUTAYA BOOK 2">IMAGE 2</a></li>
-			<li><a href="image/2_10.jpg" onclick="showPic(this); return false" title="TSUTAYA BOOK 3">IMAGE 3</a></li>
-			<li><a href="image/5_02.jpg" onclick="showPic(this); return false" title="TSUTAYA BOOK 4">IMAGE 4</a></li>
-		</ul>
 		<img id="placeholder" src="image/2_02.jpg" alt="">
-		<p id="text">Choose an image.</p>
+		<p id="text">Choose an image</p>
+		<ul id="imglist">
+			<li><a href="image/1_02.jpg" title="TSUTAYA BOOK 1"><img alt="IMAGE 1"></a></li>
+			<li><a href="image/2_03.jpg" title="TSUTAYA BOOK 2"><img alt="IMAGE 2"></a></li>
+			<li><a href="image/2_10.jpg" title="TSUTAYA BOOK 3"><img alt="IMAGE 3"></a></li>
+			<li><a href="image/5_02.jpg" title="TSUTAYA BOOK 4"><img alt="IMAGE 4"></a></li>
+		</ul>
+		
 	</div>
 </body>
-</html>
 <script>
-function showPic(piclink) {
+function clickimg() {
 	var img = document.getElementById('placeholder')
-	var source = piclink.getAttribute('href')
-	img.setAttribute('src',source)
 	var showtext = document.getElementById('text')
+	img.onclick = function() {
+		img.src = "image/2_02.jpg"
+		showtext.firstChild.nodeValue = "Choose an image"
+	}
+}
+function addLoadEvent (func) {
+	var oldonload = window.onload
+	if (typeof window.onload != 'function') {
+		window.onload = func
+	} else {
+		window.onload = function () {
+			oldonload()
+			func()
+		}
+	}
+}
+function showPic(piclink) {	
+	var img = document.getElementById('placeholder')
+	var showtext = document.getElementById('text')
+	var source = piclink.getAttribute('href')
 	var text = piclink.getAttribute('title')
+	img.setAttribute('src',source)
 	showtext.firstChild.nodeValue = text
 }
-
-
+function clicknow() {
+	var link = document.getElementsByTagName('a')
+	for (var i=0; i<link.length; i++) {
+		link[i].onclick = function (){
+			showPic(this)
+			return false
+		}
+	}
+}
+function showimg() {
+	var imglist = document.getElementById('imglist')
+	var screen = imglist.getElementsByTagName('img')
+	var link = document.getElementsByTagName('a')
+	for (var i=0; i<link.length; i++) {
+		var pic = link[i].getAttribute('href')
+		screen[i].setAttribute('src',pic)
+		//console.log(i)
+	}
+}
+addLoadEvent(clickimg)
+addLoadEvent(showimg)
+addLoadEvent(clicknow)
 </script>
+</html>
