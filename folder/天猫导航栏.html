@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+    
+    .content {
+        width: 90%;
+        min-width: 1230px;
+        margin: 0 auto;
+    }
+    
+    .navbar {
+        font-size: 11.5px;
+        line-height: 33px;
+        height: 33px;
+        border: 1.5px solid #ddd;
+        border-right: transparent;
+        border-left: transparent;
+        background: #efefef;
+        width: 100%;
+    }
+    
+    .tag {
+        position: relative;
+        display: inline-block;
+        margin-right: 20px;
+        color: #999;
+    }
+    
+    .tag a {
+        text-decoration: none;
+        color: #999;
+    }
+    
+    .tag b {
+        color: #555;
+    }
+    
+    .close {
+        line-height: 11px;
+        display: inline-block;
+        width: 15px;
+        height: 15px;
+        padding: 1px;
+        cursor: pointer;
+        text-align: center;
+        color: #ddd;
+        border-radius: 50px;
+        background: transparent;
+    }
+    
+    .close:hover {
+        color: #fff;
+        background: #c00;
+    }
+    
+    .message {
+        line-height: 17px;
+        position: absolute;
+        z-index: 1;
+        top: 30px;
+        left: -100px;
+        width: 160px;
+        padding: 1px 5px;
+        color: #fff;
+        border-radius: 3px;
+        background: #616161;
+    }
+    
+    .messageicon {
+        position: absolute;
+        top: -7px;
+        left: 120px;
+        width: 0;
+        height: 0;
+        border-width: 0 8px 8px;
+        border-style: solid;
+        border-color: transparent transparent #616161;
+    }
+    
+    .mark {
+        font-size: 9px;
+        line-height: 11px;
+        display: inline-block;
+        width: 14px;
+        height: 14px;
+        padding: 2px;
+        text-align: center;
+        color: #fff;
+        border-radius: 50px;
+        background: #c00;
+    }
+    
+    .navhead {
+        display: inline-block;
+    }
+    
+    .navcenter {
+        display: inline-block;
+    }
+    
+    .navlist {
+        float: right;
+        list-style: none;
+    }
+    
+    .pulldown {
+        line-height: 25px;
+        position: absolute;
+        top: 32px;
+        left: -1px;
+        display: none;
+        width: 95px;
+        padding: 5px;
+        text-align: center;
+        border: 1px solid #bbb;
+        border-top: transparent;
+    }
+    
+    .pulldown a {
+        display: block;
+        color: #000;
+    }
+    
+    .pullbox {
+        margin-right: 10px;
+        padding: 0 10px 0 10px;
+        border-right: 1px solid transparent;
+        border-left: 1px solid transparent;
+    }
+    
+    .pullbox:hover {
+        border-color: #ddd;
+        background: #fff;
+    }
+    
+    .pullbox:hover .pulldown {
+        display: block;
+    }
+    
+    .pullbox:hover .pulltext {
+        color: #c00;
+    }
+    
+    .pulltext:hover {
+        color: #c00;
+    }
+    
+    .pulltext:hover b {
+        color: #c00;
+    }
+    
+    .pulldown a:hover {
+        text-decoration: underline;
+        color: #c00;
+    }
+    
+    .navmark {
+        font-size: 12px;
+        color: #c00;
+    }
+    
+    .arrow {
+        display: inline-block;
+        transition: .2s;
+        transform: rotate(0deg);
+    }
+    
+    .pullbox:hover .arrow {
+        transform: rotate(180deg);
+    }
+    
+    .bar {
+        font-size: 14px;
+        line-height: 30px;
+        position: absolute;
+        margin-left: -10px;
+        color: #bbb;
+    }
+    
+    .qr {
+        position: absolute;
+        top: 30px;
+        left: -100px;
+        display: none;
+        width: 160px;
+        height: 200px;
+        padding: 1px 5px;
+        padding: 15px;
+        text-align: center;
+        color: #fff;
+        border-radius: 3px;
+        background: #616161;
+    }
+    
+    .qricon {
+        position: absolute;
+        top: -7px;
+        left: 120px;
+        width: 0;
+        height: 0;
+        border-width: 0 8px 8px;
+        border-style: solid;
+        border-color: transparent transparent #616161;
+    }
+    
+    .qrimg {
+        display: block;
+        width: 130px;
+        height: 130px;
+        margin: 0 auto;
+        background: #212121;
+    }
+    
+    .tag:hover .qr {
+        display: block;
+    }
+    
+    .pulllist {
+        line-height: 25px;
+        position: absolute;
+        top: 32px;
+        left: -63px;
+        display: none;
+        width: 140px;
+        padding: 5px;
+        text-align: left;
+        border: 1px solid #bbb;
+        border-top: transparent;
+    }
+    
+    .pulllist dd {
+        display: inline-block;
+        margin: 0 8px;
+    }
+    
+    .pulllist dt {
+        margin: 0 8px;
+    }
+    
+    .pulllist a {
+        display: block;
+        color: #000;
+    }
+    
+    .upbar {
+        display: block;
+        width: 105px;
+        margin-top: 5px;
+        border-top: 1px dotted #bbb;
+    }
+    
+    .udbar {
+        display: block;
+        width: 105px;
+        border-bottom: 1px dotted #bbb;
+    }
+    
+    .pullbox:hover .pulllist {
+        display: block;
+    }
+    
+    .pulllist a:hover {
+        text-decoration: underline;
+        color: #c00;
+    }
+    
+    .sitenav {
+        position: absolute;
+        top: 32px;
+        left: -1168px;
+        display: none;
+        width: 1260px;
+        height: 280px;
+        border: 1px solid #bbb;
+        border-top: transparent;
+        background: #fff;
+    }
+    
+    .pullbox:hover .sitenav {
+        display: block;
+    }
+    
+    .sitenav h3 {
+        font-size: 16px;
+        font-weight: 100;
+        color: #212121;
+    }
+    
+    .sitenav ul {
+        display: inline-block;
+        height: 240px;
+        margin: 20px 0 0 0;
+        padding: 0 30px;
+        list-style: none;
+        vertical-align: top;
+    }
+    
+    .hot {
+        width: 30%;
+        border-right: 1px dotted #bbb;
+    }
+    
+    .market {
+        width: 29%;
+        border-right: 1px dotted #bbb;
+    }
+    
+    .brand {
+        width: 25%;
+        border-right: 1px dotted #bbb;
+    }
+    
+    .help {
+        width: 15%;
+    }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar">
+        <section class="content">
+            <p class="navhead">
+                <span class="tag">
+					<span>Hi&nbsp;,&nbsp;</span>
+                <a class="pulltext" href="https://www.tmall.com/">刘看山</a>
+                <a href="https://www.tmall.com/"><span class="mark">T4</span></a>
+                </span>
+                <span class="tag">
+					<a  class="pulltext" href="https://login.tmall.com/">积分<b>998</b></a>
+				</span>
+                <span class="tag">
+					<a  class="pulltext" href="https://login.tmall.com/">消息<b>1</b></a>
+					<span class="message">
+						天猫会员经验值发放成功&nbsp;
+					<span class="messageicon"></span>
+                <span class="close">×</span>
+                </span>
+                </span>
+                <span class="tag">
+					<a class="pulltext" href="https://login.tmall.com/">退出</a>
+				</span>
+            </p>
+            <p class="navcenter">
+                <ul class="navlist">
+                    <li class="tag pullbox">
+                        <a class="pulltext" href="">我的淘宝</a><span class="arrow">▾</span>
+                        <div class="pulldown">
+                            <a href="">已买到的宝贝</a>
+                            <a href="">已卖出的宝贝</a>
+                        </div>
+                    </li>
+                    <li class="tag">
+                        <span class="navmark">❤</span>
+                        <a class="pulltext" href="">我关注的品牌</a>
+                    </li>
+                    <li class="tag">
+                        <span class="navmark">★</span>
+                        <a class="pulltext" href="">购物车<b>98</b>件</a>
+                    </li>
+                    <li class="tag pullbox">
+                        <a class="pulltext" href="">收藏夹</a><span class="arrow">▾</span>
+                        <div class="pulldown">
+                            <a href="">收藏的宝贝</a>
+                            <a href="">收藏的店铺</a>
+                        </div>
+                    </li>
+                    <span class="bar">|</span>
+                    <li class="tag">
+                        <span class="navmark">▮</span>
+                        <a class="pulltext" href="">手机版</a>
+                        <span class="qr">
+            				<img class="qrimg" src="" alt="二维码">
+            				<p>扫一扫上天猫！！</p>
+            				<span class="qricon"></span>
+                        </span>
+                    </li>
+                    <li class="tag"><a class="pulltext" href="">淘宝网</a></li>
+                    <li class="tag"><a class="pulltext" href="">企业购</a></li>
+                    <li class="tag  pullbox">
+                        <a class="pulltext" href="">商家支持</a><span class="arrow">▾</span>
+                        <dl class="pulllist">
+                            <dt><b>商家：</b></dt>
+                            <dd><a href="">商家中心</a></dd>
+                            <dd><a href="">天猫智库</a></dd>
+                            <dd><a href="">商家规则</a></dd>
+                            <dd><a href="">商家品控</a></dd>
+                            <dd><a href="">商家工具</a></dd>
+                            <dd><a href="">运营支持</a></dd>
+                            <dd><a href="">商家入住</a></dd>
+                            <dd><a href="">喵言喵语</a></dd>
+                            <dt class="upbar"><b>帮助：</b></dt>
+                            <dd class="udbar"><a href="">帮助中心</a></dd>
+                        </dl>
+                    </li>
+                    <li class="tag  pullbox">
+                        <span class="navmark">✒</span>
+                        <a class="pulltext" href="">网站导航</a><span class="arrow">▾</span>
+                        <div class="sitenav">
+                            <ul class="hot">
+                                <h3>热点推荐 HOT</h3>
+                            </ul>
+                            <ul class="market">
+                                <h3>行业市场 Market</h3>
+                            </ul>
+                            <ul class="brand">
+                                <h3>品牌风尚 Brand</h3>
+                            </ul>
+                            <ul class="help">
+                                <h3>服务指南 Help</h3>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </p>
+        </section>
+    </nav>
+</body>
+</html>
