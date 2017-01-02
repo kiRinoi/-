@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<style>
+	* {margin: 0;padding: 0;box-sizing: border-box;}
+	ul {list-style: none;width: 100%;height: 50px;background: #212121;padding-left: 100px;}
+	li {display: inline-block;line-height: 50px;width: 100px;text-align: center;background: #333;color: #FFF;cursor: pointer;}
+	p {height: 400px;width: 80%;background: #DDD;margin: 0 auto;border: 1px solid #000;}
+	.fix {position: fixed;top: 0;width: 100%;}
+	.cur {background: #FFF; color: #212121;}
+</style>
+<body>
+	<div style="height: 200px;"></div>
+	<nav id="nav">
+		<ul>
+			<li class="cur">1</li><!--
+		 --><li>2</li><!--
+		 --><li>3</li>
+		</ul>
+	</nav>
+	<div>
+		<p>1</p>
+		<p>2</p>
+		<p>3</p>
+	</div>
+	<div style="height:500px;"></div>
+</body>
+<script>
+
+function up() {
+var nav = document.getElementById("nav")
+var scroll = document.documentElement
+var top = nav.offsetTop
+var hei = nav.offsetHeight
+var li = document.getElementsByTagName("li")
+var p = document.getElementsByTagName("p")
+	window.onscroll = function() {
+		if (scroll.scrollTop >= top) {
+			nav.className = "fix"
+		}
+		if (scroll.scrollTop <= top) {
+			nav.className = ""
+		}
+		for (var i=0;i<li.length;i++) {
+			if (scroll.scrollTop + hei >= p[i].offsetTop - top/1.1) {
+				for (var j=0;j<li.length;j++) {
+					li[j].className = ""
+				}
+				li[i].className = "cur"
+			}
+		}
+	}
+}
+
+function move(){
+	var nav = document.getElementById("nav")
+	var scroll = document.documentElement
+	var hei = nav.offsetHeight
+	var li = document.getElementsByTagName("li")
+	var p = document.getElementsByTagName("p")
+	for (var i=0; i<li.length; i++){
+		var timer
+		li[i].index = i
+		li[i].onclick = function(){
+			var self = this
+			clearInterval(timer)
+			timer = setInterval(function(){
+				if (scroll.scrollTop + hei <= p[self.index].offsetTop) {
+					scroll.scrollTop += Math.ceil(p[self.index].offsetTop/10)
+				if (scroll.scrollTop + hei >= p[self.index].offsetTop) {
+					scroll.scrollTop = p[self.index].offsetTop - hei
+					clearInterval(timer)
+				}
+				} else {
+					scroll.scrollTop /= 1.1
+					if (scroll.scrollTop + hei <= p[self.index].offsetTop) {
+						scroll.scrollTop = p[self.index].offsetTop - hei
+						clearInterval(timer)
+					}
+				}
+			},20)
+		}
+	}
+}
+
+window.onload = function(){
+	up()
+	move()
+}
+</script>
+</html>
