@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		*{margin: 0;padding: 0;}
+		#main {position: relative;margin: 0 auto;width: 1130px;margin-top: 10px;}
+		.box {float: left;padding: 2px;}
+		.pic {padding: 10px;border: 1px solid #000;border-radius: 10px;}
+		.pic img {width: 200px;height: auto;}
+	</style>
+</head>
+<body>
+	<div id="main">
+		<div class="box">
+			<div class="pic">
+				<img src="image\1_02.jpg" alt="">
+			</div>
+		</div>
+		<div class="box">
+			<div class="pic">
+				<img src="image\1_01.jpg" alt="">
+			</div>
+		</div>
+		<div class="box">
+			<div class="pic">
+				<img src="image\1_02.jpg" alt="">
+			</div>
+		</div>
+		<div class="box">
+			<div class="pic">
+				<img src="image\3_07.jpg" alt="">
+			</div>
+		</div>
+		<div class="box">
+			<div class="pic">
+				<img src="image\1_01.jpg" alt="">
+			</div>
+		</div>
+		<div class="box">
+			<div class="pic">
+				<img src="image\main2.jpg" alt="">
+			</div>
+		</div>
+		<div class="box">
+			<div class="pic">
+				<img src="image\3_07.jpg" alt="">
+			</div>
+		</div>
+		<div class="box">
+			<div class="pic">
+				<img src="image\main2.jpg" alt="">
+			</div>
+		</div>
+		<div class="box">
+			<div class="pic">
+				<img src="image\3_07.jpg" alt="">
+			</div>
+		</div>
+		<div class="box">
+			<div class="pic">
+				<img src="image\1_02.jpg" alt="">
+			</div>
+		</div>
+		<div class="box">
+			<div class="pic">
+				<img src="image\3_07.jpg" alt="">
+			</div>
+		</div>
+		<div class="box">
+			<div class="pic">
+				<img src="image\1_02.jpg" alt="">
+			</div>
+		</div>
+		<div class="box">
+			<div class="pic">
+				<img src="image\1_01.jpg" alt="">
+			</div>
+		</div>
+		<div class="box">
+			<div class="pic">
+				<img src="image\3_01.jpg" alt="">
+			</div>
+		</div>
+		<div class="box">
+			<div class="pic">
+				<img src="image\1_01.jpg" alt="">
+			</div>
+		</div>
+		<div class="box">
+			<div class="pic">
+				<img src="image\1_02.jpg" alt="">
+			</div>
+		</div>
+		<div class="box">
+			<div class="pic">
+				<img src="image\3_07.jpg" alt="">
+			</div>
+		</div>
+		<div class="box">
+			<div class="pic">
+				<img src="image\1_01.jpg" alt="">
+			</div>
+		</div>
+		<div class="box">
+			<div class="pic">
+				<img src="image\3_01.jpg" alt="">
+			</div>
+		</div>
+		<div class="box">
+			<div class="pic">
+				<img src="image\1_01.jpg" alt="">
+			</div>
+		</div>
+		<div class="box">
+			<div class="pic">
+				<img src="image\main2.jpg" alt="">
+			</div>
+		</div>
+	</div>
+</body>
+<script>
+	window.onload = function() {
+		waterfull("main", "box")
+		var data = {"data":[{"src":"2_06.jpg"},{"src":"3_07.jpg"},{"src":"6_02.jpg"},{"src":"main4.jpg"},{"src":"1_02.jpg"}]}
+		window.onscroll = function() {
+			if (check()) {
+				var main = document.getElementById("main")
+				for (var i=0; i<data.data.length; i++) {
+					var dbox = document.createElement("div")
+					dbox.className = "box"
+					main.appendChild(dbox)
+					var dpic = document.createElement("div")
+					dpic.className = "pic"
+					dbox.appendChild(dpic)
+					var img = document.createElement("img")
+					img.src = "image/" + data.data[i].src
+					dpic.appendChild(img)
+				}
+				waterfull("main", "box")
+			}
+		}
+	}
+
+	function waterfull(parent,box) {
+		var boxs = document.getElementById("main").getElementsByClassName("box")
+		//var boxsW = boxs[0].offsetWidth
+		//var pageW = document.documentElement.clientWidth
+		var cols = 5
+		//Math.floor(pageW/boxsW)
+		console.log(cols)
+		var harr = new Array()
+		for (var i=0; i<boxs.length; i++) {
+			if (i < cols) {
+				harr.push(boxs[i].offsetHeight)
+			} else {
+				var minH = Math.min.apply(null,harr)
+				var index = getindex(harr, minH)
+				boxs[i].style.position = "absolute"
+				boxs[i].style.top = minH + "px"
+				boxs[i].style.left = boxs[index].offsetLeft + "px"
+				harr[index] += boxs[i].offsetHeight
+			}
+		}
+	}
+
+	function getindex(arr, val) {
+		for (var i in arr) {
+			if (arr[i] == val) {
+				return i
+			}
+		}
+	}
+
+	function check() {
+		var boxs = document.getElementById("main").getElementsByClassName("box")
+		var lastboxH = boxs[boxs.length - 1].offsetHeight
+		var boxTop = boxs[boxs.length - 1].offsetTop + lastboxH/2
+		var scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
+		var screenH = document.body.clientHeight || document.documentElement.clientHeight;
+		if (scrollTop + screenH > boxTop) {
+			return true
+		} else { 
+			return false
+		}
+	}
+</script>
+</html>
