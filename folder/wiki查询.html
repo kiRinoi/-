@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+	<style>
+	.div {border: 1px solid #000;margin: 5px;padding: 10px;}
+	</style>
+</head>
+<body>
+	<input id="txt" type="text">
+	<input id="sub" type="submit">
+	<input id="random" type="button" value="Random">
+	<div id="m">
+		
+	</div>
+</body>
+<script>
+	var api = "http://en.wikipedia.org/w/api.php?format=json&action=query&generator=search&prop=extracts&pilimit=max&gsrnamespace=0&gsrlimit=10&exintro&explaintext&exsentences=1&exlimit=max&callback=?&gsrsearch=";
+	$("#random").click(function(){
+		window.open("http://en.wikipedia.org/wiki/Special:Random");
+	})
+	$("#sub").click(function(){
+		console.log($("#txt").val())
+		$.getJSON(api + $("#txt").val() + "", function(data) {
+			console.log(data.query.pages);
+			$("#m").empty();
+			$.each(data.query.pages, function(key, value) {
+				$("#m").append("<div class='div'><a href='https://en.wikipedia.org/?curid=" + value.pageid + "' target='_blank'>" + value.title + "</a><p>" + value.extract + "</p></div>")
+			})
+		})
+	})
+</script>
+</html>
