@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <style>
+    .ul {display: inline-block;}
+    </style>
+</head>
+<body>
+    <div>
+        <h1>今日天气</h1>
+        <span></span>
+        <ul>
+            <li>城市：<span></span></li>
+            <li>天气：<span></span></li>
+            <li>温度：<span></span></li>
+            <li>风向：<span></span></li>
+            <li>风力：<span></span></li>
+            <li>湿度：<span></span></li>
+        </ul>
+        <ul>
+            <li>穿衣指数：<span></span></li>
+            <li>洗车指数：<span></span></li>
+            <li>旅行指数：<span></span></li>
+            <li>锻炼指数：<span></span></li>
+            <li>紫外线指数：<span></span></li>
+        </ul>
+    </div>
+    <div>
+        <h1>未来6天天气</h1>
+        <section></section>
+    </div>
+    <script>
+    $.getJSON("http://v.juhe.cn/weather/index?callback=?", {
+        "cityname": "上海",
+        "dtype": "jsonp",
+        "key": "81acb16a3c95e2f294dc1ea9a1b200f4"
+    },
+    function(data) {
+        console.log(data);
+        var sk = data.result.sk;
+        var td = data.result.today;
+        var fu = data.result.future;
+        var count = 0;
+        var arr = [
+        td.date_y,
+        td.city,
+        td.weather,
+        sk.temp, 
+        sk.wind_direction, 
+        sk.wind_strength,
+        sk.humidity,
+        td.dressing_advice,
+        td.wash_index,
+        td.travel_index,
+        td.exercise_index,
+        td.uv_index,
+        ];
+        for (let i in arr) {
+            $("span").eq(count).text(arr[i].toString());
+            count++;
+        }
+        var c = 0;
+        for (let i in fu) {
+            var ul = document.createElement("ul");
+            ul.classList.add("ul");
+            $("section").append(ul);
+            for (let r in fu[i]) {
+                $(".ul").eq(c).append("<li><span>" + fu[i][r] + "</span></li>");
+            }
+            c++;
+        }
+        var u = document.getElementsByClassName("ul");
+        for (let i=0; i<u.length; i++){
+            u[i].getElementsByTagName('li')[2].style.display = "none";
+        }
+        return false;
+    })
+    </script>
+</body>
+</html>
