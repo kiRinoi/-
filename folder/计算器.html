@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+    #val {height: 22px;width: 300px;border: 1px solid #000;color: #000;text-align: right;padding: 1px;}
+    div {margin-top: 5px;}
+    </style>
+</head>
+
+<body>
+<div>
+    <p id="val"></p>
+</div>
+<div>
+    <input type="button" id="ac" value="AC">
+    <input type="button" id="ce" value="CE">
+    <input type="button" id="iq" value="=">
+</div>
+<div>
+    <button>.</button>
+    <button>+</button>
+    <button>-</button>
+    <button>*</button>
+    <button>/</button>
+    <button>%</button>
+</div>
+<div>
+    <button>1</button>
+    <button>2</button>
+    <button>3</button>
+    <button>4</button>
+    <button>5</button>
+    <button>6</button>
+    <button>7</button>
+    <button>8</button>
+    <button>9</button>
+    <button>0</button>
+</div>
+
+    <script>
+(function push(){
+    var val = document.getElementById("val");
+    var btn = document.getElementsByTagName("button");
+    for (let i of btn) {
+        i.onclick = function(){
+            val.innerHTML += this.innerHTML;
+        }
+    }
+})();
+(function only(){
+    var iq = document.getElementById("iq");
+    var ac = document.getElementById("ac");
+    var ce = document.getElementById("ce");
+    var val = document.getElementById("val");
+    var ceval;
+    iq.onclick = function(){
+        val.innerHTML = eval(val.innerHTML);
+    }
+    ac.onclick = function(){
+        val.innerHTML = "";
+    }
+    ce.onclick = function(){
+        ceval = val.innerHTML.toString().slice(0, -1)
+        val.innerHTML = ceval;
+    }
+})();
+
+    </script>
+
+</body>
+
+</html>
