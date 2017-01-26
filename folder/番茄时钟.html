@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+    #val {height: 22px;width: 300px;border: 1px solid #000;color: #000;text-align: right;padding: 1px;}
+    div {margin-top: 5px;}
+    </style>
+</head>
+
+<body>
+    <div id="work">
+        <button><</button>
+        <span>25</span>
+        <button>></button>
+    </div>
+    <div id="break">
+        <button><</button>
+        <span>5</span>
+        <button>></button>
+    </div>
+    <section>
+        <p id="wt">set work time</p>
+        <p id="bt">set break time</p>
+    </section>
+    <div id="ctrl">
+        <button>start</button>
+        <button>reset</button>
+    </div>
+
+    
+
+    <script>
+        (function count(){
+            var wk = document.getElementById("work");
+            var bk = document.getElementById("break");
+            var wkadd = wk.getElementsByTagName("button")[1];
+            var wkdel = wk.getElementsByTagName("button")[0];
+            var wkval = wk.getElementsByTagName("span")[0];
+            var bkadd = bk.getElementsByTagName("button")[1];
+            var bkdel = bk.getElementsByTagName("button")[0];
+            var bkval = bk.getElementsByTagName("span")[0];
+
+            var ctrl = document.getElementById("ctrl");
+            var start = ctrl.getElementsByTagName("button")[0];
+            var reset = ctrl.getElementsByTagName("button")[1];
+            var wt = document.getElementById("wt");
+            var bt = document.getElementById("bt");
+
+            var w, b, cw, cb;
+
+            wkadd.onclick = function(){
+                wkval.innerHTML++;
+            }
+            wkdel.onclick = function(){
+                wkval.innerHTML--;
+            }
+            bkadd.onclick = function(){
+                bkval.innerHTML++;
+            }
+            bkdel.onclick = function(){
+                bkval.innerHTML--;
+            }
+            start.onclick = function(){
+                w = wkval.innerHTML * 60;
+                b = bkval.innerHTML * 60;
+                cw = setInterval(function(){
+                    wt.innerHTML = "Work Time: " + w + " sec";
+                    bt.innerHTML = "Break Time: " + b + " sec";
+                    w--;
+                    if (w < 0) {
+                        clearInterval(cw);
+                        cb = setInterval(function(){
+                            bt.innerHTML = "Break Time: " + b + " sec";
+                            b--;
+                            if (b < 0) {
+                                clearInterval(cb);
+                                reset.click();
+                                alert("over!")
+                            }
+                        }, 1000)
+                    }
+                }, 1000)
+            }
+            reset.onclick = function(){
+                clearInterval(cw);
+                clearInterval(cb);
+                wt.innerHTML = "Work Time: " + wkval.innerHTML * 60 + " sec";
+                bt.innerHTML = "Break Time: " + bkval.innerHTML * 60 + " sec";
+            }
+        })();
+
+    </script>
+</body>
+
+</html>
