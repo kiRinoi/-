@@ -3,6 +3,9 @@
 主要是HTML+CSS+Javascript的练习，用于巩固基础的知识点。
 <br><br>
 ### 课题列表：
++ FCC致敬页面
++ FCC个人页面
+<br><br>
 + DOM编程1
 + AJAX
 + 天猫导航栏
