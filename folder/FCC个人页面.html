@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>Build a Personal Portfolio Webpage</title>
+    <link rel="stylesheet" href="http://apps.bdimg.com/libs/bootstrap/3.3.4/css/bootstrap.min.css">
+    <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="http://apps.bdimg.com/libs/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <style>
+    body {
+        background: url(http://imglf.nosdn.127.net/img/blJpRVNabllxYmdBVW9ZbUZQR1AwK2w0eURzcENQc1AxdU1aVzdjZHY3cWU5K2pTa1drTzd3PT0.jpg?imageView&thumbnail=1680x0&quality=96&stripmeta=0&type=jpg);
+        background-attachment: fixed;
+        background-position: 0 -600px;
+        background-size: 1423px 2000px;
+        background-repeat: no-repeat;
+        font-family: "Microsoft YaHei";
+    }
+    
+    nav {
+        padding: 0 40px 0 20px;
+    }
+    
+    .page-one {
+        padding-top: 200px;
+        height: 730px;
+    }
+    
+    .page-one h1 {
+        font-size: 65px;
+        color: #DDD;
+        text-shadow: 2px 2px 2px #222;
+    }
+    
+    .page-one h2 {
+        color: #DDD;
+        text-shadow: 2px 2px 2px #222;
+    }
+    
+    hr {
+        margin: 50px auto;
+        border:2px solid #FFF;
+    }
+    
+    .page-two {
+        background: url(http://imglf.nosdn.127.net/img/blJpRVNabllxYmdBVW9ZbUZQR1AweTNSNnE3YWh0UERndWY4WkNXaktIaFhRNDdNU3psYU1BPT0.jpg?imageView&thumbnail=1920y1280&type=jpg&quality=96&stripmeta=0&type=jpg);
+        background-attachment: fixed;
+        background-size: cover;
+        background-repeat: no-repeat;
+        width: 100%;
+        height: 900px;
+        padding-top: 250px;
+    }
+    
+    .page-two h3 {
+        color: #DDD;
+        font-size: 30px;
+    }
+    
+    .page-two p {
+        color: #DDD;
+        line-height: 30px;
+        font-size: 20px;
+        padding: 25px;
+        border-radius: 15px;
+        background-color:rgba(0,0,0,0.5);
+    }
+    
+    .page-three {
+        background: url(http://imglf.nosdn.127.net/img/blJpRVNabllxYmdBVW9ZbUZQR1AwMlU4QUpSYnRXNWpBN2hCZXoyL1B1SmlqdFdDbXh0UkNnPT0.jpg?imageView&thumbnail=1680x0&quality=96&stripmeta=0&type=jpg);
+        background-attachment: fixed;
+        background-size: cover;
+        background-repeat: no-repeat;
+        width: 100%;
+        height: 900px;
+        padding-top: 250px;
+    }
+    
+    .page-three p {
+        background: #222;
+        height: 150px;
+        opacity: 0.9;
+        line-height: 150px;
+        color: #FFF;
+        font-size: 20px;
+    }
+    
+    .page-three .img {
+        margin-top: 40px;
+    }
+    
+    .page-four {
+        height: 800px;
+        padding-top: 350px;
+    }
+    
+    .page-four h1 {
+        color: #FFF;
+        text-shadow: 2px 2px 2px #222;
+        font-size: 80px;
+    }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-default navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a href="javascript:void(0)" class="navbar-brand">kiRi</a>
+            </div>
+            <ul class="nav navbar-nav navbar-right" id="btn-list1">
+                <li class="active"><a href="javascript:void(0)">首页</a></li>
+                <li><a href="javascript:void(0)">关于</a></li>
+                <li><a href="javascript:void(0)">项目</a></li>
+                <li><a href="javascript:void(0)">联系</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container page-one scroll">
+        <div class="row">
+            <section class="col-md-10 col-md-offset-1 text-center">
+                <h1><strong>Infinito Web Design Studio</strong></h1>
+                <h2><strong>Where Awesomeness Is Brought To Life.</strong></h2>
+                <hr>
+                <a href="https://twitter.com" target="_blank">
+                    <button class="btn btn-lg"><span class="glyphicon glyphicon-send"></span> Twitter</button>
+                </a>
+                <a href="https://github.com/" target="_blank">
+                    <button class="btn btn-lg"><span class="glyphicon glyphicon-tower"></span> Github</button>
+                </a>
+                <a href="https://www.linkedin.com/" target="_blank">
+                    <button class="btn btn-lg"><span class="glyphicon glyphicon-education"></span> Linkedin</button>
+                </a>
+                <a href="https://www.freecodecamp.cn/" target="_blank">
+                    <button class="btn btn-lg"><span class="glyphicon glyphicon-grain"></span> FreeCodeCamp</button>
+                </a>
+            </section>
+        </div>
+    </div>
+    <div class="container page-two scroll">
+        <div class="row">
+            <section class="col-md-10 col-md-offset-2">
+                <h3 class="lead"><strong>About</strong></h3>
+                <p class="col-md-6">
+                    我是一名正在自学中的前端开发者。大学毕业后从事翻译工作，直到遇到了前端才发觉自己兴趣所在。目前正在为了成为一名全栈开发而努力中。
+                    <br>
+                    <br>感谢FCC提供了系统的学习计划、平台和资料，还有社区同学们的热心帮助。
+                    <br>
+                    <br>目前掌握的技能有：
+                    <br>Javascript, HTML5, CSS3, jQuery, Bootstrap3.
+                    <br>正在学习SQL与Node.js等后端知识。
+                </p>
+            </section>
+        </div>
+    </div>
+    <div class="container page-three scroll">
+        <div class="row">
+            <section class="col-md-3 col-md-offset-2 text-center col-sm-6 col-xs-6">
+                <div class="panel panel-primary text-left">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Demo</h3>
+                    </div>
+                    <div class="panel-body">
+                        在FCC学习时，完成的一些小项目。
+                    </div>
+                    <ul class="list-group" id="img-list">
+                        <strong>
+                            <li class="list-group-item"><a href="http://codepen.io/kiRinoi/full/ZLXJVg/" target="_blank" alt="http://imglf.nosdn.127.net/img/blJpRVNabllxYmdqREEwMTBaektOUnc3eWt1eG5wMWEwTEY5Y0V0YTJZcnRkcUg3N2MzZ1R3PT0.jpg?imageView&thumbnail=1680x0&quality=96&stripmeta=0&type=jpg">Tribute Page</a></li>
+                            <li class="list-group-item"><a href="javascript:void(0)" target="_blank">Random Quote Machine</a></li>
+                            <li class="list-group-item"><a href="javascript:void(0)" target="_blank">Local Weather</a></li>
+                            <li class="list-group-item"><a href="javascript:void(0)" target="_blank">Wikipedia Viewer</a></li>
+                            <li class="list-group-item"><a href="javascript:void(0)" target="_blank">JavaScript Calculator</a></li>
+                            <li class="list-group-item"><a href="javascript:void(0)" target="_blank">Pomodoro Clock</a></li>
+                            <li class="list-group-item"><a href="javascript:void(0)" target="_blank">Tic Tac Toe Game</a></li>
+                            <li class="list-group-item"><a href="javascript:void(0)" target="_blank">Simon Game</a></li>
+                            <li class="list-group-item"><a href="javascript:void(0)" target="_blank">Danmu App</a></li>
+                        </strong>
+                    </ul>
+                </div>
+            </section>
+            <div class="col-md-5 col-xs-6 col-sm-6 img">
+                <img id="show-img" class="img-responsive img-thumbnail" src="http://imglf.nosdn.127.net/img/blJpRVNabllxYmdqREEwMTBaektOUnc3eWt1eG5wMWEwTEY5Y0V0YTJZcnRkcUg3N2MzZ1R3PT0.jpg?imageView&thumbnail=1680x0&quality=96&stripmeta=0&type=jpg" alt="img">
+            </div>
+        </div>
+    </div>
+    <div class="container page-four scroll">
+        <div class="row">
+            <section class="col-md-8 col-md-offset-2">
+                <h1 class="col-md-12 text-center">
+                   <strong>kiRi@mail.cc</strong>
+                </h1>
+                <small class="col-md-12 text-center">这个邮件地址是假的，出于隐私考虑。 : )</small>
+            </section>
+        </div>
+    </div>
+    <footer class="nav navbar-inverse">
+        <ul class="nav navbar-nav" id="btn-list2">
+            <li><a href="javascript:void(0)">首页</a></li>
+            <li><a href="javascript:void(0)">关于</a></li>
+            <li><a href="javascript:void(0)">项目</a></li>
+            <li><a href="javascript:void(0)">联系</a></li>
+        </ul>
+    </footer>
+</body>
+
+<script>
+(function shift(){
+    var ul = document.getElementById('btn-list1');
+    var li = ul.getElementsByTagName('li');
+    var t1 = document.body;
+    var t2 = document.documentElement;
+    var hei = 0;
+    var sc = 0;
+    var c = 0;
+    var index = 0;
+    var timer;
+    var a = 0;
+    for (let i of li) {
+        i.index = index;
+        i.onclick = function(){
+            clearInterval(timer);
+            for (let j of li) {
+                j.className = '';
+            }
+            this.className = 'active';
+            hei = t1.scrollTop || t2.scrollTop;
+            sc = this.index * 850;
+                c = sc - hei;
+                timer = setInterval(function(){
+                    hei = t1.scrollTop || t2.scrollTop;
+                    t1.scrollTop += Math.ceil(c/20);
+                    t2.scrollTop += Math.ceil(c/20);
+                    if (Math.ceil(c/20) == 0) {
+                        clearInterval(timer);
+                    }
+                    if (c > 0) {
+                        if (hei >= sc) {
+                            clearInterval(timer);
+                        }
+                    } else {
+                        if (hei <= sc) {
+                            clearInterval(timer);
+                        }
+                    }
+                }, 3)
+                
+        }
+        index++;
+    }
+    var ul2 = document.getElementById('btn-list2');
+    var li2 = ul2.getElementsByTagName('li');
+    var count = 0;
+    for (let i of li2) {
+        i.count = count;
+        i.onclick = function(){
+            li[this.count].click();
+        }
+        count++;
+    }
+    var d = document.getElementsByClassName('scroll');
+    var nav = document.getElementsByTagName('nav')[0].offsetHeight;
+    d = Array.from(d);
+    window.onscroll = function(){
+        hei = t1.scrollTop || t2.scrollTop;
+        d.forEach(function(i, index){
+            if (hei+nav >= i.offsetTop) {
+                for (let j of li) {
+                    j.className = '';
+                }
+                li[index].className = 'active';
+            }
+        })
+    }
+})();
+(function(){
+    var list = document.getElementById('img-list');
+    var li = list.getElementsByTagName('a');
+    var img = document.getElementById('show-img');
+    for (let i of li) {
+        i.onmouseover = function(){
+            img.src = this.getAttribute("alt");
+        }
+    }
+})();
+
+</script>
+</html>
