@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>Random Quote Machine</title>
+    <link rel="stylesheet" href="http://apps.bdimg.com/libs/bootstrap/3.3.4/css/bootstrap.min.css">
+    <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="http://apps.bdimg.com/libs/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <style>
+    body {
+        padding-top: 150px;
+        background: #444;
+    }
+    
+    .box {
+        padding: 30px;
+    }
+    
+    .box blockquote {
+        border: none;
+        line-height: 40px;
+    }
+    
+    .box blockquote small {
+        margin-top: 5px;
+    }
+    
+    p {
+        color: #FFF;
+    }
+    
+    .box small {
+        font-size: 18px;
+        font-weight: bold;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <section class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12">
+                <div class="panel panel-primary bo">
+                    <div class="panel-heading color">
+                        <h3 class="panel-title">Random Quote Machine</h3>
+                    </div>
+                    <div class="box">
+                        <blockquote class="panel-body">
+                            <strong id="say">在年轻时我曾想过自杀，但最终没有，原因只是想多学些数学知识。</strong>
+                            <small class="text-right" id="person">罗素</small>
+                        </blockquote>
+                        <a class="btn btn-danger">分享到微博</a>
+                        <button class="btn btn-primary pull-right">点击按钮获取名言</button>
+                    </div>
+                </div>
+                <p class="col-md-6 col-md-offset-3 text-center">by kiRi</p>
+            </section>
+        </div>
+    </div>
+</body>
+<script>
+(function q() {
+    var btn = document.querySelector("button");
+    var say = document.querySelector("#say");
+    var per = document.querySelector("#person");
+    var c = document.querySelector(".color");
+    var bo = document.querySelector(".bo");
+    var color = ["#F44336", "#3F51B5", "#448AFF", "#4CAF50", "#FFA000", "#795548", "#607D8B", "#333"];
+    var index = 0;
+    var count = 0;
+    var quote = {
+        "当我沉默的时候，我觉得很充实，当我开口说话，就感到了空虚。": "鲁迅",
+        "贪安稳就没有自由，要自由就要历些危险。只有这两条路。": "鲁迅",
+        "生命是以时间为单位的，浪费别人的时间等于谋财害命；浪费自己的时间，等于慢性自杀。": "鲁迅",
+        "人最苦的是梦醒了却无路可走。": "鲁迅",
+        "楼下一个男人病得要死，那间隔壁的一家唱着留声机，对面是弄孩子。楼上有两人狂笑；还有打牌声。河中的船上有女人哭着她死去的母亲。人类的悲欢并不相通，我只觉得他们吵闹。": "鲁迅",
+        "有时也觉得宽恕是美德，但立刻也疑心这话是怯汉所发明，因为他没有报复的勇气；或者倒是卑怯的坏人所创造，因为他贻害于人而怕人来报复，便骗以宽恕的美名。": "鲁迅",
+        "苛求君子，宽纵小人，自以为明察秋毫，而实则反助小人张目。": "鲁迅",
+        "无法做出决策的人，或欲望过大，或觉悟不足。": "笛卡尔",
+        "没有知识的人总爱议论别人的无知，知识丰富的人却时时发现自己的无知。": "笛卡尔",
+        "只有服从理性，我们才能成人。": "笛卡尔",
+        "要想知道他们真正的看法，一定要看他们的实际行动，不能光听他们说的话。": "笛卡尔",
+        "乞丐并不会妒忌百万富翁，但是他肯定会妒忌收入更高的乞丐。": "罗素",
+        "你能在浪费时间中获得乐趣，就不是浪费时间。": "罗素",
+        "一切伟大的著作都有令人生厌的章节，一切伟人的生活都有无聊乏味的时候。": "罗素",
+        "如果一听到一种与你相左的意见就发怒，这表明，你已经下意识地感觉到你那种看法没有充分理由。如果某个人硬要说二加二等于五，你只会感到怜悯而不是愤怒。": "罗素",
+        "我绝不会为我的信仰而献身，因为我可能是错的。": "罗素",
+        "参差多态乃是幸福之本源。": "罗素",
+        "眼光长远是理性的，但也是苦闷的，因为美好永远在将来，当下永远有苦难。": "罗素",
+        "人的情绪起落是与他对事实的感知成反比的，你对事实了解得越少，就容易动感情。": "罗素",
+        "不要为自己持独特看法而感到害怕，因为我们现在所接受的常识都曾是独特看法。": "罗素",
+        "精神崩溃的一个最初征兆就是坚信自己的工作非常重要。": "罗素",
+        "第一条是：记住你的动机并不总像你想象的那么有益于他人。第二条是：不要过高估计你自己的价值。第三条是：不要期望他人能像你那样注意你。第四条是：不要以为多数人都在设法迫害你。": "罗素",
+        "一个明智的人决不会因别人有别的东西，就对自己的东西不感兴趣。": "罗素",
+        "如果你害怕这个社会，就等同给了别人捕获你的机会，而你要是对它不屑一顾，它就会怀疑自己的力量。": "罗素",
+        "发怒，是用别人的错误来惩罚自己。": "康德",
+        "一个人的缺点来自他的时代，他的美德和伟大却属于自己。": "康德",
+        "自律原则是唯一的道德原则。": "康德",
+        "要么孤独，要么庸俗。": "叔本华",
+        "人性一个最特别的弱点就是：在意别人如何看待自己。": "叔本华",
+        "人们最终所真正能够理解和欣赏的事物，只不过是一些在本质上和他自身相同的事物罢了。": "叔本华",
+        "一条弹簧如久受外物的压迫，会失去弹性，我们的精神也是一样，如常受别人的思想的压力，也会失去其弹性。": "叔本华",
+        "任何人都不要抱怨卑鄙和下流，因为在这世上只有卑鄙和下流才是威力无比的。": "叔本华",
+        "我们在与人交往时能够拥有优势，全在于我们对对方没有要求，不用依靠他们，并让他们清楚这一点。": "叔本华",
+        "越是内心里有欠缺，他越是希望在别人眼里被看作幸运儿。": "叔本华",
+        "一个真正老于世故的人，就是一个做事从来不会犹豫不决、举棋不定的人，也不是匆忙急躁地行动的人。": "叔本华",
+        "他人即地狱。": "萨特",
+        "我是个百依百顺的孩子，至死不变，但只顺从我自己。": "萨特",
+        "如果你独处时感到寂寞，这说明你没有和你自己成为好朋友。": "萨特",
+        "我选择沉默的主要原因之一：从话语中，你很少能学到人性，从沉默中却能。假如还想学得更多，那就要继续一声不吭 。": "王小波",
+        "人在年轻时，最头疼的一件事就是决定自己这一生要做什么。": "王小波",
+        "人活在世上 就是为了忍受摧残 一直到死 想明了这一点 一切都能泰然处之。": "王小波",
+        "一个人想像自己不懂得的事很容易浪漫。": "王小波",
+        "口沫飞溅，对别人大做价值评判，层次很低。": "王小波",
+        "有些人生活的乐趣就是发掘别人道德上的毛病，然后盼着人家倒霉。": "王小波",
+        "假如我被大奸大恶之徒所骗，心理还能平衡，而被善良的低智人所骗，我就不能原谅自己。": "王小波",
+        "一个人活在这世界上第一要好好做人；第二不要惯坏了别人的坏毛病。": "王小波",
+        "一个人思虑太多，就会失去做人的乐趣。": "莎士比亚",
+        "世上本无所谓好和坏，思想使然。": "莎士比亚",
+        "人假使做了无耻的事，总免不了还要用加倍的无耻来抵赖。": "莎士比亚",
+        "我们所要做的事，应该一想到就做；因为人的想法是会变化的，有多少舌头，多少手，多少意外，就会有多少犹豫，多少迟延。": "莎士比亚",
+        "对自己忠实，才不会对别人欺诈。": "莎士比亚",
+        "自知理亏的人，就只能用道德来抹黑人。": "kiRi",
+        "成熟只是愚人的一块遮羞布。": "kiRi"
+    };
+    var key = Object.keys(quote);
+    btn.onclick = function() {
+        index = Math.floor(Math.random() * color.length);
+        count = Math.floor(Math.random() * key.length);
+        say.innerHTML = key[count];
+        per.innerHTML = quote[key[count]];
+        c.style.background = color[index];
+        c.style.borderColor = color[index];
+        bo.style.borderColor = color[index];
+        say.style.color = color[index];
+        per.style.color = color[index];
+        btn.style.background = color[index];
+        btn.style.borderColor = color[index];
+    }
+    var a = document.querySelector("a");
+    a.onclick = function() {
+        window.open("http://service.weibo.com/share/share.php?appkey=&title=&url=&pic=&searchPic=false&style=simple#_loginLayer_1485555172898", "_blank", "toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=yes, width=500, height=500");
+    }
+})();
+</script>
+
+</html>
