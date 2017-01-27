@@ -6,6 +6,7 @@
 + FCC致敬页面
 + FCC个人页面
 + FCC弹幕墙
++ FCC名言引用
 <br><br>
 + DOM编程1
 + AJAX
