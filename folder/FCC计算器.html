@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>Build a JavaScript Calculator</title>
+    <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <style>
+    * {
+        font-family: "Microsoft YaHei";
+        margin: 0;
+        padding: 0;
+    }
+    
+    #calc {
+        padding-top: 100px;
+    }
+    
+    #sc {
+        background: #FFF;
+        border: 5px solid #EEE;
+        width: 324px;
+        height: 83px;
+        margin: 0 auto;
+    }
+    
+    #sc p {
+        margin: 0;
+        text-align: right;
+        padding-right: 5px;
+        padding-left: 5px;
+        overflow: hidden;
+        word-break: keep-all;
+    }
+    
+    #sub {
+        font-size: 20px;
+        color: #999;
+        padding-top: 5px;
+        height: 25px;
+    }
+    
+    #main {
+        font-size: 40px;
+        font-weight: bold;
+    }
+    
+    table {
+        font-weight: bold;
+        font-size: 30px;
+        text-align: center;
+        background: #EEE;
+        padding: 2px;
+        margin: 0 auto;
+    }
+    
+    table td {
+        height: 80px;
+        width: 80px;
+        line-height: 50px;
+        cursor: pointer;
+    }
+    
+    td:hover {
+        background: #CCC;
+    }
+    </style>
+</head>
+
+<body>
+    <div id="calc">
+        <div id="sc">
+            <p id="sub"></p>
+            <p id="main">0</p>
+        </div>
+        <table>
+            <tr>
+                <td id="ce">CE</td>
+                <td id="ac">AC</td>
+                <td id="del">&LessLess;</td>
+                <td class="sum" data="/">÷</td>
+            </tr>
+            <tr>
+                <td class="num" data="7">7</td>
+                <td class="num" data="8">8</td>
+                <td class="num" data="9">9</td>
+                <td class="sum" data="*">×</td>
+            </tr>
+            <tr>
+                <td class="num" data="4">4</td>
+                <td class="num" data="5">5</td>
+                <td class="num" data="6">6</td>
+                <td class="sum" data="-">－</td>
+            </tr>
+            <tr>
+                <td class="num" data="1">1</td>
+                <td class="num" data="2">2</td>
+                <td class="num" data="3">3</td>
+                <td class="sum" data="+">＋</td>
+            </tr>
+            <tr>
+                <td id="abs">±</td>
+                <td class="num" data="0">0</td>
+                <td class="num" data=".">·</td>
+                <td id="iq">＝</td>
+            </tr>
+        </table>
+    </div>
+</body>
+<script>
+function num() {
+    var num = document.querySelectorAll(".num");
+    var main = document.getElementById("main");
+    var sub = document.getElementById("sub");
+    var clear = true;
+    for (let i of num) {
+        i.onclick = function() {
+            if (!clear) {
+                main.innerHTML += this.getAttribute("data");
+            } else {
+                main.innerHTML = this.getAttribute("data");
+                clear = false;
+            }
+        }
+    }
+    var sum = document.querySelectorAll(".sum")
+    for (let i of sum) {
+        i.onclick = function() {
+            sub.innerHTML += main.innerHTML + this.getAttribute("data");
+            clear = true;
+        }
+    }
+    var iq = document.getElementById("iq");
+    iq.onclick = function() {
+        try {
+            if (sub.innerHTML) {
+                sub.innerHTML += main.innerHTML;
+                main.innerHTML = eval(sub.innerHTML);
+                sub.innerHTML = "";
+                clear = true;
+            } else {
+                clear = true;
+            }
+        }
+        catch (err) {
+            main.innerHTML = "NaN";
+            sub.innerHTML = "";
+            clear = true;
+        }
+
+        
+    }
+    var ce = document.getElementById("ce");
+    ce.onclick = function() {
+        main.innerHTML = "0";
+        clear = true;
+    }
+    var ac = document.getElementById("ac");
+    ac.onclick = function() {
+        main.innerHTML = "0";
+        sub.innerHTML = "";
+        clear = true;
+    }
+    var del = document.getElementById("del");
+    del.onclick = function() {
+        if (main.innerHTML.length == 1) {
+            main.innerHTML = "0";
+            clear = true;
+        } else {
+            main.innerHTML = main.innerHTML.toString().slice(0, -1);
+        }
+    }
+    var abs = document.getElementById("abs");
+    abs.onclick = function() {
+        if (Number(main.innerHTML) <= 0) {
+            main.innerHTML = Math.abs(main.innerHTML);
+        } else {
+            main.innerHTML = "-" + main.innerHTML;
+        }
+    }
+}
+num()
+</script>
+
+</html>
