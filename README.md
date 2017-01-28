@@ -7,6 +7,7 @@
 + FCC个人页面
 + FCC弹幕墙
 + FCC名言引用
++ FCC天气预报
 <br><br>
 + DOM编程1
 + AJAX
