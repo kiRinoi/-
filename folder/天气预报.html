@@ -1,83 +1,140 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <title>Document</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>Show the Local Weather</title>
+    <link rel="stylesheet" href="http://apps.bdimg.com/libs/bootstrap/3.3.4/css/bootstrap.min.css">
     <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="http://apps.bdimg.com/libs/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     <style>
-    .ul {display: inline-block;}
+    * {
+        font-family: "Microsoft YaHei";
+    }
+    
+    .page-one {
+        padding-left: 100px;
+        padding-right: 100px;
+        background: #8BC34A;
+        color: #FFF;
+    }
+    
+    .page-one h1 {
+        font-size: 80px;
+    }
+    
+    hr {
+        border-top: 2px solid #AAA;
+    }
+    
+    #main {
+        font-size: 15px;
+    }
+    
+    #main .json {
+        font-size: 15px;
+    }
+    
+    h3 {
+        margin-bottom: 20px;
+    }
+    
+    .future {
+        margin-bottom: 100px;
+    }
     </style>
 </head>
+
 <body>
-    <div>
-        <h1>今日天气</h1>
-        <span></span>
-        <ul>
-            <li>城市：<span></span></li>
-            <li>天气：<span></span></li>
-            <li>温度：<span></span></li>
-            <li>风向：<span></span></li>
-            <li>风力：<span></span></li>
-            <li>湿度：<span></span></li>
-        </ul>
-        <ul>
-            <li>穿衣指数：<span></span></li>
-            <li>洗车指数：<span></span></li>
-            <li>旅行指数：<span></span></li>
-            <li>锻炼指数：<span></span></li>
-            <li>紫外线指数：<span></span></li>
-        </ul>
+    <div class="jumbotron page-one">
+        <h1><strong>天气预报</strong></h1>
+        <p><strong>轻松获取本地天气！</strong></p>
+        <form class="form-inline" role="form">
+            <div class="form-group">
+                <input type="text" class="form-control" id="name" placeholder="请输入城市名称">
+                <button type="submit" class="btn btn-primary" id="btn1">查询</button>
+            </div>
+        </form>
     </div>
-    <div>
-        <h1>未来6天天气</h1>
-        <section></section>
+    <div class="container">
+        <div class="row">
+            <h1><strong alt="city" data="today" class="json">请查询!</strong> <small alt="date_y" data="today" class="json">请查询!</small> <small data="today" alt="week" class="json">请查询!</small></h1>
+            <hr>
+            <h3>今日天气</h3>
+            <div class="col-md-4 col-sm-6 col-xs-12">
+                <ul class="list-group" id="main">
+                    <li class="list-group-item">天气：<span class="badge json" data="today" alt="weather">请查询!</span></li>
+                    <li class="list-group-item">温度：<span class="badge json" data="today" alt="temperature">请查询!</span></li>
+                    <li class="list-group-item">风力：<span class="badge json" data="sk" alt="wind_strength">请查询!</span></li>
+                    <li class="list-group-item">风向：<span class="badge json" data="today" alt="wind">请查询!</span></li>
+                    <li class="list-group-item">紫外线：<span class="badge json" data="today" alt="uv_index">请查询!</span></li>
+                    <li class="list-group-item">锻炼指数：<span class="badge json" data="today" alt="exercise_index">请查询!</span></li>
+                    <li class="list-group-item">出行指数：<span class="badge json" data="today" alt="travel_index">请查询!</span></li>
+                    <li class="list-group-item">洗车指数：<span class="badge json" data="today" alt="wash_index">请查询!</span></li>
+                    <li class="list-group-item">穿衣指数：<span class="badge json" data="today" alt="dressing_index">请查询!</span></li>
+                    <small class="text-muted">获取时间：<span class="json" data="sk" alt="time">请查询!</span></small>
+                </ul>
+            </div>
+            <div class="col-md-7 col-sm-6">
+                <strong>穿衣建议：</strong>
+                <p class="json" data="today" alt="dressing_advice">请查询!</p>
+            </div>
+            <hr class="col-md-12">
+            <h3 class="col-md-12">未来7天天气</h3>
+            <div class="col-md-12 future">
+            </div>
+        </div>
     </div>
-    <script>
-    $.getJSON("http://v.juhe.cn/weather/index?callback=?", {
-        "cityname": "上海",
-        "dtype": "jsonp",
-        "key": "81acb16a3c95e2f294dc1ea9a1b200f4"
-    },
-    function(data) {
-        console.log(data);
-        var sk = data.result.sk;
-        var td = data.result.today;
-        var fu = data.result.future;
-        var count = 0;
-        var arr = [
-        td.date_y,
-        td.city,
-        td.weather,
-        sk.temp, 
-        sk.wind_direction, 
-        sk.wind_strength,
-        sk.humidity,
-        td.dressing_advice,
-        td.wash_index,
-        td.travel_index,
-        td.exercise_index,
-        td.uv_index,
-        ];
-        for (let i in arr) {
-            $("span").eq(count).text(arr[i].toString());
-            count++;
-        }
-        var c = 0;
-        for (let i in fu) {
-            var ul = document.createElement("ul");
-            ul.classList.add("ul");
-            $("section").append(ul);
-            for (let r in fu[i]) {
-                $(".ul").eq(c).append("<li><span>" + fu[i][r] + "</span></li>");
-            }
-            c++;
-        }
-        var u = document.getElementsByClassName("ul");
-        for (let i=0; i<u.length; i++){
-            u[i].getElementsByTagName('li')[2].style.display = "none";
-        }
-        return false;
-    })
-    </script>
 </body>
+<script>
+var btn = document.getElementById("btn1");
+btn.onclick = function() {
+    var val = document.getElementById("name")
+    $.getJSON("http://v.juhe.cn/weather/index?callback=?", {
+        "cityname": val.value,
+        "dtype": "jsonp",
+        "key": "12414e77c662232a1d89546d83777e2a"
+    }, function(data) {
+        var result = data.result;
+        var c = document.querySelectorAll(".json");
+        var alt, da;
+        console.log(data.result.future)
+        for (let i of c) {
+            alt = i.getAttribute("alt");
+            da = i.getAttribute("data");
+            i.innerHTML = result[da][alt];
+        }
+        var fu = data.result.future;
+        var div = document.querySelector(".future")
+        div.innerHTML = "";
+        var ul, li, key;
+        var index = 0;
+        for (let x in fu) {
+            console.log(typeof x)
+            ul = document.createElement("ul");
+            div.appendChild(ul);
+            li = div.querySelectorAll("ul");
+            li[index].className = "list-group";
+            li.index = index;
+            for (let y in fu[x]) {
+                var l = document.createElement("li")
+                li[index].appendChild(l);
+                l.innerHTML = fu[x][y];
+                l.className = "list-group-item col-md-3"
+
+            }
+            index++;
+        }
+        for (let a of li) {
+            console.log(a)
+            a.getElementsByTagName("li")[2].style.display = "none";
+            a.getElementsByTagName("li")[5].style.display = "none";
+        }
+    })
+    return false;
+}
+</script>
+
 </html>
