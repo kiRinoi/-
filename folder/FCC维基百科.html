@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>Build a Wikipedia Viewer</title>
+    <link rel="stylesheet" href="http://apps.bdimg.com/libs/bootstrap/3.3.4/css/bootstrap.min.css">
+    <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="http://apps.bdimg.com/libs/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <style>
+    * {
+        font-family: "Microsoft YaHei";
+    }
+    
+    .div {
+        padding: 15px;
+        margin-top: 10px;
+        background: #EEE;
+        line-height: 30px;
+    }
+    
+    .div a {
+        font-weight: bold;
+        font-size: 25px;
+    }
+    
+    .div strong {
+        font-size: 24px;
+    }
+    
+    #m {
+        margin-bottom: 50px;
+    }
+    footer {margin-bottom: 50px;}
+    </style>
+</head>
+
+<body>
+    <div class="jumbotron">
+        <div class="container">
+            <h1>维基百科查询</h1>
+            <p>Wikipedia Viewer</p>
+            <form class="form-inline" role="form">
+                <div class="form-group">
+                    <input type="text" class="form-control" id="txt" placeholder="请输入查询内容">
+                </div>
+                <button type="submit" class="btn btn-primary" id="sub">提交查询</button>
+                <a class="btn btn-primary" id="random">随机页面</a>
+            </form>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12" id="m">
+            </div>
+        </div>
+    </div>
+    <footer class="text-center">
+        <small class="text-muted">所有数据来源于维基百科<br>code by kiRi</small>
+    </footer>
+</body>
+<script>
+var api = "http://en.wikipedia.org/w/api.php?format=json&action=query&generator=search&prop=extracts&pilimit=max&gsrnamespace=0&gsrlimit=10&exintro&explaintext&exsentences=1&exlimit=max&callback=?&gsrsearch=";
+$("#random").click(function() {
+    window.open("http://en.wikipedia.org/wiki/Special:Random");
+    return false;
+})
+$("#sub").click(function() {
+    if ($("#txt").val()) {
+        $.getJSON(api + $("#txt").val() + "", function(data) {
+            $("#m").empty();
+            var index = 1;
+            $.each(data.query.pages, function(key, value) {
+                $("#m").append("<div class='div'>" + "<strong>" + (index++) + ". </strong>" + "<a href='https://en.wikipedia.org/?curid=" + value.pageid + "' target='_blank'>" + value.title + "</a><p>" + value.extract + "</p></div>")
+            })
+        })
+    } else {
+    	alert("请输入查询内容！")
+    }
+
+    return false;
+})
+</script>
+
+</html>
