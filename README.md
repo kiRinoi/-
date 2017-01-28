@@ -9,6 +9,7 @@
 + FCC名言引用
 + FCC天气预报
 + FCC维基百科
++ FCC计算器
 <br><br>
 + DOM编程1
 + AJAX
