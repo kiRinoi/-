@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>Build a Pomodoro Clock</title>
+    <link rel="stylesheet" href="http://apps.bdimg.com/libs/bootstrap/3.3.4/css/bootstrap.min.css">
+    <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="http://apps.bdimg.com/libs/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <style>
+    * {
+        font-family: Microsoft YaHei;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        -o-user-select: none;
+        user-select: none;
+    }
+    
+    body {
+        background: #333;
+    }
+    
+    .title {
+        color: #EEE;
+        margin: 35px auto;
+    }
+    
+    .time {
+        color: #EEE;
+        margin-bottom: 20px;
+    }
+    
+    .time span {
+        font-size: 40px;
+        display: inline-block;
+        width: 80px;
+    }
+    
+    .time strong {
+        cursor: pointer;
+        font-size: 40px;
+    }
+    
+    #sc {
+        border: 0px solid #EEE;
+        border-width: 3px;
+        border-radius: 100%;
+        height: 400px;
+        width: 400px;
+        margin: 0 auto;
+        clear: both;
+        color: #EEE;
+        position: relative;
+        padding-top: 180px;
+    }
+    
+    #start {
+        border-style: solid;
+        border-color: #EEE;
+        border-width: 2px;
+        display: inline-block;
+        height: 140px;
+        width: 160px;
+        border-top-left-radius: 120%;
+        position: absolute;
+        left: 30px;
+        top: 20px;
+        font-size: 30px;
+        padding-top: 55px;
+        padding-left: 25px;
+        cursor: pointer;
+        font-weight: bold;
+    }
+    
+    #reseat {
+        border-style: solid;
+        border-color: #EEE;
+        border-width: 2px;
+        display: inline-block;
+        height: 140px;
+        width: 160px;
+        border-top-right-radius: 120%;
+        position: absolute;
+        right: 30px;
+        top: 20px;
+        padding-top: 53px;
+        padding-right: 27px;
+        font-size: 30px;
+        cursor: pointer;
+        font-weight: bold;
+    }
+    
+    #count {
+        margin: 0 auto;
+        font-size: 90px;
+        font-weight: bold;
+    }
+    
+    #txt {
+        margin-top: 5px;
+        font-size: 20px;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 text-center">
+                <h1 class="title">
+                        <strong>番茄倒计时</strong>
+                    </h1>
+                <div class="col-md-6 time">
+                    <h4>休息时间</h4>
+                    <strong>&utrif;</strong>
+                    <span id="break">5</span>
+                    <strong>&dtrif;</strong>
+                </div>
+                <div class="col-md-6 time">
+                    <h4>工作时间</h4>
+                    <strong>&utrif;</strong>
+                    <span id="work">25</span>
+                    <strong>&dtrif;</strong>
+                </div>
+                <div id="sc">
+                    <div class="button">
+                        <span id="start">start</span>
+                        <span id="reseat">reseat</span>
+                    </div>
+                    <p id="count">00:00</p>
+                    <p id="txt">Click Start!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+var bp = document.querySelectorAll(".time")[0].getElementsByTagName("strong")[0];
+var bm = document.querySelectorAll(".time")[0].getElementsByTagName("strong")[1];
+var wp = document.querySelectorAll(".time")[1].getElementsByTagName("strong")[0];
+var wm = document.querySelectorAll(".time")[1].getElementsByTagName("strong")[1];
+
+var bv = document.getElementById("break");
+var wv = document.getElementById("work");
+bp.onclick = function() {
+    bv.innerHTML++;
+}
+bm.onclick = function() {
+    if (bv.innerHTML > 0) {
+        bv.innerHTML--;
+    }
+}
+wp.onclick = function() {
+    wv.innerHTML++;
+}
+wm.onclick = function() {
+    if (wv.innerHTML > 0) {
+        wv.innerHTML--;
+    }
+}
+var start = document.getElementById("start");
+var reseat = document.getElementById("reseat");
+var count = document.getElementById("count");
+var txt = document.getElementById("txt");
+var timer, sectimer;
+start.onclick = function tomato() {
+    clearInterval(timer);
+    clearInterval(sectimer);
+    var wt = wv.innerHTML * 60;
+    var bt = bv.innerHTML * 60;
+    txt.innerHTML = "工作时间";
+    timer = setInterval(function() {
+        var wmin = Math.floor(wt / 60);
+        if (wt % 60 >= 10) {
+            var wsec = wt % 60;
+        } else {
+            wsec = "0" + (wt % 60);
+        }
+
+        count.innerHTML = wmin + ":" + wsec;
+        wt--;
+        if (wt < 0) {
+            clearInterval(timer);
+            txt.innerHTML = "休息时间";
+            sectimer = setInterval(function() {
+                var bmin = Math.floor(bt / 60);
+                if (bt % 60 >= 10) {
+                    var bsec = bt % 60;
+                } else {
+                    bsec = "0" + (bt % 60);
+                }
+
+                count.innerHTML = bmin + ":" + bsec;
+                bt--;
+                if (bt < 0) {
+                    clearInterval(sectimer);
+                    tomato();
+                }
+            }, 1000)
+        }
+    }, 1000);
+}
+reseat.onclick = function() {
+    clearInterval(timer);
+    clearInterval(sectimer);
+    count.innerHTML = "00:00";
+    txt.innerHTML = "Click Start!";
+}
+</script>
+
+</html>
