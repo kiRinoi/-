@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>Build a Tic Tac Toe Game</title>
+    </script>
+    <style>
+    * {
+        margin: 0;
+        padding: 0;
+        font-family: "Microsoft YaHei";
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        -o-user-select: none;
+        user-select: none;
+    }
+    
+    ul {
+        border: 1px solid #000;
+        width: 300px;
+        height: 300px;
+        text-align: center;
+        margin: 20px auto;
+    }
+    
+    li {
+        border: 1px solid #000;
+        display: block;
+        float: left;
+        width: 98px;
+        height: 98px;
+        cursor: pointer;
+        text-align: center;
+        line-height: 98px;
+        font-size: 80px;
+        font-weight: bold;
+        color: #333;
+    }
+    
+    button {
+        display: block;
+        text-align: center;
+        margin: 0 auto;
+        font-size: 30px;
+        padding: 5px;
+    }
+    h1 {margin: 0 auto;text-align: center;margin-top: 50px;color: #333;}
+    p {text-align: center;margin-top: 10px;}
+    </style>
+</head>
+
+<body>
+    <h1>OX棋</h1>
+    <ul>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+    <button>开始游戏</button>
+    <p>
+        玩家：<span id="per"></span><br>
+        电脑：<span id="ai"></span>
+    </p>
+</body>
+<script>
+ox()
+
+function click(item) {
+    var li = document.querySelectorAll("li");
+    for (let i of li) {
+        i.onclick = function() {
+            if (!i.innerHTML) {
+                i.innerHTML = item;
+                isWin(item);
+                ai();
+                return false;
+            } else {
+                return false;
+            }
+        }
+
+    }
+}
+
+function ox() {
+    var btn = document.querySelector("button");
+    var li = document.querySelectorAll("li");
+    btn.onclick = function() {
+        for (let i of li){
+            i.innerHTML = "";
+        }
+        if (confirm("请选择棋子：\n>> 确定为 O；\n>> 取消为 X")) {
+            var per = document.getElementById('per');
+            per.innerHTML = "O";
+            var ai = document.getElementById('ai');
+            ai.innerHTML = "X";
+            click("O");
+        } else {
+            click("X");
+            var per = document.getElementById('per');
+            per.innerHTML = "X";
+            var ai = document.getElementById('ai');
+            ai.innerHTML = "O";
+        }
+    }
+}
+
+function isWin(xo) {
+    var li = document.querySelectorAll("li");
+    var a = [];
+    for (let i of li) {
+        if (i.innerHTML == "") {
+            a.push("null");
+        } else {
+            a.push(i.innerHTML);
+        }
+    }
+    var flag = false;
+    if (
+        (a[0] == xo && a[1] == xo && a[2] == xo) ||
+        (a[3] == xo && a[4] == xo && a[5] == xo) ||
+        (a[6] == xo && a[7] == xo && a[8] == xo) ||
+        (a[0] == xo && a[3] == xo && a[6] == xo) ||
+        (a[1] == xo && a[4] == xo && a[7] == xo) ||
+        (a[2] == xo && a[5] == xo && a[8] == xo) ||
+        (a[0] == xo && a[4] == xo && a[8] == xo) ||
+        (a[2] == xo && a[4] == xo && a[6] == xo)
+    ) {
+        setTimeout(function() {
+            alert(xo + " 胜利了！！");
+            location.reload(true);
+        }, 100)
+    } else {
+        console.log(a + " >>")
+        for (let j of a) {
+            if (j == "null") {
+                flag = true;
+            }
+        }
+        if (flag) {
+                return false;
+        } else {
+            setTimeout(function() {
+                alert("平局！！");
+                location.reload(true);
+            }, 100)   
+        }
+    }
+}
+function ai(){
+    var a = [];
+    var li = document.querySelectorAll("li");
+    for (let i of li) {
+        if (i.innerHTML == "") {
+            a.push("null");
+        } else {
+            a.push(i.innerHTML);
+        }
+    }
+    var a2 = [];
+    a.forEach(function(i,index){
+        if (i == "null") {
+            a2.push(index);
+        }
+    })
+    var ai = document.getElementById("ai");
+    var random = Math.floor(Math.random()*a2.length);
+    try {
+       li[a2[random]].innerHTML = ai.innerHTML;
+        isWin(ai.innerHTML); 
+    } catch(err) {
+        console.log(err);
+        return false;
+    }
+}
+</script>
+
+</html>
