@@ -1,0 +1,261 @@
+<!DOCTYPE>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>IFE JavaScript Task 17</title>
+    <style>
+    * {
+        font-family: "Microsoft YaHei", Helvetica, sans-serif;
+    }
+    
+    .g {
+        -webkit-flex: auto;
+        -moz-flex: auto;
+        -ms-flex: auto;
+        -o-flex: auto;
+        flex: auto;
+        border: 1px solid #000;
+        margin: 0 3px;
+        cursor: pointer;
+        position: relative;
+    }
+    
+    body {
+        padding: 0 50px;
+    }
+    
+    .aqi-chart-wrap {
+        min-width: 800px;
+        display: -webkit-flex;
+        display: -moz-flex;
+        display: -ms-flex;
+        display: -o-flex;
+        display: flex;
+        -ms-align-items: flex-end;
+        align-items: flex-end;
+        justify-content: space-around;
+        height: 550px;
+        border-bottom: 5px solid #333;
+    }
+    
+    .box {
+        display: none;
+        position: absolute;
+        background: #FFF;
+        width: 100px;
+        padding: 5px;
+        z-index: 100;
+        text-align: center;
+        border: 1px solid #333;
+        color: #333;
+        font-size: 15px;
+        border-radius: 10px;
+        top: -60px;
+        left: -45px;
+    }
+    
+    .g:hover .box {
+        display: block;
+    }
+    </style>
+</head>
+
+<body>
+    <h1>城市空气污染指数</h1>
+    <fieldset id="form-gra-time">
+        <legend>请选择日期粒度：</legend>
+        <label>日
+            <input name="gra-time" value="day" type="radio" checked="checked">
+        </label>
+        <label>周
+            <input name="gra-time" value="week" type="radio">
+        </label>
+        <label>月
+            <input name="gra-time" value="month" type="radio">
+        </label>
+    </fieldset>
+    <fieldset>
+        <legend>请选择查看的城市：</legend>
+        <select id="city-select">
+        </select>
+    </fieldset>
+    <div class="aqi-chart-wrap">
+    </div>
+</body>
+<script>
+/* 数据格式演示
+var aqiSourceData = {
+  "北京": {
+    "2016-01-01": 10,
+    "2016-01-02": 10,
+    "2016-01-03": 10,
+    "2016-01-04": 10
+  }
+};
+*/
+
+// 以下两个函数用于随机模拟生成测试数据
+function getDateStr(dat) {
+    var y = dat.getFullYear();
+    var m = dat.getMonth() + 1;
+    m = m < 10 ? '0' + m : m;
+    var d = dat.getDate();
+    d = d < 10 ? '0' + d : d;
+    return y + '-' + m + '-' + d;
+}
+
+function randomBuildData(seed) {
+    var returnData = {};
+    var dat = new Date("2016-11-01");
+    var datStr = ''
+    for (var i = 1; i < 92; i++) {
+        datStr = getDateStr(dat);
+        returnData[datStr] = Math.ceil(Math.random() * seed);
+        dat.setDate(dat.getDate() + 1);
+    }
+    return returnData;
+}
+
+var aqiSourceData = {
+    "北京": randomBuildData(500),
+    "上海": randomBuildData(300),
+    "广州": randomBuildData(200),
+    "深圳": randomBuildData(100),
+    "成都": randomBuildData(300),
+    "西安": randomBuildData(500),
+    "福州": randomBuildData(100),
+    "厦门": randomBuildData(100),
+    "沈阳": randomBuildData(500)
+};
+console.log(aqiSourceData)
+    // 用于渲染图表的数据
+var chartData = {};
+
+// 记录当前页面的表单选项
+var pageState = {
+    nowSelectCity: -1,
+    nowGraTime: "day"
+}
+
+function addOption() {
+    var city = document.getElementById("city-select");
+    var cityArr = Object.keys(aqiSourceData);
+    for (let i of cityArr) {
+        city.innerHTML += "<option>" + i + "</option>";
+    }
+    return false;
+}
+/**
+ * 渲染图表
+ */
+function renderChart(city) {
+    var show = document.querySelector(".aqi-chart-wrap");
+    var color = ["#388E3C", "#F57C00", "#F44336", "#448AFF", "#795548", "#7C4DFF"];
+    var random = 0;
+    show.innerHTML = "";
+    for (let data in city) {
+        random = Math.floor(Math.random() * color.length);
+        show.innerHTML += "<div class='g' style='height:" + city[data] + "px;background:" + color[random] + ";'><div class='box'>" + data + "<br>指数:" + city[data] + "</div></div>"
+    }
+    return false;
+}
+
+function selectorCity() {
+    var city = document.getElementById("city-select");
+    var tag = document.getElementsByTagName("option");
+    var newData;
+    city.onchange = function() {
+        for (let item of tag) {
+            if (item.selected == true) {
+                console.log(item.innerHTML)
+                chartData = aqiSourceData[item.innerHTML];
+            }
+        }
+        newData = getTime(chartData);
+        renderChart(newData);
+    }
+    city.onchange();
+    var input = document.getElementsByTagName("input");
+    for (let i of input) {
+        i.onchange = function() {
+            newData = getTime(chartData);
+            renderChart(newData);
+        }
+    }
+    return false;
+}
+
+function getTime(cityData) {
+    var input = document.querySelectorAll("input");
+    var sum = 0;
+    var week = 1;
+    var day = 0;
+    var month;
+    var newData = {};
+    var name;
+    var flag = true;
+    var count = 1;
+    for (let val of input) {
+        if (val.value == "week" && (val.checked == true)) {
+            for (let key in cityData) {
+                sum += cityData[key];
+                day++;
+                if (new Date(key).getDay() == 6) {
+                    name = "第" + (week++) + "周";
+                    newData[name] = Math.ceil(sum / day);
+                    sum = 0;
+                    day = 0;
+                }
+            }
+            if (day != 0) {
+                name = "第" + (week++) + "周";
+                newData[name] = Math.ceil(sum / 7);
+                sum = 0;
+                day = 0;
+            }
+            return newData;
+        }
+        if (val.value == "month" && (val.checked == true)) {
+            for (let key in cityData) {
+                if (flag) {
+                    month = new Date(key).getMonth();
+                    flag = false;
+                }
+                if (new Date(key).getMonth() == month) {
+                    sum += cityData[key];
+                    day++;
+                } else {
+                    month = new Date(key).getMonth();
+                    name = "第" + count + "月";
+                    count++;
+                    newData[name] = Math.ceil(sum / day);
+                    sum = 0;
+                    day = 0;
+                }
+            }
+            if (day != 0) {
+                name = "第" + count + "月";
+                count++;
+                newData[name] = Math.ceil(sum / day);
+                sum = 0;
+                day = 0;
+            }
+            return newData;
+        }
+        if (val.value == "day" && (val.checked == true)) {
+            return cityData;
+        }
+    }
+}
+
+
+
+function init() {
+    addOption();
+    selectorCity();
+}
+init();
+</script>
+
+</html>
