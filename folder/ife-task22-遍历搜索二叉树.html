@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>task 22</title>
+    <style>
+    div {
+        border: 1px solid #000;
+        margin: 5px;
+        padding: 10px;
+        display: flex;
+        flex: auto;
+        flex-wrap: wrap;
+    }
+    </style>
+</head>
+
+<body>
+    <div id="box">Main
+        <div>A
+            <div>1</div>
+            <div>2</div>
+            <div>3</div>
+            <div>4</div>
+        </div>
+        <div>B
+            <div>5
+                <div>c1
+                    <div>cs1</div>
+                    <div>cs2</div>
+                </div>
+                <div>c2</div>
+                <div>c3</div>
+            </div>
+            <div>6</div>
+            <div>7</div>
+            <div>8</div>
+        </div>
+        <div>C
+            <div>9
+                <div>s1</div>
+                <div>s2</div>
+            </div>
+            <div>10</div>
+            <div>11</div>
+        </div>
+        <div>D</div>
+    </div>
+    <button id="btn">Start</button>
+    <input type="text">
+    <button id="b">Search</button>
+</body>
+<script>
+var arr = [];
+var timer;
+var btn = document.getElementById("btn");
+btn.onclick = function() {
+    re();
+    cgc();
+}
+
+function re() {
+    clearInterval(timer);
+    arr = [];
+    var div = document.getElementsByTagName("div");
+    for (let i of div) {
+        i.style.background = "#FFF";
+    }
+    run(div[0])
+}
+
+function run(node) {
+    if (node != null) {
+        arr.push(node) // 正遍历
+        Array.from(node.children).forEach(function(i, index) {
+                run(i)
+            })
+            // arr.push(node) // 逆向遍历
+    }
+}
+
+function cgc() {
+    var i = 0;
+    arr[i].style.background = "#F55";
+    timer = setInterval(function() {
+        i++;
+        if (i < arr.length) {
+            arr[i].style.background = "#F55";
+            arr[i - 1].style.background = "#FFF";
+        } else {
+            clearInterval(timer);
+            arr[i - 1].style.background = "#FFF";
+        }
+    }, 300)
+}
+
+function se() {
+    var val = document.getElementsByTagName("input")[0];
+    var se = document.getElementById("b");
+    se.onclick = function() {
+        re();
+        var i = 0;
+        arr[i].style.background = "#F55";
+        timer = setInterval(function() {
+            i++;
+            if (i < arr.length) {
+                arr[i].style.background = "#F55";
+                arr[i - 1].style.background = "#FFF";
+                var txt = arr[i].firstChild.nodeValue.replace(/\W+/gi, "")
+                if (txt.toLowerCase() == val.value.toLowerCase()) {
+                    clearInterval(timer);
+                    arr[i].style.background = "#333";
+                }
+            } else {
+                clearInterval(timer);
+                arr[i - 1].style.background = "#FFF";
+                setTimeout(function() {
+                    alert("没有找到子元素!")
+                }, 10);
+            }
+
+        }, 300)
+    }
+}
+se()
+</script>
+
+</html>
