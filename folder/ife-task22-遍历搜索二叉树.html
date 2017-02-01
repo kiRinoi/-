@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>task 22</title>
+    <style>
+    div {
+        border: 1px solid #000;
+        margin: 5px;
+        padding: 10px;
+        display: flex;
+        flex: auto;
+        flex-wrap: wrap;
+    }
+    </style>
+</head>
+
+<body>
+    <div id="box">MainBox
+        <div>box1
+            <div>css</div>
+            <div>html</div>
+            <div>javascript</div>
+            <div>Java</div>
+        </div>
+        <div>box2
+            <div>python
+                <div>C
+                    <div>Csharp</div>
+                    <div>Cpp</div>
+                </div>
+                <div>MicroSoft</div>
+                <div>Apple</div>
+            </div>
+            <div>cs1</div>
+            <div>cs2</div>
+            <div>cs3</div>
+        </div>
+        <div>box3
+            <div>sub
+                <div>sub1</div>
+                <div>sub2</div>
+            </div>
+            <div>Hello</div>
+            <div>World</div>
+        </div>
+        <div>box4</div>
+    </div>
+    <button id="btn">Start</button>
+    <input type="text">
+    <button id="b">Search</button>
+</body>
+<script>
+var arr = [];
+var timer;
+var btn = document.getElementById("btn");
+btn.onclick = function() {
+    re();
+    cgc();
+}
+
+function re() {
+    clearInterval(timer);
+    arr = [];
+    var div = document.getElementsByTagName("div");
+    for (let i of div) {
+        i.style.background = "#FFF";
+    }
+    run(div[0])
+}
+
+function run(node) {
+    if (node != null) {
+        arr.push(node) // 正遍历
+        Array.from(node.children).forEach(function(i, index) {
+                run(i)
+            })
+            // arr.push(node) // 逆向遍历
+    }
+}
+
+function cgc() {
+    var i = 0;
+    timer = setInterval(function() {
+        if (i < arr.length) {
+            arr[i].style.background = "#F55";
+            if (i > 0) {
+                arr[i - 1].style.background = "#FFF";
+            }
+        } else {
+            clearInterval(timer);
+            arr[i - 1].style.background = "#FFF";
+        }
+        i++;
+    }, 300)
+}
+
+function se() {
+    var sar = [];
+    var val = document.getElementsByTagName("input")[0];
+    var se = document.getElementById("b");
+    var div = document.getElementsByTagName("div");
+    se.onclick = function() {
+        re();
+        var i = 0;
+        timer = setInterval(function() {
+            if (i < arr.length) {
+                var txt = arr[i].firstChild.nodeValue.replace(/\W+/gi, "").toLowerCase();
+                var v = val.value.toLowerCase();
+                if (txt != txt.replace(v, "")) {
+                    console.log(txt, txt.replace(v, ""))
+                    arr[i].style.background = "#333";
+                    sar.push(i);
+                } else {
+                    arr[i].style.background = "#F55";
+                }
+                if (i > 0) {
+                    arr[i - 1].style.background = "#FFF";
+                }
+            } else {
+                clearInterval(timer);
+                arr[i - 1].style.background = "#FFF";
+                console.log(sar)
+                if (sar.length > 0) {
+                    for (let i of sar) {
+                        div[i].style.background = "#333";
+                        sar = [];
+                    }
+                } else {
+                    alert("Not found!");
+                }
+            }
+            i++;
+        }, 300)
+    }
+}
+se()
+</script>
+
+</html>
