@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>task 25</title>
+    <style>
+    * {
+        font-family: "MicroSoft YaHei", Helvetica, sans-serif;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        -o-user-select: none;
+        user-select: none;
+    }
+    
+    fieldset {
+        width: 400px;
+        margin: 15px auto;
+    }
+    
+    div {
+        padding: 2px 0 2px 25px;
+        border-left: 1px solid #AAA;
+        margin-top: 5px;
+        cursor: default;
+        position: relative;
+        color: #222;
+    }
+    
+    .min {
+        display: block;
+        position: absolute;
+        height: 15px;
+        width: 15px;
+        top: 4px;
+        left: 7px;
+        cursor: pointer;
+        text-align: center;
+        line-height: 15px;
+        font-weight: bold;
+        font-size: 20px;
+        color: #F55;
+    }
+    
+    .add {
+        font-weight: bold;
+        cursor: pointer;
+        color: #AAA;
+        font-size: 20px;
+        position: absolute;
+        right: 20px;
+        top: 0;
+    }
+    
+    .del {
+        font-weight: bold;
+        cursor: pointer;
+        color: #AAA;
+        font-size: 20px;
+        position: absolute;
+        right: 0;
+        top: 0;
+    }
+    
+    .del:hover,
+    .add:hover {
+        color: #F55;
+    }
+    </style>
+</head>
+
+<body>
+    <fieldset>
+        <legend>树形组件</legend>
+        <input type="text">
+        <button>Search</button>
+        <button>Reseat</button>
+        <p>点击标签折叠节点! 点击 + × 添加删除节点!</p>
+        <div>Menu
+            <div>JavaScript
+                <div>Java</div>
+                <div>Script</div>
+            </div>
+            <div>HTML
+                <div>html5</div>
+                <div>WWW</div>
+            </div>
+            <div>CSS
+                <div>css3</div>
+            </div>
+            <div>MySQL
+                <div>database</div>
+                <div>root</div>
+            </div>
+            <div>Node.js
+                <div>n1
+                    <div>Node</div>
+                    <div>js</div>
+                </div>
+                <div>n2</div>
+            </div>
+            <div>PHP
+            </div>
+        </div>
+    </fieldset>
+</body>
+<script>
+var arr = [];
+
+function addArrow() {
+    add();
+    var div = document.getElementsByTagName("div");
+    for (let i of div) {
+        if ((i.children[i.children.length - 1]).getAttribute("class") != "del") {
+            var box = document.createElement("span");
+            var txt = document.createTextNode("-");
+            box.appendChild(txt);
+            i.appendChild(box);
+            box.className = "min";
+        }
+    }
+    var min = document.querySelectorAll(".min");
+    for (let x of min) {
+        x.onclick = function() {
+            for (let y of x.parentNode.children) {
+                if (y.getAttribute("class") != "min") {
+                    if (y.style.display != "none") {
+                        y.style.display = "none";
+                        this.innerHTML = "+";
+                    } else {
+                        y.style.display = "block";
+                        this.innerHTML = "-";
+                    }
+                }
+            }
+        }
+    }
+}
+
+function pushArr(node) {
+    if (node) {
+        arr.push(node);
+        Array.from(node.children).forEach(function(i, index) {
+            pushArr(i);
+        })
+    }
+}
+
+function search() {
+    var btn = document.querySelector("button");
+    var input = document.querySelector("input");
+    var div = document.querySelectorAll("div");
+    btn.onclick = function() {
+        var sar = [];
+        arr = [];
+        pushArr(div[0]);
+        arr.forEach(function(i, index) {
+            var txt = i.firstChild.nodeValue.replace(/\W+/gi, "").toLowerCase();
+            var val = input.value.toLowerCase();
+            if (txt != txt.replace(val, "")) {
+                i.style.color = "#F55";
+                sar.push(index);
+            } else {
+                i.style.color = "#222";
+            }
+        })
+        var p = document.querySelector("p");
+        if (sar.length > 0) {
+            p.innerHTML = "搜索到 " + sar.length + " 个结果!";
+        } else {
+            p.innerHTML = "没有搜索到结果!!";
+        }
+        return false;
+    }
+
+}
+
+function add() {
+    var div = document.getElementsByTagName("div");
+    for (let i of div) {
+        var add = document.createElement("span");
+        var del = document.createElement("span");
+        add.innerHTML = "+";
+        del.innerHTML = "×";
+        i.insertBefore(del, i.children[0]);
+        i.insertBefore(add, i.children[0]);
+        add.className = "add";
+        del.className = "del";
+    }
+
+}
+
+function deli() {
+    var del = document.querySelectorAll(".del");
+    var add = document.querySelectorAll(".add");
+    for (let i = 0; i < add.length; i++) {
+        del[i].onclick = function() {
+            this.parentNode.parentNode.removeChild(this.parentNode);
+            addArrow();
+            deli();
+        }
+        add[i].onclick = function() {
+            var nd = document.createElement("div");
+            this.parentNode.appendChild(nd);
+            nd.innerHTML = prompt("请输入名字", "New Node") + "<span class='add'>+</span><span class='del'>×</span>";
+            addArrow();
+            deli();
+        }
+    }
+}
+
+function reseat() {
+    var btn = document.querySelectorAll("button")[1];
+    btn.onclick = function() {
+        window.location.reload(true);
+    }
+}
+
+function init() {
+    addArrow();
+    search();
+    deli();
+    reseat();
+}
+init();
+</script>
+
+</html>
