@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>ife-task21</title>
+    <style>
+    * {
+        font-family: "Microsoft YaHei", Helvetica, sans-serif;
+    }
+    
+    .label {
+        color: #FFF;
+        background: #F55;
+        border-radius: 5px;
+        padding: 1px 10px;
+        cursor: pointer;
+        margin: 2px;
+    }
+    
+    button {
+        display: block;
+        margin: 3px 0;
+    }
+    </style>
+</head>
+
+<body>
+    <form>
+        <div>
+            <p>TAG:
+                <input type="text">
+            </p>
+            <div id="tag"></div>
+            <p>Search:
+                <input type="text" id="s">
+            </p>
+        </div>
+        <div>
+            <textarea name="" id="" cols="40" rows="8"></textarea>
+            <button>确认</button>
+            <div id="w"></div>
+        </div>
+    </form>
+</body>
+<script>
+function tag() {
+    var input = document.getElementsByTagName("input")[0];
+    var tag = document.getElementById("tag");
+    var arr = [];
+    input.onkeypress = function(event) {
+        var key = window.event ? event.keyCode : event.which;
+        if (key == 13 || key == 44 || key == 32 || key == 188) {
+            var txt = this.value.toString().replace(/\W+/g, "");
+            arr.push(txt);
+            var flag = arr.every(function(i, index) {
+                return arr.indexOf(i) == index;
+            })
+            arr = arr.filter(function(i, index) {
+                return arr.indexOf(i) == index;
+            })
+            if (flag) {
+                var label = document.createElement("span");
+                txt = document.createTextNode(txt);
+                label.appendChild(txt);
+                tag.appendChild(label);
+                label.className = "label";
+            }
+            setTimeout(function() {
+                input.value = "";
+            }, 0)
+            var lab = document.querySelectorAll(".label");
+            if (lab.length > 10) {
+                tag.removeChild(tag.firstChild);
+                arr.shift();
+            }
+            lab = document.querySelectorAll(".label");
+            for (let x of lab) {
+                x.onmouseover = function() {
+                    this.innerHTML = "删除" + this.innerHTML;
+                }
+                x.onmouseout = function() {
+                    this.innerHTML = this.innerHTML.slice(2);
+                }
+                x.onclick = function() {
+                    var t = this.innerHTML.slice(2);
+                    arr = arr.filter(function(i, index) {
+                        return i != t;
+                    })
+                    console.log(arr)
+                    tag.removeChild(this);
+                }
+            }
+            search();
+        }
+    }
+    return false;
+}
+tag();
+
+function text() {
+    var btn = document.getElementsByTagName("button")[0];
+    var ta = document.getElementsByTagName("textarea")[0];
+    var w = document.getElementById("w");
+    btn.onclick = function() {
+        w.innerHTML = ta.value;
+        setTimeout(function(){
+            ta.value = "";
+        }, 0)
+        return false;
+    }
+}
+text();
+function search() {
+    var lab = document.querySelectorAll(".label");
+    var s = document.getElementById("s");
+    console.log(lab)
+    s.onkeypress = function(event) {
+        var key = window.event ? event.keyCode : event.which;
+        if (key == 13 || key == 188) {
+            for (let i of lab) {
+                i.style.background = "#F55";
+                var a = i.innerHTML.split("");
+                var flag = a.some(function(i, index) {
+                    return i == s.value;
+                })
+                console.log(flag)
+                if (flag) {
+                    i.style.background = "#333";
+                }
+            }
+            setTimeout(function(){
+                s.value = "";
+            }, 0)
+        }
+    }
+}
+</script>
+
+</html>
