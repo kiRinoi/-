@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>task28</title>
+    <style>
+    * {
+        padding: 0;
+        margin: 0;
+        font-family: "Microsoft YaHei", Helvetica, sans-serif;
+        box-sizing: border-box;
+    }
+    
+    body {
+        background: #333;
+        padding: 50px 30px;
+    }
+    
+    main {
+        display: flex;
+        justify-content: space-between;
+        align-items: stretch;
+        height: 600px;
+        min-width: 850px;
+    }
+    
+    .screen {
+        border: 1px solid #FFF;
+        width: 65%;
+        margin-right: 10px;
+        position: relative;
+        min-width: 600px;
+    }
+    
+    .pannel {
+        width: 35%;
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: column;
+    }
+    
+    .pannel .console {
+        border: 1px solid #FFF;
+        flex: 2 0 250px;
+        padding: 10px;
+        line-height: 30px;
+        color: #FFF;
+        overflow-y: scroll;
+    }
+    
+    .pannel .ctrl {
+        border: 1px solid #FFF;
+        flex: 1 1 100px;
+        margin-top: 10px;
+        padding: 10px;
+        line-height: 30px;
+    }
+    
+    .screen .center {
+        position: absolute;
+        margin: auto;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+    }
+    
+    .screen .earth {
+        height: 150px;
+        width: 150px;
+        text-align: center;
+    }
+    
+    .screen .circle {
+        border: 1px solid #FFF;
+        border-radius: 100%;
+    }
+    
+    .screen .rule1 {
+        height: 250px;
+        width: 250px;
+    }
+    
+    .screen .rule2 {
+        height: 400px;
+        width: 400px;
+    }
+    
+    .screen .rule3 {
+        height: 550px;
+        width: 550px;
+    }
+    
+    .rocket {
+        position: absolute;
+        margin: auto;
+        top: -25px;
+        right: 0;
+        left: 0;
+    }
+    
+    .btn {
+        padding: 2px 5px;
+        margin-left: 5px;
+    }
+    
+    span {
+        color: #FFF;
+    }
+    
+    #new {
+        margin-top: 10px;
+    }
+    </style>
+</head>
+
+<body>
+    <main>
+        <section class="screen">
+            <img class="earth center" src="http://i.imgur.com/FouXwTr.png" alt="earth">
+            <div class="center rule1 circle"></div>
+            <div class="center rule2 circle"></div>
+            <div class="center rule3 circle"></div>
+        </section>
+        <section class="pannel">
+            <div class="console"></div>
+            <div class="ctrl">
+                <div id="new">
+                    <h5><span>创建新飞船：</span></h5>
+                    <button class="btn add">猫屎一号</button>
+                    <button class="btn add">辣椒强尼</button>
+                    <button class="btn add">火鸡汽水</button>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+<script>
+var SpaceShip = function(name, ship, radio) {
+    this.name = name;
+    this.ship = ship;
+    this.radio = radio;
+    this.timer = null;
+    this.deg = 0;
+    this.power = 100;
+    this.state = "stop";
+    switch (name) {
+        case "猫屎一号":
+            this.speed = 0.2;
+            this.fuel = 0.3;
+            break;
+        case "辣椒强尼":
+            this.speed = 0.5;
+            this.fuel = 0.2;
+            break;
+        case "火鸡汽水":
+            this.speed = 1;
+            this.fuel = 0.1;
+    }
+    this.media = {};
+}
+SpaceShip.prototype.energySys = function() {
+    var self = this;
+    var fly = function() {
+        self.timer = setInterval(function() {
+            self.deg += self.speed;
+            if (self.deg >= 361) {
+                self.deg = 0;
+            }
+            self.ship.style.transform = "rotate(" + self.deg + "deg)";
+        }, 20)
+        self.radio.innerHTML += self.name + " 起飞!" + "<br>";
+        self.media.speed = self.speed + "px/s";
+    }
+    var stop = function() {
+        clearInterval(self.timer);
+        self.radio.innerHTML += self.name + " 停止!" + "<br>";
+    }
+    return {
+        fly: fly,
+        stop: stop
+    }
+}
+SpaceShip.prototype.powerSys = function() {
+    var self = this;
+    var charge = function() {
+        var fuel = 10;
+        var timer = setInterval(function() {
+            if (self.state == "fly" || self.state == "destroy") {
+                clearInterval(timer);
+                return false;
+            }
+            if (self.power >= 100) {
+                clearInterval(timer);
+                self.power = 100;
+                self.stateManager().startFly();
+                return false;
+            }
+            self.power += fuel;
+            self.media.energy = self.power;
+            return true;
+        }, 400)
+        self.radio.innerHTML += self.name + " 开始充能!" + "<br>";
+    }
+    var discharge = function() {
+        var timer = setInterval(function() {
+            if (self.state == "stop" || self.state == "destroy") {
+                clearInterval(timer);
+                return false;
+            }
+            if (self.power <= 0) {
+                clearInterval(timer);
+                self.power = 0;
+                self.stateManager().stopFly();
+                return false;
+            }
+            self.power -= self.fuel;
+            self.media.energy = self.power;
+        }, 20)
+        self.radio.innerHTML += self.name + " 正在消耗能源!" + "<br>";
+        self.media.use = self.fuel + "e/s";
+    }
+    return {
+        charge: charge,
+        discharge: discharge
+    }
+}
+SpaceShip.prototype.airSys = function() {
+    var self = this;
+    var air = function() {
+        self.radio.innerHTML += self.name + " 开启广播，10秒播报一次!<br>"
+        var timer = setInterval(function() {
+            self.radio.innerHTML += "广播: " + self.name + " " + self.state + " Now; 速度: " + self.media.speed + "; 消耗: " + self.media.use + "; 能量: " + Math.ceil(self.media.energy) + "e<br>";
+        }, 10000)
+    }
+    return {
+        air: air
+    }
+}
+SpaceShip.prototype.stateManager = function() {
+    var self = this;
+    var state = {
+        fly: function() {
+            self.state = "fly";
+            self.energySys().fly();
+            self.powerSys().discharge();
+        },
+        stop: function() {
+            self.state = "stop";
+            self.energySys().stop();
+            self.powerSys().charge();
+        },
+        destroy: function() {
+            self.state = "destroy";
+            self.ship.innerHTML = "";
+            self.radio.innerHTML += self.name + " 已经销毁!" + "<br>";
+        },
+        onair: function() {
+            self.airSys().air();
+        }
+    }
+    return {
+        startFly: state.fly,
+        stopFly: state.stop,
+        delShip: state.destroy,
+        onAir: state.onair
+    }
+}
+
+function Command(ship, btn1, btn2, btn3, btn4, spaceship) {
+    this.ship = ship;
+    this.btn1 = btn1;
+    this.btn2 = btn2;
+    this.btn3 = btn3;
+    this.btn4 = btn4;
+    this.MyShip = spaceship;
+}
+
+Command.prototype.init = function() {
+    var self = this;
+    this.btn1.onclick = function() {
+        self.MyShip.startFly();
+    }
+    this.btn2.onclick = function() {
+        self.MyShip.stopFly();
+    }
+    this.btn3.onclick = function() {
+        self.MyShip.delShip();
+        this.parentNode.parentNode.removeChild(this.parentNode);
+
+    }
+    this.btn4.onclick = function() {
+        self.MyShip.onAir();
+    }
+}
+
+function ctrl() {
+    var newid = document.querySelector("#new");
+    var btn = newid.querySelectorAll(".add");
+    var circle = document.querySelectorAll(".circle");
+    var radio = document.querySelector(".console");
+    Array.from(btn).forEach(function(item, index) {
+        item.onclick = function() {
+            if (newid.parentNode.children.length < 4) {
+                var div = document.createElement("div");
+                newid.parentNode.insertBefore(div, newid);
+                var b1 = document.createElement("button");
+                var b2 = document.createElement("button");
+                var b3 = document.createElement("button");
+                var b4 = document.createElement("button");
+                div.innerHTML = "<span>" + this.innerHTML + "</span>";
+                div.appendChild(b1);
+                div.appendChild(b2);
+                div.appendChild(b3);
+                div.appendChild(b4);
+                b1.innerHTML = "起飞";
+                b2.innerHTML = "停止";
+                b3.innerHTML = "销毁";
+                b4.innerHTML = "广播";
+                b1.className = "btn";
+                b2.className = "btn";
+                b3.className = "btn";
+                b4.className = "btn";
+                circle[newid.parentNode.children.length - 2].innerHTML = "<img class='rocket' src='http://i.imgur.com/HJyZaBj.png'>";
+                var MyShip = new SpaceShip(this.innerHTML, circle[newid.parentNode.children.length - 2], radio).stateManager();
+                new Command(this, b1, b2, b3, b4, MyShip).init();
+            }
+        }
+    })
+}
+ctrl()
+</script>
+
+</html>
