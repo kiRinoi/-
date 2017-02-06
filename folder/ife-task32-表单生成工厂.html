@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+    * {
+        font-family: "Microsoft YaHei", Helvetica, sans-serif;
+    }
+    body {
+        padding: 25px;
+        background: #EEE;
+    }
+    form {
+        width: 400px;
+    }
+    fieldset {
+        padding: 20px;
+    }
+    button {
+        margin: 5px;
+        display: block;
+    }
+    textarea {display: block;margin: 10px 0;}
+    </style>
+</head>
+
+<body>
+    <form action="">
+        <fieldset id="form">
+            <legend>Form</legend>
+        </fieldset>
+    </form>
+    <br>
+    <div>
+        <small>
+        接受一个数据，将其转换为表单文件。
+        输入格式如下：<br>
+        表单标签,<br>
+        表单类型(text, radio, checkbox),<br>
+        表单验证规则,<br>
+        验证通过提示,<br>
+        验证通过提示,<br>
+        验证失败提示<br>
+        例：
+        </small>
+    </div>
+<textarea cols="55" rows="12">
+var username = {
+        label: '名称',
+        type: 'text',
+        validator: function(val) {
+        return val.length >= 4 && val.length <= 16;
+        },
+        rules: '必填，长度为4-16个字符',
+        success: '格式正确',
+        fail: '格式错误，请重新输入'
+}</textarea>
+    <br>
+    <div>
+        <small>
+        然后将其写入<q>setForm()</q>函数内，如下：
+        </small>
+    </div>
+<textarea name="" id="" cols="55" rows="5">
+function setForm(){
+    factory(username);
+    factory(mail);
+}</textarea>
+</body>
+<script>
+var username = {
+    label: '名称', // 表单标签
+    type: 'text', // 表单类型
+    validator: function(val) {
+        return val.length >= 4 && val.length <= 16;
+    }, // 表单验证规
+    rules: '必填，长度为4-16个字符', // 填写规则提示
+    success: '格式正确', // 验证通过提示
+    fail: '格式错误，请重新输入' // 验证失败提示
+}
+var mail = {
+    label: '邮箱', // 表单标签
+    type: 'text', // 表单类型
+    validator: function(val) {
+        return /\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/.test(val);
+    }, // 表单验证规
+    rules: '必填，带有@邮件地址', // 填写规则提示
+    success: '格式正确', // 验证通过提示
+    fail: '格式错误，请重新输入' // 验证失败提示
+}
+
+var Checkform = function(insert, form) {
+    this.insert = insert;
+    this.label = form.label;
+    this.type = form.type;
+    this.validator = form.validator;
+    this.rules = form.rules;
+    this.success = form.success;
+    this.fail = form.fail;
+}
+
+Checkform.prototype.init = function() {
+    var self = this;
+    var box = document.createElement("div");
+    self.insert.appendChild(box);
+    box.style.marginTop = "5px";
+    box.innerHTML = "<label>" + self.label + " <input type='" + self.type + "'/></label><small></small>"
+    var input = box.querySelector("input");
+    var small = box.querySelector("small");
+    small.style.marginLeft = "10px";
+    input.onfocus = function() {
+        small.style.color = "gray";
+        small.innerHTML = self.rules;
+    }
+    input.onblur = function() {
+        if (!this.value) {
+            small.style.color = "red";
+            small.innerHTML = self.label + "不能为空";
+        } else
+        if (self.validator(this.value)) {
+            small.style.color = "green";
+            small.innerHTML = self.success;
+        } else {
+            small.style.color = "red";
+            small.innerHTML = self.fail;
+        }
+    }
+
+}
+
+function factory(obj) {
+    var f = document.querySelector("#form");
+    new Checkform(f, obj).init();
+}
+function setForm(){
+    factory(username);
+    factory(mail);
+}
+setForm();
+</script>
+
+</html>
