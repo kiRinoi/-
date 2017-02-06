@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="http://apps.bdimg.com/libs/bootstrap/3.3.4/css/bootstrap.css">
+    <style>
+    small {
+        color: #AAA;
+        padding-left: 5px;
+    }
+    
+    .la {
+        margin-top: 50px;
+        margin-bottom: 20px;
+    }
+    
+    .lb {
+        margin-left: 100px;
+    }
+    
+    .s2 {
+        margin-left: 10px;
+    }
+    
+    .nat {
+        display: none;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <h1 class="col-md-11 col-sm-12 col-xs-12 col-md-offset-1"><strong>表单验证</strong></h1>
+            <form class="form-horizontal col-md-12" role="form">
+                <div class="form-group">
+                    <label class="col-md-2 col-sm-2 col-xs-12 control-label">用户名：</label>
+                    <div class="col-md-4 col-sm-6 col-xs-8">
+                        <input type="text" class="form-control" placeholder="请输入名称" id="name" data-set="请输入4~16位字符！">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 col-sm-2 col-xs-12 control-label">邮箱：</label>
+                    <div class="col-md-4 col-sm-6 col-xs-8">
+                        <input type="text" class="form-control" placeholder="请输入邮箱" id="mail" data-set="请输入包含@的邮箱地址！">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 col-sm-2 col-xs-12 control-label">密码：</label>
+                    <div class="col-md-4 col-sm-6 col-xs-8">
+                        <input type="password" class="form-control" placeholder="请输入密码" id="pw1" data-set="请输入6~16位密码！">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 col-sm-2 col-xs-12 control-label">密码确认：</label>
+                    <div class="col-md-4 col-sm-6 col-xs-8">
+                        <input type="password" class="form-control" placeholder="请输入密码" id="pw2" data-set="请重新输入密码！">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 col-sm-2 col-xs-12 control-label">手机：</label>
+                    <div class="col-md-4 col-sm-6 col-xs-8">
+                        <input type="text" class="form-control" placeholder="请输入手机" id="tel" data-set="请输入11位手机号码！">
+                    </div>
+                </div>
+                <div class="col-md-offset-5 col-md-7 col-sm-6 col-xs-6 col-sm-offset-6 col-xs-offset-6">
+                    <button class="btn btn-lg btn-primary">提交</button>
+                </div>
+            </form>
+            <form class="col-md-11 col-md-offset-1 col-sm-11 col-sm-offset-1 col-xs-12 f2">
+                <label class="la" for="sut1">
+                    <input type="radio" name="sut" id="sut1" checked="checked"> 在校生</label>
+                <label class="la lb" for="sut2">
+                    <input type="radio" name="sut" id="sut2"> 非在校生</label>
+                <div class="at">
+                    <select class="c1">
+                        <option>上海</option>
+                        <option>北京</option>
+                        <option>广州</option>
+                    </select>
+                    <select class="s2">
+                        <option>上海大学</option>
+                        <option>同济大学</option>
+                        <option>上海外国语大学</option>
+                    </select>
+                </div>
+                <div class="nat">
+                    <label>就业单位
+                        <input type="text">
+                    </label>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+<script>
+function cr() {
+    var s1 = ["上海大学", "同济大学", "上海外国语大学", ];
+    var s2 = ["北京大学", "清华大学", "中央大学", ];
+    var s3 = ["广州大学", "鲁迅大学", "交通大学", ];
+    var at = document.querySelector(".at");
+    var s = document.querySelector(".s2");
+    var op = s.querySelectorAll("option");
+    var c1 = document.querySelector(".c1");
+    c1.onchange = function() {
+        switch (this.value) {
+            case "上海":
+                for (let i = 0; i < op.length; i++) {
+                    op[i].innerHTML = s1[i];
+                }
+                break;
+            case "北京":
+                for (let i = 0; i < op.length; i++) {
+                    op[i].innerHTML = s2[i];
+                }
+                break;
+            case "广州":
+                for (let i = 0; i < op.length; i++) {
+                    op[i].innerHTML = s3[i];
+                }
+
+        }
+    }
+
+}
+cr()
+
+function choose() {
+    var f = document.querySelector(".f2");
+    var ip = f.querySelectorAll("input");
+    var at = document.querySelector(".at");
+    var nat = document.querySelector(".nat");
+    if (ip[0].checked) {
+        nat.style.display = "none";
+        at.style.display = "block";
+    } else {
+        at.style.display = "none";
+        nat.style.display = "block";
+    }
+    for (let i of ip) {
+        i.onchange = function(){
+            choose();
+        }
+    }
+}
+choose();
+
+function addSmall() {
+    var form = document.querySelector("form");
+    var input = form.querySelectorAll("input");
+    for (let i of input) {
+        i.onfocus = function() {
+            if (i.parentNode.children.length < 2) {
+                var small = document.createElement("small");
+                i.parentNode.appendChild(small);
+            }
+            var _small = this.parentNode.querySelector("small");
+            _small.style.color = "";
+            _small.innerHTML = this.dataset.set;
+            this.style.borderColor = "";
+        }
+        i.onblur = function() {
+            var txt = "输入不正确！";
+            var ok = "输入正确！";
+            var _small = this.parentNode.querySelector("small");
+            switch (this.id) {
+                case "name":
+                    if (this.value.length > 16 || this.value.length < 4) {
+                        this.style.borderColor = "#F55";
+                        _small.innerHTML = txt;
+                        _small.style.color = "#F55";
+                    } else {
+                        _small.style.color = "green";
+                        _small.innerHTML = ok;
+
+                    }
+                    break;
+                case "mail":
+                    if (/\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/.test(this.value)) {
+                        _small.style.color = "green";
+                        _small.innerHTML = ok;
+
+                    } else {
+                        this.style.borderColor = "#F55";
+                        _small.innerHTML = txt;
+                        _small.style.color = "#F55";
+                    }
+                    break;
+                case "pw1":
+                    if (this.value.length > 16 || this.value.length < 6) {
+                        this.style.borderColor = "#F55";
+                        _small.innerHTML = txt;
+                        _small.style.color = "#F55";
+                    } else {
+                        _small.style.color = "green";
+                        _small.innerHTML = ok;
+
+                    }
+                    break;
+                case "pw2":
+                    var p1 = document.querySelector("#pw1").value;
+                    var p2 = document.querySelector("#pw2").value;
+                    if (p2.length >= 6 && p2.length <= 16 && p1 === p2) {
+                        _small.style.color = "green";
+                        _small.innerHTML = ok;
+
+                    } else {
+                        this.style.borderColor = "#F55";
+                        _small.innerHTML = txt;
+                        _small.style.color = "#F55";
+                    }
+                    break;
+                case "tel":
+                    if (/1\d{10}/.test(this.value)) {
+                        _small.style.color = "green";
+                        _small.innerHTML = ok;
+
+                    } else {
+                        this.style.borderColor = "#F55";
+                        _small.innerHTML = txt;
+                        _small.style.color = "#F55";
+                    }
+                    break;
+            }
+        }
+    }
+}
+
+function submit() {
+    var btn = document.querySelector(".btn");
+    var input = document.querySelectorAll("input");
+    btn.onclick = function() {
+        for (let i of input) {
+            i.onfocus();
+            i.onblur();
+        }
+        var txt = document.querySelectorAll("small");
+        for (let f of txt) {
+            if (f.innerHTML == "输入不正确！") {
+                setTimeout(function() {
+                    alert("请确认表单是否填写正确！");
+                }, 100)
+                return false;
+            } else {
+                return true
+            }
+        }
+    }
+}
+addSmall();
+submit();
+</script>
+
+</html>
