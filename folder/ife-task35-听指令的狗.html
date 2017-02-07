@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+    * {
+        font-family: "Microsoft YaHei", Helvetica, sans-serif;
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+    
+    ul {
+        display: flex;
+        height: 65px;
+        width: 650px;
+        list-style: none;
+    }
+    
+    li {
+        flex: auto;
+        border-bottom: 1px solid #AAA;
+        border-right: 1px solid #AAA;
+    }
+    
+    div {
+        border: 1px solid #333;
+        display: inline-block;
+        position: relative;
+        top: 50px;
+        left: 50px;
+    }
+    
+    .row {
+        letter-spacing: 55px;
+        width: 650px;
+        text-indent: 25px;
+        height: 50px;
+        line-height: 50px;
+        position: absolute;
+        top: 0;
+        left: 50px;
+    }
+    
+    .column {
+        writing-mode: tb-rl;
+        letter-spacing: 55px;
+        position: absolute;
+        left: 0;
+        top: 70px;
+        height: 650px;
+        width: 35px;
+        text-indent: 10px;
+    }
+    
+    img {
+        position: absolute;
+    }
+    
+    section {
+        position: absolute;
+        display: inline-block;
+        top: 50px;
+        left: 750px;
+    }
+    
+    button {
+        padding: 2px 5px;
+        font-size: 16px;
+        margin-right: 15px;
+    }
+    </style>
+</head>
+
+<body>
+    <p class="row">ABCDEFGHIJ</p>
+    <p class="column">0123456789</p>
+    <div id="div">
+        <img id="img" src="http://i.imgur.com/n4osPYj.png" alt="dog">
+    </div>
+    <section>
+        <button>左转</button>
+        <button>前进</button>
+        <button>右转</button>
+        <p><small>点击按钮或者棋盘移动</small></p>
+    </section>
+</body>
+<script>
+function style() {
+    var div = document.querySelector("div");
+    for (let i = 0; i < 10; i++) {
+        var ul = document.createElement("ul");
+        div.appendChild(ul);
+        for (let f = 0; f < 10; f++) {
+            var li = document.createElement("li");
+            ul.appendChild(li);
+            if (i % 2 == 1) {
+                if (f % 2 == 1) {
+                    li.style.background = "#DDD";
+                }
+            }
+            if (i % 2 == 0) {
+                if (f % 2 == 0) {
+                    li.style.background = "#DDD";
+                }
+            }
+        }
+    }
+}
+style();
+
+var ClickMe = function() {
+    var div = document.querySelector("#div");
+    var img = document.querySelector("#img");
+    var timer, timer2;
+    div.onclick = function(e) {
+        var sc = document.documentElement.scrollTop || document.body.scrollTop;
+        clearInterval(timer);
+        clearInterval(timer2);
+        var e = e || window.event;
+        var target = e.target || e.srcElement;
+        var x = e.clientX - 50;
+        var y = e.clientY + sc - 50;
+        var moveY = Math.floor(y / 65) * 65;
+        var moveX = Math.floor(x / 65) * 65;
+        var top = Number(img.style.top.replace(/px/, ""));
+        var left = Number(img.style.left.replace(/px/, ""));
+        timer = setInterval(function() {
+            img.style.top = top + "px";
+            top = top < moveY ? top + 6.5 : top - 6.5;
+            if (Math.abs(top - moveY) == 0) {
+                img.style.top = top + "px";
+                clearInterval(timer);
+                timer2 = setInterval(function() {
+                    img.style.left = left + "px";
+                    left = left < moveX ? left + 6.5 : left - 6.5;
+                    if (Math.abs(left - moveX) == 0) {
+                        img.style.left = left + "px";
+                        clearInterval(timer2);
+
+                    }
+                }, 20)
+            }
+        }, 20)
+    }
+}
+ClickMe()
+
+var Command = function() {
+    var img = document.querySelector("#img");
+    var btn = document.querySelectorAll("button");
+    var deg = 0;
+    var top;
+    var left;
+    img.style.transform = "rotate(" + deg + "deg)";
+    btn[2].onclick = function() {
+        deg += 90;
+        if (deg >= 360) {
+            deg = 0;
+        }
+        console.log(deg)
+        img.style.transform = "rotate(" + deg + "deg)";
+    }
+    btn[0].onclick = function() {
+        deg -= 90;
+        if (deg == -360) {
+            deg = 0;
+        }
+
+        console.log(deg)
+        img.style.transform = "rotate(" + deg + "deg)";
+    }
+    btn[1].onclick = function() {
+        switch (deg) {
+            case -90:
+                deg = 270;
+                break;
+            case -180:
+                deg = 180;
+                break;
+            case -270:
+                deg = 90;
+                break;
+            default:
+                break;
+        }
+        top = Number(img.style.top.replace(/px/, ""));
+        left = Number(img.style.left.replace(/px/, ""));
+        console.log(top, left, deg)
+        switch (Math.abs(deg)) {
+            case 0:
+                if (top < 585) {
+                    img.style.top = top + 65 + "px";
+                }
+                break;
+            case 90:
+                if (left > 0) {
+                    img.style.left = left - 65 + "px";
+                }
+                break;
+            case 270:
+                if (left < 585) {
+                    img.style.left = left + 65 + "px";
+                }
+                break;
+            case 180:
+                if (top > 0) {
+                    img.style.top = top - 65 + "px";
+                }
+                break;
+        }
+    }
+}
+Command();
+</script>
+
+</html>
