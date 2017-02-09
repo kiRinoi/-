@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+    article {
+        display: inline-block;
+        border: 1px solid #000;
+    }
+    
+    nav {
+        height: 25px;
+        line-height: 25px;
+        text-align: center;
+        display: flex;
+        justify-content: space-between;
+        padding: 5px 15px;
+        font-weight: bold;
+    }
+    
+    a {
+        cursor: pointer;
+    }
+    
+    p {
+        display: flex;
+        padding: 2px 5px;
+        text-align: center;
+    }
+    
+    main p span {
+        display: inline-block;
+        height: 25px;
+        width: 50px;
+        line-height: 25px;
+    }
+    </style>
+</head>
+<article>
+    <nav>
+        <a id="min">
+            <</a>
+                <a><span id="y">2017</span> <span id="m">2</span></a>
+                <a id="pls">></a>
+    </nav>
+    <main>
+        <p>
+            <span>日</span>
+            <span>一</span>
+            <span>二</span>
+            <span>三</span>
+            <span>四</span>
+            <span>五</span>
+            <span>六</span>
+        </p>
+    </main>
+</article>
+</body>
+<script>
+function getDate() {
+    var div = document.createElement("div");
+    var today = new Date();
+    var year = today.getFullYear();
+    var month = today.getMonth();
+    var day = today.getDate();
+    var min = document.querySelector("#min");
+    var pls = document.querySelector("#pls");
+    console.log(year, month)
+    min.onclick = function() {
+        div.innerHTML = "";
+        month--;
+        if (month < 0) {
+            month = 11;
+            year--;
+        }
+        console.log(year, month)
+        today = new Date(year, month, day);
+        cal(today, div);
+    }
+    pls.onclick = function() {
+        div.innerHTML = "";
+        month++;
+        if (month > 11) {
+            month = 0;
+            year++;
+        }
+        console.log(year, month)
+        today = new Date(year, month, day);
+        cal(today, div);
+    }
+    cal(today, div);
+}
+getDate();
+
+function cal(today, div) {
+    var year = today.getFullYear();
+    var month = today.getMonth() + 1;
+    var day = today.getDate();
+    var startDay = new Date(year, month - 1, 1).getDay();
+    var allDays = new Date(year, month, 0).getDate();
+    var y = document.querySelector("#y");
+    var m = document.querySelector("#m");
+    y.innerHTML = year;
+    m.innerHTML = month;
+    var count = 0;
+    var html = "<p>";
+    for (var i = 0; i < startDay; i++) {
+        html += "<span></span>";
+        count++;
+    }
+    for (var j = 1; j <= allDays; j++) {
+        if (j == day && new Date().getMonth() + 1 == month) {
+            html += "<span style='color:red'>" + j + "</span>";
+        } else {
+            html += "<span>" + j + "</span>"
+        }
+        count++;
+        if (count >= 7) {
+            count = 0;
+            html += "</p><p>"
+        }
+    }
+    html += "</p>";
+    div.innerHTML = html;
+    document.querySelector("main").appendChild(div);
+}
+</script>
+
+</html>
