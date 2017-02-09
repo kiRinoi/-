@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+    * {
+        margin: 0;
+        padding: 0;
+        font-family: "Microsoft YaHei", Helvetica, sans-serif;
+    }
+    
+    main {
+        padding-top: 60px;
+    }
+    
+    nav {
+        background: #333;
+        height: 45px;
+        width: 100%;
+        position: fixed;
+        line-height: 45px;
+    }
+    
+    nav h1 {
+        margin-left: 75px;
+        color: #FFF;
+        font-size: 22px;
+    }
+    
+    .btn {
+        width: 100%;
+        height: 25px;
+        border-top: 1px dashed #333;
+        background: #FFF;
+        margin-top: 50px;
+        border-bottom: 1px dashed #333;
+        background: #FFF;
+        margin-top: 50px;
+        border-right: 0;
+        border-left: 0;
+    }
+    
+    .btn:hover {
+        background: #FFCCBC;
+    }
+    
+    .dib {
+        display: none;
+        border: 1px solid #333;
+        position: absolute;
+        left: -61px;
+        top: 40px;
+        padding: 10px 5px;
+    }
+    
+    .nav {
+        height: 25px;
+        line-height: 25px;
+        text-align: center;
+        display: flex;
+        justify-content: space-between;
+        padding: 5px 15px;
+        font-weight: bold;
+    }
+    
+    a {
+        cursor: pointer;
+    }
+    
+    .column {
+        display: flex;
+        padding: 2px 5px;
+        text-align: center;
+    }
+    
+    .column span {
+        display: inline-block;
+        height: 25px;
+        width: 50px;
+        line-height: 25px;
+        cursor: pointer;
+    }
+    
+    .time {
+        position: relative;
+        height: 50px;
+        width: 550px;
+        text-align: center;
+        margin: 50px auto;
+        line-height: 50px;
+    }
+    
+    form {
+        display: none;
+        text-align: center;
+    }
+    
+    form h1 {
+        margin: 50px 0;
+        display: inline-block;
+    }
+    .btn-group {display: inline-block;}
+    .btn-group button {margin-left: 25px;padding: 5px 5px;}
+    .addqt {height: 150px; width: 400px;position: relative;line-height: 150px;text-align: center;margin: 0 auto;background: #DDD;box-shadow: 2px 2px 2px #333;display: none;z-index: 10;}
+    .addqt button {margin: 25px;padding: 5px 5px;}
+    .mask {height: 100%;width: 100%;background: #000;position: absolute;top: 0;left: 0;opacity: 0.8;}
+    
+    </style>
+</head>
+
+<body>
+    <nav>
+        <h1>问卷调查</h1>
+    </nav>
+    <main>
+        <button class="btn">新增问卷</button>
+        <form>
+            <h1 contenteditable="true">点击修改标题</h1>
+            <div class="addqt">
+                <button>单选题</button>
+                <button>多选题</button>
+                <button>文本题</button>
+            </div>
+            <button class="btn newqt">添加一个新问题</button>
+            <div class="time">
+                <label for="">问卷截止日期
+                    <input type="text" class="settime">
+                </label>
+                <div class="btn-group"><button>保存问卷</button><button>发布问卷</button></div>
+                <div class="dib">
+                    <div class="nav">
+                        <a id="min">
+                            <</a>
+                                <a><span id="y">2017</span>年 <span id="m">2</span>月</a>
+                                <a id="pls">></a>
+                    </div>
+                    <div class="cal">
+                        <p class="column">
+                            <span>日</span>
+                            <span>一</span>
+                            <span>二</span>
+                            <span>三</span>
+                            <span>四</span>
+                            <span>五</span>
+                            <span>六</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </main>
+
+</body>
+<script>
+function addqt() {
+    var btn = document.querySelector(".btn");
+    var form = document.querySelector("form");
+    btn.onclick = function() {
+        this.style.display = "none";
+        form.style.display = "block";
+    }
+}
+addqt()
+var Question = function(btn) {
+    this.btn = btn;
+}
+Question.prototype = {
+    newQt: function() {
+        var self = this;
+        self.btn.onclick = function(){
+            return false;
+        }
+    }
+}
+
+var b1 = document.querySelector(".newqt");
+var Qt = new Question(b1);
+Qt.newQt()
+
+var Cal = function(main, div, yv, mv, input) {
+    this.input = input;
+    this.main = main;
+    this.yv = yv;
+    this.mv = mv;
+    this.div = div;
+    this.today = new Date();
+    this.year = this.today.getFullYear();
+    this.month = this.today.getMonth();
+    this.day = this.today.getDate();
+    this.getDate();
+}
+Cal.prototype = {
+    min: function() {
+        var self = this;
+        self.div.innerHTML = "";
+        self.month--;
+        if (self.month < 0) {
+            self.month = 11;
+            self.year--;
+        }
+        self.today = new Date(self.year, self.month, self.day);
+        self.getDate();
+    },
+    pls: function() {
+        var self = this;
+        self.div.innerHTML = "";
+        self.month++;
+        if (self.month > 11) {
+            self.month = 0;
+            self.year++;
+        }
+        self.today = new Date(self.year, self.month, self.day);
+        self.getDate();
+    },
+    getDate: function() {
+        var self = this;
+        var month = self.month + 1;
+        var startDay = new Date(self.year, month - 1, 1).getDay();
+        var allDays = new Date(self.year, month, 0).getDate();
+        self.yv.innerHTML = self.year;
+        self.mv.innerHTML = month;
+        var count = 0;
+        var html = "<p class='column'>";
+        for (let i = 0; i < startDay; i++) {
+            html += "<span></span>";
+            count++;
+        }
+        for (let j = 1; j <= allDays; j++) {
+            if (j == self.day && new Date().getMonth() + 1 == month) {
+                html += "<span style='color:red' class='se'>" + j + "</span>";
+            } else {
+                html += "<span class='se'>" + j + "</span>"
+            }
+            count++;
+            if (count >= 7) {
+                count = 0;
+                html += "</p><p class='column'>";
+            }
+        }
+        html += "</p>";
+        self.div.innerHTML = html;
+        self.main.appendChild(self.div);
+    },
+    setDate: function() {
+        var self = this;
+        self.main.onclick = function(e) {
+            var e = e || window.event;
+            var target = e.target || e.srcElement;
+            if (target.classList.value == "se") {
+                self.input.value = self.year + "-" + (self.month + 1) + "-" + target.innerHTML;
+            }
+            var myDate = new Date();
+            myDate.setFullYear(self.year, self.month, target.innerHTML)
+            var today = new Date();
+            if (myDate < today) {
+                alert("请选择正确日期！");
+            } else {
+                document.querySelector(".dib").style.display = "none";
+            }
+        }
+    }
+}
+
+function createCal() {
+    var input = document.querySelector(".settime");
+    var div = document.createElement("div");
+    var min = document.querySelector("#min");
+    var pls = document.querySelector("#pls");
+    var yv = document.querySelector("#y");
+    var mv = document.querySelector("#m");
+    var ca = document.querySelector(".cal");
+    var Cc = new Cal(ca, div, yv, mv, input);
+    min.onclick = function() {
+        Cc.min();
+    }
+    pls.onclick = function() {
+        Cc.pls();
+    }
+    Cc.getDate();
+    Cc.setDate();
+    document.onclick = function(e) {
+        var e = e || window.event;
+        var target = e.target || e.srcElement;
+        if (target.nodeName != "INPUT" && target.id != "min" && target.id != "pls") {
+            document.querySelector(".dib").style.display = "none";
+        } else {
+            document.querySelector(".dib").style.display = "inline-block";
+        }
+    }
+}
+createCal();
+</script>
+
+</html>
