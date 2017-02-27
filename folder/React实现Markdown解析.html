@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+    $dib: inline-block;
+    $pm: 10px;
+    $co: #EEE;
+    body {
+        background: $co;
+    }
+    
+    textarea {
+        display: $dib;
+        padding: $pm;
+    }
+    
+    div {
+        display: $dib;
+        margin-left: $pm;
+        vertical-align: top;
+    }
+    </style>
+</head>
+
+<body>
+</body>
+<script type="text/babel">
+var MarkDown = React.createClass({
+    getInitialState: function() {
+        return {
+            value: "# Marked in browser\n\nRendered by **marked**.\n\n- 1\n- 2\n- 3\n - 4\n\n> this is blockquto\n\n`function abs(){console.log(abc)}`"
+        }
+    },
+    handleChange: function(event) {
+        this.setState({
+            value: event.target.value
+        });
+    },
+    render: function() {
+        var val = this.state.value;
+        var dom = {
+            __html: marked(val)
+        };
+        return <section > < textarea cols = "50"
+        rows = "20"
+        onChange = {
+            this.handleChange
+        }
+        value = {
+            val
+        } > < /textarea><div dangerouslySetInnerHTML={dom}></div > < /section>;
+    }
+});
+ReactDOM.render( < MarkDown / > ,
+    document.getElementsByTagName('body')[0]
+);
+</script>
+
+</html>
